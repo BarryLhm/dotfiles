@@ -22,6 +22,7 @@ clang
 cmake
 curl
 dmesg
+dosbox-staging
 elogind
 ethtool
 fastfetch
@@ -31,8 +32,7 @@ file
 firefox
 fish-shell
 flatpak
-font-manager
-fonts-monaspace-otf><Q1Cjqb92Ni5zfUdhdKFzsm16BFZsg=
+fonts-monaspace-otf
 fonts-nerd-symbols-only
 fonts-noto-emoji-ttf
 fonts-noto-extra
@@ -52,7 +52,9 @@ iputils
 iw
 iwd
 java-jre-openjdk17-default
+kde-cli-tools
 labwc
+libgcc-chimera
 linux-stable
 llvm
 lscpu
@@ -92,9 +94,16 @@ ucode-intel-full
 usbutils
 util-linux
 wget
+wine
 xdg-user-dirs
 xdg-utils
 xeyes
+!xfce4-apps
+!xfce4-backgrounds
+xfce4-panel
+!xfce4-panel-plugins
+xfce4-session
+!xfce4-settings-default-themes
 xwayland
 xwaylandvideobridge
 yadm
