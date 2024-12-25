@@ -20,6 +20,7 @@ chimerautils-extra
 chrony-dinit
 clang
 cmake
+cups
 curl
 dmesg
 dosbox-staging
@@ -52,7 +53,6 @@ iputils
 iw
 iwd
 java-jre-openjdk17-default
-kde-cli-tools
 labwc
 libgcc-chimera
 linux-stable
@@ -72,7 +72,6 @@ openssh
 pciutils
 pipewire
 pkgconf
-plasma-desktop
 !plasma-desktop-meta
 !plasma-desktop-sddm-meta
 !plasma-desktop-x11-meta
@@ -84,6 +83,7 @@ steam-devices-udev
 strace
 swww
 syslog-ng
+thunar
 traceroute
 tuigreet
 ucode-amd
@@ -94,15 +94,21 @@ usbutils
 util-linux
 wget
 wine
+xdg-desktop-portal
 xdg-user-dirs
+xdg-user-dirs-gtk
 xdg-utils
 xeyes
+xfce4-appfinder
 !xfce4-apps
 !xfce4-backgrounds
 xfce4-panel
 !xfce4-panel-plugins
+xfce4-power-manager
+!xfce4-screenshooter
 xfce4-session
-!xfce4-settings-default-themes
+xfce4-settings
+xfce4-windowck-plugin
 xwayland
 xwaylandvideobridge
 yadm
