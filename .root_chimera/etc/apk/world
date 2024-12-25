@@ -73,7 +73,6 @@ pciutils
 pipewire
 pkgconf
 plasma-desktop
-!plasma-desktop-*-meta
 !plasma-desktop-meta
 !plasma-desktop-sddm-meta
 !plasma-desktop-x11-meta
