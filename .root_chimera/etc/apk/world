@@ -53,7 +53,6 @@ iputils
 iw
 iwd
 java-jre-openjdk17-default
-labwc
 libgcc-chimera
 linux-stable
 llvm
@@ -92,6 +91,8 @@ ucode-intel
 ucode-intel-full
 usbutils
 util-linux
+waydroid
+wayfire
 wget
 wine
 xdg-desktop-portal
@@ -108,6 +109,7 @@ xfce4-power-manager
 !xfce4-screenshooter
 xfce4-session
 xfce4-settings
+xfce4-taskmanager
 xfce4-whiskermenu-plugin
 xfce4-windowck-plugin
 xwayland
