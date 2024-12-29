@@ -11,6 +11,7 @@ bc-gh
 blueman
 btrfs-progs
 cage
+cargo
 chimera-artwork
 chimera-install-scripts
 chimera-repo-main
@@ -53,6 +54,8 @@ iputils
 iw
 iwd
 java-jre-openjdk17-default
+kexec-tools
+labwc
 libgcc-chimera
 linux-stable
 llvm
@@ -92,6 +95,7 @@ ucode-intel-full
 usbutils
 util-linux
 waydroid
+waydroid-image><Q1trcXQYkhnY4XlwrBjEEULcLPfTo=
 wayfire
 wget
 wine
