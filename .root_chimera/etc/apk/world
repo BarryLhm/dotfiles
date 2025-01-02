@@ -1,5 +1,4 @@
 7zip
-alacritty
 alsa-lib-devel
 android-tools
 asciinema
@@ -48,6 +47,7 @@ git
 github-cli
 gmake
 grub-x86_64-efi
+gsed
 htop
 ifupdown-ng
 initramfs-tools
@@ -69,6 +69,7 @@ mousepad
 mpv
 nano
 networkmanager
+nmap
 nodejs
 nyagetty
 opendoas
@@ -79,6 +80,7 @@ pkgconf
 !plasma-desktop-meta
 !plasma-desktop-sddm-meta
 !plasma-desktop-x11-meta
+podman
 power-profiles-daemon
 rfkill
 smartmontools
@@ -96,8 +98,6 @@ ucode-intel
 ucode-intel-full
 usbutils
 util-linux
-waydroid
-waydroid-image><Q1trcXQYkhnY4XlwrBjEEULcLPfTo=
 wayfire
 wget
 wine

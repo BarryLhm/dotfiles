@@ -1,9 +1,0 @@
-# alacritty daemon
-type                = process
-command             = /usr/bin/alacritty --daemon
-working-dir         = $HOME
-restart             = true
-termsignal          = INT
-restart-delay       = 1.0
-restart-limit-count = 100
-smooth-recovery     = true
