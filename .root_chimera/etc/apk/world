@@ -96,6 +96,7 @@ ucode-amd
 ucode-amd-full
 ucode-intel
 ucode-intel-full
+udisks
 usbutils
 util-linux
 wayfire
