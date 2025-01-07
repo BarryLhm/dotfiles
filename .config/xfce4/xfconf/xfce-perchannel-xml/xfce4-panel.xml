@@ -63,8 +63,8 @@
       <property name="recent" type="array">
         <value type="string" value="org.turbowarp.TurboWarp.desktop"/>
         <value type="string" value="com.github.tchx84.Flatseal.desktop"/>
-        <value type="string" value="cups.desktop"/>
         <value type="string" value="firefox.desktop"/>
+        <value type="string" value="cups.desktop"/>
         <value type="string" value="com.valvesoftware.Steam.desktop"/>
       </property>
     </property>
