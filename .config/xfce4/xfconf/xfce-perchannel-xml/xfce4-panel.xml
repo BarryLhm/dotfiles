@@ -62,6 +62,8 @@
     <property name="plugin-1" type="string" value="whiskermenu">
       <property name="recent" type="array">
         <value type="string" value="org.turbowarp.TurboWarp.desktop"/>
+        <value type="string" value="xfce-mouse-settings.desktop"/>
+        <value type="string" value="xfce-settings-manager.desktop"/>
         <value type="string" value="com.github.tchx84.Flatseal.desktop"/>
         <value type="string" value="firefox.desktop"/>
         <value type="string" value="cups.desktop"/>

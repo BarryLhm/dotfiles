@@ -48,6 +48,12 @@ github-cli
 gmake
 grub-x86_64-efi
 gsed
+gvfs
+!gvfs-afc
+!gvfs-afp
+!gvfs-cdda
+!gvfs-gphoto2
+!gvfs-smb
 htop
 ifupdown-ng
 initramfs-tools
@@ -90,6 +96,7 @@ strace
 swww
 syslog-ng
 thunar
+thunar-volman
 traceroute
 tuigreet
 ucode-amd
@@ -121,7 +128,6 @@ xfce4-whiskermenu-plugin
 xfce4-windowck-plugin
 xserver-xorg-video-ati
 xwayland
-xwaylandvideobridge
 yadm
 zip
 zramctl
