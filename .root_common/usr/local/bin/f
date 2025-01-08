@@ -5,4 +5,4 @@ cmd=run;fg=0;case "$1" in -f)fg=1;;-k)cmd=kill;;-u)cmd=update;;-i)cmd=install;;*
 ;;thunder|xl)	app=com.xunlei.Thunder
 ;;turbowarp|tw)	app=org.turbowarp.TurboWarp
 ;;wechat|wx)	app=com.tencent.WeChat
-;;*)app="$1";esac;shift;if test $fg == 1;then exec flatpak $cmd "$app" "$@";else exec flatpak $cmd "$app" "$@" </dev/null >/dev/null 2>/dev/null;fi
+;;*)app="$1";esac;shift;if test $fg == 1;then exec flatpak $cmd "$app" "$@";else exec flatpak $cmd "$app" "$@" </dev/null >/dev/null 2>/dev/null&:;fi
