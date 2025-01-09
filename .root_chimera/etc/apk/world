@@ -23,6 +23,7 @@ clang
 cmake
 cups
 curl
+distrobox
 dmesg
 dosbox-staging
 elogind
@@ -87,6 +88,7 @@ pkgconf
 !plasma-desktop-sddm-meta
 !plasma-desktop-x11-meta
 podman
+podman-tui
 power-profiles-daemon
 rfkill
 smartmontools
@@ -106,6 +108,7 @@ ucode-intel-full
 udisks
 usbutils
 util-linux
+util-linux-ns
 wayfire
 wget
 wine
@@ -120,7 +123,7 @@ xfce4-appfinder
 xfce4-panel
 !xfce4-panel-plugins
 xfce4-power-manager
-!xfce4-screenshooter
+xfce4-screenshooter
 xfce4-session
 xfce4-settings
 xfce4-taskmanager
