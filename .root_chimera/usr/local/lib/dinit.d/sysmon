@@ -1,6 +1,6 @@
-# htop viewer on tty9
+# system monitor on tty9
 type                = process
-command             = /usr/bin/agetty -a htop tty9
+command             = /usr/bin/agetty -a sysmon tty9
 restart             = true
 depends-on          = login.target
 termsignal          = HUP
