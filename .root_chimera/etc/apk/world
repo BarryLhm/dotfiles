@@ -18,6 +18,7 @@ cmake
 cups
 distrobox
 dosbox-staging
+eza
 fastfetch
 fd
 ffmpeg

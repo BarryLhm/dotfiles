@@ -1,10 +1,35 @@
 #!/bin/sh
-shift=1;cmd=run;case "$1" in -f):;;-k)cmd=kill;;-u)cmd=update;;-i)cmd=install;;*)quiet=1;shift=0;esac;shift $shift;case "$1" in '')echo Flatpak quick launcher;echo Usage: f [-kui] appname ...;exit 1
-;;steam|st)	app=com.valvesoftware.Steam 
-;;steamlink|sl)	app=com.valvesoftware.SteamLink
-;;thunder|xl)	app=com.xunlei.Thunder
-;;turbowarp|tw)	app=org.turbowarp.TurboWarp
-;;wechat|wx)	app=com.tencent.WeChat
-;;flatseal|fs)	app=com.github.tchx84.Flatseal
-;;flatsweep|fc) app=io.github.giantpinkrobots.flatsweep
-;;*)app="$1";esac;shift;[ $quiet ]||exec flatpak $cmd "$app" "$@";exec flatpak $cmd "$app" "$@" </dev/null >/dev/null 2>/dev/null&
+shift=1; allowempty=0; cmd="run"; extargs=""
+case "$1" in
+	-f):;;
+	-k)cmd="kill";;
+	-u)cmd="update"; allowempty=1;;
+	-i)cmd="install";;
+	*)shift=0; extargs="</dev/null >/dev/null 2>/dev/null&"
+esac
+shift $shift
+case "$1" in
+	"")	if [ $allowempty != 1 ]
+		then	read prog </proc/self/comm
+			echo "$prog: Flatpak quick launcher"
+			echo "Usage:"
+			echo "     $prog [mode] app [options]"
+			echo
+			echo "MODES"
+			echo "    -f   run in frontground"
+			echo "    -k   kill"
+			echo "    -u   update"
+			echo "    -i   install"
+			exit 114
+		else app=""
+		fi;;
+	steam|st)	app="com.valvesoftware.Steam"	;;
+	steamlink|sl)	app="com.valvesoftware.SteamLink"	;;
+	thunder|xl)	app="com.xunlei.Thunder"	;;
+	turbowarp|tw)	app="org.turbowarp.TurboWarp"	;;
+	wechat|wx)	app="com.tencent.WeChat"	;;
+	flatseal|fs)	app="com.github.tchx84.Flatseal"	;;
+	flatsweep|fc)	app="io.github.giantpinkrobots.flatsweep"	;;
+	*)app="$1"
+esac
+eval exec flatpak "$cmd" "$app" "$@" "$extargs"
