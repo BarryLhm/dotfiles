@@ -5,7 +5,6 @@ asciinema
 baobab
 base-full
 bat
-bc-gh
 blueman
 broot
 btop
@@ -79,6 +78,7 @@ pkgconf
 podman
 podman-tui
 power-profiles-daemon
+qemu-system-x86_64
 rfkill
 ripgrep
 smartmontools
@@ -99,6 +99,8 @@ udisks
 usbutils
 util-linux
 util-linux-ns
+virt-manager
+waydroid
 wayfire
 wget
 wine

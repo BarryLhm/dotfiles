@@ -5,4 +5,6 @@ shift=1;cmd=run;case "$1" in -f):;;-k)cmd=kill;;-u)cmd=update;;-i)cmd=install;;*
 ;;thunder|xl)	app=com.xunlei.Thunder
 ;;turbowarp|tw)	app=org.turbowarp.TurboWarp
 ;;wechat|wx)	app=com.tencent.WeChat
+;;flatseal|fs)	app=com.github.tchx84.Flatseal
+;;flatsweep|fc) app=io.github.giantpinkrobots.flatsweep
 ;;*)app="$1";esac;shift;[ $quiet ]||exec flatpak $cmd "$app" "$@";exec flatpak $cmd "$app" "$@" </dev/null >/dev/null 2>/dev/null&
