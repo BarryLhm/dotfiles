@@ -1,5 +1,4 @@
 7zip
-alsa-lib-devel
 android-tools
 asciinema
 baobab
@@ -16,6 +15,7 @@ chrony-dinit
 clang
 cmake
 cups
+discount-progs
 distrobox
 dosbox-staging
 eza
@@ -36,11 +36,15 @@ fonts-noto-extra
 fonts-noto-sans-cjk-extra
 fonts-noto-serif-cjk-extra
 foot
+gawk
+gcc
 gcompat
 git
 github-cli
+glow
 gmake
 grub-x86_64-efi
+gtk-layer-shell-devel
 gvfs
 !gvfs-afc
 !gvfs-afp
@@ -57,6 +61,7 @@ java-jre-openjdk17-default
 kexec-tools
 labwc
 libgcc-chimera
+libxinerama-devel
 linux-stable
 llvm
 lsof
@@ -103,8 +108,11 @@ util-linux-ns
 virt-manager
 waydroid
 wayfire
+wayland-devel
+wayland-protocols
 wget
 wine
+wlroots0.18-devel
 xdg-desktop-portal
 xdg-user-dirs
 xdg-user-dirs-gtk
@@ -123,6 +131,7 @@ xfce4-taskmanager
 xfce4-whiskermenu-plugin
 xfce4-windowck-plugin
 xfdesktop
+xserver-xorg-devel
 xserver-xorg-video-ati
 xwayland
 yadm
