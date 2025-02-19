@@ -6,7 +6,8 @@ case "$1" in
 	-l)cmd="list"; allowempty=1;;
 	-u)cmd="update"; allowempty=1;;
 	-i)cmd="install";;
-	*)shift=0; extargs="</dev/null >/dev/null 2>/dev/null&"
+	-*)echo "Unknown mode: $1"; exit 114;;
+	*)shift=0; extargs="&"
 esac
 shift $shift
 case "$1" in

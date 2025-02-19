@@ -57,6 +57,7 @@
     <property name="plugin-20" type="string" value="windowck-plugin"/>
     <property name="plugin-1" type="string" value="whiskermenu">
       <property name="recent" type="array">
+        <value type="string" value="com.github.tchx84.Flatseal.desktop"/>
         <value type="string" value="xfce-session-settings.desktop"/>
         <value type="string" value="foot.desktop"/>
         <value type="string" value="org.turbowarp.TurboWarp.desktop"/>
@@ -65,7 +66,6 @@
         <value type="string" value="debian.desktop"/>
         <value type="string" value="amdgpu_top.desktop"/>
         <value type="string" value="io.github.giantpinkrobots.flatsweep.desktop"/>
-        <value type="string" value="com.github.tchx84.Flatseal.desktop"/>
         <value type="string" value="cups.desktop"/>
       </property>
     </property>
