@@ -3,6 +3,7 @@ shift=1; allowempty=0; cmd="run"; extargs=""
 case "$1" in
 	-f):;;
 	-k)cmd="kill";;
+	-l)cmd="list"; allowempty=1;;
 	-u)cmd="update"; allowempty=1;;
 	-i)cmd="install";;
 	*)shift=0; extargs="</dev/null >/dev/null 2>/dev/null&"
@@ -18,6 +19,7 @@ case "$1" in
 			echo "MODES"
 			echo "    -f   run in frontground"
 			echo "    -k   kill"
+			echo "    -l   list"
 			echo "    -u   update"
 			echo "    -i   install"
 			exit 114
