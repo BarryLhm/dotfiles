@@ -53,6 +53,7 @@ gvfs
 !gvfs-smb
 htop
 ifupdown-ng
+imhex
 initramfs-tools
 iproute2
 iputils
@@ -123,6 +124,7 @@ wayland-devel
 wayland-protocols
 wget
 wine
+wireshark
 wlroots0.18-devel
 xdg-desktop-portal
 xdg-user-dirs
