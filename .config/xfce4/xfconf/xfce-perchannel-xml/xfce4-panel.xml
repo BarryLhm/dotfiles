@@ -57,17 +57,19 @@
     <property name="plugin-20" type="string" value="windowck-plugin"/>
     <property name="plugin-1" type="string" value="whiskermenu">
       <property name="recent" type="array">
-        <value type="string" value="page.codeberg.JakobDev.CCLite.desktop"/>
-        <value type="string" value="org.dupot.easyflatpak.desktop"/>
+        <value type="string" value="io.github.shiftey.Desktop.desktop"/>
+        <value type="string" value="xfce-mouse-settings.desktop"/>
+        <value type="string" value="org.gtk.PrintEditor4.desktop"/>
+        <value type="string" value="org.gtk.gtk4.NodeEditor.desktop"/>
+        <value type="string" value="org.gtk.WidgetFactory4.desktop"/>
         <value type="string" value="com.github.tchx84.Flatseal.desktop"/>
-        <value type="string" value="xfce-session-settings.desktop"/>
-        <value type="string" value="foot.desktop"/>
-        <value type="string" value="org.turbowarp.TurboWarp.desktop"/>
+        <value type="string" value="org.wireshark.Wireshark.desktop"/>
         <value type="string" value="virt-manager.desktop"/>
-        <value type="string" value="cover-thumbnailer-gui.desktop"/>
-        <value type="string" value="debian.desktop"/>
-        <value type="string" value="amdgpu_top.desktop"/>
+        <value type="string" value="org.gnome.baobab.desktop"/>
+        <value type="string" value="gimp.desktop"/>
       </property>
+      <property name="menu-height" type="int" value="540"/>
+      <property name="menu-width" type="int" value="465"/>
     </property>
     <property name="plugin-21" type="string" value="showdesktop"/>
   </property>
