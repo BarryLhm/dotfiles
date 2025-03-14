@@ -1,6 +1,0 @@
-#!/bin/sh -eu
-
-. "$(dirname "$0")/COMMON"
-
-"$dir/clear"
-"$dir/add"
