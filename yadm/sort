@@ -1,0 +1,5 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+LC_ALL=C sort -o "$pathlist" "$pathlist"

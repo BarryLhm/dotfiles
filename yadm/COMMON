@@ -1,0 +1,5 @@
+#!/bin/sh -eu
+
+dir="$(dirname "$0")"
+pathlist="$dir/PATH"
+worktree="$(yadm gitconfig get core.worktree)"
