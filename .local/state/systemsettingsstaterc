@@ -1,0 +1,10 @@
+[MainWindow]
+1680x1050 screen: Height=653
+1680x1050 screen: Width=1106
+1680x1050 screen: XPosition=450
+1680x1050 screen: YPosition=256
+VGA-1=VGA-1
+
+[Open-with settings]
+CompletionMode=1
+History=

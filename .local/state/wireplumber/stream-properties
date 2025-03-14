@@ -1,0 +1,18 @@
+[stream-properties]
+Audio/Sink:node.name:auto_null={"volume":1.000000, "channelVolumes":[1.000000, 1.000000], "channelMap":["FL", "FR"], "mute":false}
+Input/Audio:application.id:org.kde.plasma-pa={"channelMap":["MONO"], "mute":false, "channelVolumes":[1.000000], "volume":1.000000}
+Input/Audio:application.name:winecfg.exe={"mute":false, "volume":1.000000, "channelVolumes":[1.000000], "channelMap":["MONO"]}
+Output/Audio:application.name:Chromium={"channelMap":["FL", "FR"], "mute":false, "channelVolumes":[1.000000, 1.000000], "volume":1.000000}
+Output/Audio:application.name:Firefox={"channelVolumes":[1.000000, 1.000000], "channelMap":["FL", "FR"], "mute":false, "volume":1.000000}
+Output/Audio:application.name:PipeWire\sALSA\s\opiano-rs\c={"volume":1.000000, "channelVolumes":[1.000000, 1.000000], "mute":false, "channelMap":["FL", "FR"]}
+Output/Audio:application.name:Waydroid={"channelVolumes":[1.000000, 1.000000], "mute":false, "channelMap":["FL", "FR"], "volume":1.000000}
+Output/Audio:application.name:arcan_sdl={"channelVolumes":[1.000000, 1.000000], "channelMap":["FL", "FR"], "mute":false, "volume":1.000000}
+Output/Audio:application.name:enlightenment={"volume":1.000000, "mute":false, "channelVolumes":[1.000000, 1.000000], "channelMap":["FL", "FR"]}
+Output/Audio:application.name:jbep3={"volume":1.000000, "channelVolumes":[1.000000, 1.000000], "mute":false, "channelMap":["FL", "FR"]}
+Output/Audio:application.name:love={"volume":1.000000, "channelVolumes":[1.000000, 1.000000], "mute":false, "channelMap":["FL", "FR"]}
+Output/Audio:application.name:speech-dispatcher-dummy={"channelMap":["MONO"], "mute":false, "channelVolumes":[1.000000], "volume":1.000000}
+Output/Audio:application.name:wechat={"channelMap":["FL", "FR"], "mute":false, "volume":1.000000, "channelVolumes":[1.000000, 1.000000]}
+Output/Audio:application.name:winecfg.exe={"mute":false, "volume":1.000000, "channelVolumes":[1.000000, 1.000000], "channelMap":["FL", "FR"]}
+Output/Audio:media.role:Game={"volume":1.000000, "channelVolumes":[1.000000, 1.000000], "channelMap":["FL", "FR"], "mute":false}
+Output/Audio:media.role:Music={"volume":1.000000, "channelMap":["FL", "FR"], "channelVolumes":[1.000000, 1.000000], "mute":false}
+Output/Audio:media.role:Notification={"mute":false, "channelVolumes":[1.000000, 1.000000], "channelMap":["FL", "FR"], "volume":1.000000}
