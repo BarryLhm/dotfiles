@@ -1,0 +1,6 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+"$dir/git-rm"
+"$dir/git-add"

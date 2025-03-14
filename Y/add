@@ -1,0 +1,10 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+for i in "$@"
+do echo "$i" >> "$pathlist"
+done
+
+"$dir/sort"
+"$dir/git-clean"
