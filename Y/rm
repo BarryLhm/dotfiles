@@ -3,7 +3,8 @@
 . "$(dirname "$0")/COMMON"
 
 for i in "$@"
-do sed -i '' -e "s/$i//g" "$pathlist"
+do grep -v -x "$i" "$pathlist" > "$pathlist.tmp"
+mv "$pathlist.tmp" "$pathlist"
 done
 
 "$dir/sort"

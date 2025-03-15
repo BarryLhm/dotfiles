@@ -1,0 +1,17 @@
+[Open-with settings]
+History=org.kde.dolphin,firefox,org.xfce.mousepad,org.xfce.mousepad-settings
+LastChoice=org.kde.dolphin
+
+[SettingsDialog]
+1680x1050 screen: Height=526
+1680x1050 screen: Width=540
+
+[State]
+1280x720 screen: Height=447
+1280x720 screen: Width=754
+1680x1050 screen: Height=621
+1680x1050 screen: Width=1014
+1680x1050 screen: XPosition=415
+1680x1050 screen: YPosition=235
+State=AAAA/wAAAAD9AAAAAgAAAAAAAAEAAAACPfwCAAAAAvsAAAAWAGYAbwBsAGQAZQByAHMARABvAGMAawAAAAAA/////wAAAAAA////+wAAABQAcABsAGEAYwBlAHMARABvAGMAawEAAAAwAAACPQAAAFMA////AAAAAwAAAAAAAAAA/AEAAAAB+wAAABgAdABlAHIAbQBpAG4AYQBsAEQAbwBjAGsAAAAAAP////8AAAAAAP///wAAAvUAAAI9AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
+VGA-1=VGA-1

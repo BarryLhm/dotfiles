@@ -2,4 +2,5 @@
 
 . "$(dirname "$0")/COMMON"
 
-LC_ALL=C uniq "$pathlist" | tr -s '\n' | sort -o "$pathlist"
+LC_ALL=C cat "$pathlist" | uniq | tr -s '\n' | sort > "$pathlist.tmp"
+mv "$pathlist.tmp" "$pathlist"

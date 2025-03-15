@@ -1,5 +1,4 @@
 .cargo/config.toml
-.config/*rc
 .config/dconf/user
 .config/fontconfig/fonts.conf
 .config/pip/pip.conf
@@ -32,4 +31,4 @@
 .root_common/usr/local/bin/cmd
 .root_common/usr/local/bin/f
 LICENSE
-Y
+yadm/

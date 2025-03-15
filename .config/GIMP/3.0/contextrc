@@ -1,0 +1,16 @@
+# GIMP user context
+
+(tool "gimp-iscissors-tool")
+(paint-info "gimp-paintbrush")
+(foreground
+    (color "R'G'B'A u8" 4 "\44\254\324\377" 0))
+(brush "剪贴板图像")
+(dynamics "Pressure Size")
+(mybrush "100% Opaque")
+(pattern "Pine")
+(gradient "前景到背景（RGB）")
+(palette "颜色历史")
+(font "Sans-serif")
+(tool-preset "Core Pointer")
+
+# end of user context

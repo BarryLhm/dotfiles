@@ -1,0 +1,10 @@
+[General]
+ConfigVersion=1
+
+[KonsoleWindow]
+FocusFollowsMouse=true
+ShowWindowTitleOnTitleBar=true
+UseSingleInstance=true
+
+[UiSettings]
+ColorScheme=

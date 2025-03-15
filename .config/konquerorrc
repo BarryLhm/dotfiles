@@ -1,0 +1,19 @@
+[KTextEditor Renderer]
+Animate Bracket Matching=false
+Auto Color Theme Selection=true
+Color Theme=Breeze Light
+Line Height Multiplier=1
+Show Indentation Lines=false
+Show Whole Bracket Expression=false
+Text Font=Monospace,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+Text Font Features=
+Word Wrap Marker=false
+
+[SearchBar]
+CompletionMode=5
+CurrentEngine=duckduckgo
+History list=\\0
+Mode=1
+
+[Undo]
+Number of Closed Windows=2

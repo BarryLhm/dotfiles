@@ -93,6 +93,7 @@ niri
 nmap
 nodejs
 obs-studio
+orca
 pciutils
 pkgconf
 plasma-desktop
@@ -130,6 +131,7 @@ waydroid
 wayfire
 wayland-devel
 wayland-protocols
+wf-shell
 wine
 wireshark
 wlroots0.18-devel

@@ -3,3 +3,4 @@
 dir="$(dirname "$0")"
 pathlist="$dir/PATH"
 worktree="$(yadm gitconfig get core.worktree)"
+cp "$pathlist" "$dir/backup/PATH-$(date +%Y%M%d-%H%M%S)"
