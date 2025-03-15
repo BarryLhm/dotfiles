@@ -3,3 +3,4 @@
 . "$(dirname "$0")/COMMON"
 
 xargs -I {} yadm add "$worktree/{}" <"$pathlist"
+xargs -I {} yadm rm -r --cached "$worktree/{}" <"$excludelist"

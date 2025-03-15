@@ -4,3 +4,5 @@
 
 LC_ALL=C cat "$pathlist" | uniq | tr -s '\n' | sort > "$pathlist.tmp"
 mv "$pathlist.tmp" "$pathlist"
+LC_ALL=C cat "$excludelist" | uniq | tr -s '\n' | sort > "$excludelist.tmp"
+mv "$excludelist.tmp" "$excludelist"

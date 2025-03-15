@@ -2,5 +2,5 @@
 
 . "$(dirname "$0")/COMMON"
 
-"$dir/git-rm"
+"$dir/git-clear"
 "$dir/git-add"

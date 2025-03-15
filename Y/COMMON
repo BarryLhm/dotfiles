@@ -2,5 +2,7 @@
 
 dir="$(dirname "$0")"
 pathlist="$dir/PATH"
+excludelist="$dir/EXCLUDE"
 worktree="$(yadm gitconfig get core.worktree)"
 cp "$pathlist" "$dir/backup/PATH-$(date +%Y%M%d-%H%M%S)"
+cp "$excludelist" "$dir/backup/EXCLUDE-$(date +%Y%M%d-%H%M%S)"
