@@ -7,7 +7,6 @@
 .config/user-dirs.locale
 .gitconfig
 .local/share/flatpak/overrides/
-.local/state/
 .npmrc
 .root_archlinux/etc/issue
 .root_archlinux/etc/locale.gen
@@ -31,6 +30,6 @@
 .root_common/usr/local/bin/afork
 .root_common/usr/local/bin/cmd
 .root_common/usr/local/bin/f
-A
 LICENSE
+S
 Y

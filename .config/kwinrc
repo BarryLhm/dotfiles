@@ -12,6 +12,7 @@ CommandAllWheel=Change Opacity
 
 [Plugins]
 desktopchangeosdEnabled=false
+dialogparentEnabled=false
 shakecursorEnabled=false
 
 [Tiling]

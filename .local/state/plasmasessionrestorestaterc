@@ -1,8 +1,0 @@
-[0]
-appId=org.kde.konsole.desktop
-
-[1]
-appId=org.kde.dolphin.desktop
-
-[2]
-appId=kwin_wayland

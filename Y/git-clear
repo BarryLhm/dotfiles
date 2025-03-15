@@ -2,4 +2,4 @@
 
 . "$(dirname "$0")/COMMON"
 
-yadm rm -r --cached "$worktree"
+yadm rm -rf --cached "$worktree"
