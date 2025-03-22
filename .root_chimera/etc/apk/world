@@ -6,7 +6,6 @@ ansible
 ark
 asciinema
 base-full
-!base-localen
 bat
 bison
 blueman
@@ -88,7 +87,6 @@ lldb
 llvm
 lsof
 lxc
-!mandoc-apropos
 meson
 mousepad
 mpv
@@ -149,7 +147,6 @@ xeyes
 !xfce4-settings-default-themes
 !xserver-xorg
 xserver-xorg-devel
-!xserver-xorg-input
 xserver-xorg-input-libinput=20250322.140303
 xwayland-devel
 xxd

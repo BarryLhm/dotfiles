@@ -2,6 +2,10 @@
 
 . "$(dirname "$0")/COMMON"
 
-"$dir/git-clear"
-"$dir/git-add"
-yadm commit -m update
+yadm rm -rqf --cached "$worktree"
+yadm -C "$worktree" add --pathspec-from-file="$pathlist"
+yadm -C "$worktree" rm -rq --cached --pathspec-from-file="$excludelist"
+set +u
+if [ "$1" == -c ]
+then yadm commit -m update
+fi
