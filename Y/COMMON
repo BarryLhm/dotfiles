@@ -1,8 +1,7 @@
-#!/bin/sh -eu
-
 dir="$(realpath "$(dirname "$0")")"
 pathlist="$dir/PATH"
 excludelist="$dir/EXCLUDE"
 worktree="$(yadm gitconfig get core.worktree)"
+[ -d "$dir/backup" ] || mkdir "$dir/backup"
 cp "$pathlist" "$dir/backup/PATH-$(date +%Y%M%d-%H%M%S)"
 cp "$excludelist" "$dir/backup/EXCLUDE-$(date +%Y%M%d-%H%M%S)"
