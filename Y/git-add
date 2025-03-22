@@ -2,5 +2,5 @@
 
 . "$(dirname "$0")/COMMON"
 
-xargs -I {} -R -1 yadm add "$worktree/{}" <"$pathlist"
+xargs -I {} -R -1 yadm add -v "$worktree/{}" <"$pathlist"
 xargs -I {} -R -1 yadm rm -r --cached "$worktree/{}" <"$excludelist"
