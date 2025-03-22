@@ -10,3 +10,5 @@ if [ "$1" ]
 then yadm commit -m "$1"
 else yadm commit -m update
 fi
+set -u
+yadm show --stat
