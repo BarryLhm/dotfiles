@@ -8,17 +8,25 @@ ToolButtonStyle=IconOnly
 
 [Recent Files]
 File1[$e]=$HOME/proj/Chimera/chimera-artwork/chimera-bg-mono-l.svg
+File10[$e]=/usr/share/wallpapers/Mountain/contents/images/1080x1920.png
 File2[$e]=$HOME/proj/Chimera/chimera-artwork/chimera-bg-mono-d.svg
 File3[$e]=$HOME/Downloads/svgviewer-output.svg
 File4[$e]=$HOME/Downloads/chimera-bg-l.svg
 File5[$e]=$HOME/Downloads/svgviewer-output(1).svg
 File6[$e]=$HOME/Downloads/chimera-bg-mono-l.svg
+File7[$e]=/usr/share/wallpapers/berries.jpg
+File8[$e]=/usr/share/wallpapers/big_leaves.jpg
+File9[$e]=/usr/share/wallpapers/summer_1am/contents/images/640x480.jpg
 Name1[$e]=chimera-bg-mono-l.svg
+Name10[$e]=1080x1920.png
 Name2[$e]=chimera-bg-mono-d.svg
 Name3[$e]=svgviewer-output.svg
 Name4[$e]=chimera-bg-l.svg
 Name5[$e]=svgviewer-output(1).svg
 Name6[$e]=chimera-bg-mono-l.svg
+Name7[$e]=berries.jpg
+Name8[$e]=big_leaves.jpg
+Name9[$e]=640x480.jpg
 
 [Tool Settings]
 Last Used Tool=5

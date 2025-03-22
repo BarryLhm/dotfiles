@@ -1,2 +1,10 @@
+[AutoOpen]
+PollMouse=true
+
 [Dialogs]
 FirstRun=false
+
+[Window]
+DynamicTabTitles=true
+KeepOpen=false
+Width=100

@@ -40,6 +40,9 @@ plugin=org.kde.plasma.pager
 immutability=1
 plugin=org.kde.plasma.icontasks
 
+[Containments][23][Applets][26][Configuration][General]
+launchers=applications:systemsettings.desktop,preferred://filemanager,preferred://browser
+
 [Containments][23][Applets][27]
 immutability=1
 plugin=org.kde.plasma.marginsseparator
@@ -49,7 +52,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][23][Applets][28][Configuration]
-PreloadWeight=80
+PreloadWeight=90
 SystrayContainmentId=29
 
 [Containments][23][Applets][38]
@@ -60,8 +63,16 @@ plugin=org.kde.plasma.digitalclock
 immutability=1
 plugin=org.kde.plasma.showdesktop
 
+[Containments][23][Applets][47]
+immutability=1
+plugin=org.kde.plasma.icon
+
+[Containments][23][Applets][47][Configuration]
+localPath=/home/barrylhm/.local/share/plasma_icons/org.kde.discover.desktop
+url=file:///usr/share/applications/org.kde.discover.desktop
+
 [Containments][23][General]
-AppletOrder=24;25;26;27;28;38;39
+AppletOrder=24;25;47;26;27;28;38;39
 
 [Containments][29]
 activityId=
@@ -79,7 +90,7 @@ immutability=1
 plugin=org.kde.plasma.cameraindicator
 
 [Containments][29][Applets][30][Configuration]
-PreloadWeight=65
+PreloadWeight=100
 
 [Containments][29][Applets][31]
 immutability=1
@@ -104,7 +115,7 @@ immutability=1
 plugin=org.kde.plasma.notifications
 
 [Containments][29][Applets][34][Configuration]
-PreloadWeight=85
+PreloadWeight=95
 
 [Containments][29][Applets][35]
 immutability=1
@@ -144,7 +155,7 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][29][Applets][42][Configuration]
-PreloadWeight=42
+PreloadWeight=52
 
 [Containments][29][Applets][45]
 immutability=1
@@ -158,7 +169,7 @@ immutability=1
 plugin=org.kde.plasma.brightness
 
 [Containments][29][Applets][46][Configuration]
-PreloadWeight=34
+PreloadWeight=39
 
 [Containments][29][ConfigDialog]
 DialogHeight=540
@@ -185,14 +196,9 @@ DialogHeight=540
 DialogWidth=720
 
 [Containments][44][General]
-positions={"1680x1050":["3","15","desktop:/Autostart","0","12","desktop:/logs","0","1","desktop:/Magisk-Stable-28000.apk","0","7","desktop:/seewo.svg","0","10","desktop:/pic","0","2","desktop:/a","0","0","desktop:/Trash","0","14","desktop:/Ravenfield Linux","0","3","desktop:/win32","0","4","desktop:/Ravenfield_B5_1_Linux.zip","0","8","desktop:/LSPosed-v1.9.2-7024-zygisk-release.zip","0","6","desktop:/新建文件夹","2","14","desktop:/super_image_tools_v15.zip","0","11","desktop:/Templates","0","13","desktop:/fastgithub_linux-x64.zip","0","5","desktop:/SC_Windows32_144.exe","0","9"]}
+positions={"1680x1050":["3","15","desktop:/Templates","0","13","desktop:/新建文件夹","2","14","desktop:/fastgithub_linux-x64.zip","0","5","desktop:/Autostart","0","12","desktop:/super_image_tools_v15.zip","0","11","desktop:/win32","0","4","desktop:/LSPosed-v1.9.2-7024-zygisk-release.zip","0","6","desktop:/seewo.svg","0","10","desktop:/logs","0","1","desktop:/Ravenfield Linux","0","3","desktop:/Magisk-Stable-28000.apk","0","7","desktop:/Ravenfield_B5_1_Linux.zip","0","8","desktop:/pic","0","2","desktop:/Trash","0","14","desktop:/a","0","0","desktop:/SC_Windows32_144.exe","0","9"]}
 sortMode=-1
-
-[Containments][44][Wallpaper][org.kde.image][General]
-Image=/usr/share/wallpapers/abnormal_fluid.jpg
-PreviewImage=/usr/share/wallpapers/abnormal_fluid.jpg
-SlidePaths=/home/barrylhm/.local/share/wallpapers/,/usr/share/wallpapers/
 
 [ScreenMapping]
 itemsOnDisabledScreens=
-screenMapping=desktop:/pic,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Ravenfield_B5_1_Linux.zip,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/logs,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/LSPosed-v1.9.2-7024-zygisk-release.zip,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Ravenfield Linux,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/win32,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Magisk-Stable-28000.apk,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/a,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Trash,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/SC_Windows32_144.exe,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Autostart,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/fastgithub_linux-x64.zip,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/super_image_tools_v15.zip,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/seewo.svg,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/新建文件夹,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Templates,0,54146405-21c9-4a4a-b7bc-998789f4134f
+screenMapping=desktop:/新建文件夹,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/SC_Windows32_144.exe,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/logs,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Ravenfield Linux,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/a,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Magisk-Stable-28000.apk,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/fastgithub_linux-x64.zip,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/win32,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Trash,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/LSPosed-v1.9.2-7024-zygisk-release.zip,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Autostart,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/super_image_tools_v15.zip,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Templates,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/seewo.svg,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/pic,0,54146405-21c9-4a4a-b7bc-998789f4134f,desktop:/Ravenfield_B5_1_Linux.zip,0,54146405-21c9-4a4a-b7bc-998789f4134f
