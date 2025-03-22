@@ -38,7 +38,7 @@ LogOut=none,,注销
 Reboot=none,,重启
 Reboot Without Confirmation=none,,重启 (无需确认)
 Shut Down=none,,关机
-_k_friendly_name=会话管理
+_k_friendly_name=KWin
 
 [kwin]
 Activate Window Demanding Attention=Meta+Ctrl+A,Meta+Ctrl+A,激活请求注意的窗口
