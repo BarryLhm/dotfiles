@@ -7,4 +7,3 @@ do echo "$i" >> "$pathlist"
 done
 
 "$dir/sort"
-"$dir/git-add"
