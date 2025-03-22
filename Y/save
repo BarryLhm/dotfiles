@@ -6,6 +6,7 @@ yadm rm -rqf --cached "$worktree"
 yadm -C "$worktree" add --pathspec-from-file="$pathlist"
 yadm -C "$worktree" rm -rq --cached --pathspec-from-file="$excludelist"
 set +u
-if [ "$1" == -c ]
-then yadm commit -m update
+if [ "$1" ]
+then yadm commit -m "$1"
+else yadm commit -m update
 fi
