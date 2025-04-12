@@ -1,4 +1,5 @@
 dir="$(realpath "$(dirname "$0")")"
+prog="$(basename "$0")"
 repeat()
 {
 	local v; v="$(printf %-"$1"s)";echo "${v// /"$2"}"
