@@ -2,6 +2,7 @@
 
 . "$(dirname "$0")/COMMON"
 
+world_file="$HOME/.termux/world"
 help_exit()
 {
 cat <<EOF
@@ -17,13 +18,21 @@ exit "$1"
 apply_world()
 {
 apt-mark auto "*" >/dev/null
-apt-mark manual $(cat "$HOME/.termux/world") >/dev/null ||
-([ "$?" = 100 ] && pkg add $(cat "$HOME/.termux/world"))
+apt-mark manual $(cat "$world_file") >/dev/null ||
+([ "$?" = 100 ] && pkg add $(cat "$world_file"))
 }
 
 save_world()
 {
-apt-mark showmanual > "$HOME/.termux/world"
+apt-mark showmanual > "$world_file"
+}
+
+sort_world()
+{
+export LC_ALL=C
+< "$world_file" tr -s '\n' | sort -u > "$world_file.tmp"
+mv "$world_file.tmp" "$world_file"
+
 }
 
 [ "$#" = 0 ] && help_exit 0
