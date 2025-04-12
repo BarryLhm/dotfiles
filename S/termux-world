@@ -3,13 +3,24 @@
 . "$(dirname "$0")/COMMON"
 
 world_file="$HOME/.termux/world"
+has_lock=0
+
+error()
+{
+echo "$1"
+exit 1
+}
+
 help_exit()
 {
 cat <<EOF
 $prog: termux apt wrapper to imitate apk world
     usage: $prog COMMAND
-    command:  apply    set manual/auto state according to world
+    command:  list     show world file
+              apply    set manual/auto state according to world
               save     save current manual package list to world
+              sort     sort world file
+              del      mark auto and del package
               help     show this help
 EOF
 exit "$1"
@@ -32,12 +43,26 @@ sort_world()
 export LC_ALL=C
 < "$world_file" tr -s '\n' | sort -u > "$world_file.tmp"
 mv "$world_file.tmp" "$world_file"
-
 }
 
+del_pkg()
+{
+[ "$#" = 0 ] || apt-mark auto "$@"
+apt autopurge
+}
+
+#Main
+
 [ "$#" = 0 ] && help_exit 0
+exec {lockfd}<>"$world_file"
 case $1 in help) help_exit
+;; list) cat "$world_file"
 ;; apply) apply_world
 ;; save) save_world
+;; sort) sort_world
+;; add) shift
+	pkg add "$@"
+;; del) shift
+	del_pkg "$@"
 ;; *) help_exit 1
 esac
