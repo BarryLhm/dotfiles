@@ -1,0 +1,9 @@
+dir="$(realpath "$(dirname "$0")")"
+repeat()
+{
+	local v; v="$(printf %-"$1"s)";echo "${v// /"$2"}"
+}
+getshpid()
+{
+grep PPid: /proc/"$$"/status | awk '{print $2}'
+}

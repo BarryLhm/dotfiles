@@ -1,0 +1,36 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+termux_gen_world()
+{
+[ "$in_termux" = 1 ] || return 0
+apt-mark showmanual > "$HOME/.termux/world"
+}
+
+add_files()
+{
+yadm rm -rqf --ignore-unmatch --cached "$worktree"
+yadm -C "$worktree" add --pathspec-from-file="$pathlist"
+yadm -C "$worktree" rm -rqf --ignore-unmatch --cached --pathspec-from-file="$excludelist"
+}
+
+do_commit()
+{
+yadm commit -qm "$1"
+}
+
+show_result()
+{
+yadm --no-pager show --stat
+}
+
+termux_gen_world
+add_files
+
+if [ "$#" -gt 0 ]
+then do_commit "$1"
+else do_commit "update"
+fi
+
+show_result

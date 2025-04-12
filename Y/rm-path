@@ -1,0 +1,11 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+for i in "$@"
+do grep -v -x "$i" "$pathlist" > "$pathlist.tmp"
+mv "$pathlist.tmp" "$pathlist"
+done
+
+"$dir/sort"
+"$dir/git-update"

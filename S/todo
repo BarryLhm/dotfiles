@@ -1,0 +1,11 @@
+#!/data/data/com.termux/files/usr/bin/bash -eui
+
+. "$(dirname "$0")/COMMON"
+
+cat << EOF
+╔═════╗
+║Todo:╟$(repeat "$(( "$COLUMNS" - 7 ))" '─')
+╚═════╝
+$(cat ~/TODO)
+$(repeat "$COLUMNS" '─')
+EOF
