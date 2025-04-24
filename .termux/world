@@ -1,5 +1,6 @@
 busybox
 debianutils
+debootstrap
 fish
 gh
 git

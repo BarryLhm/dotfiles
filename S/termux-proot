@@ -2,11 +2,25 @@
 
 . "$(dirname "$0")/COMMON"
 
-StartProot()
+StartProot() ## ( root ... ) ( preset )
 {
-	local rootfs="$1"
+	local root="$1" id="0:0" home="/" wd="/" lang="C" \
+		path=/usr/sbin:/usr/bin:/sbin:/bin termux android homebind
+	shift
+	case "$preset" in
+	default)
+		home="/root" wd="/root" lang="zh_CN.UTF8" termux=1 android=1
+		path="/usr/local/sbin:/usr/local/bin:$path"
+;;	*)	true
+	esac
+	[ ! "$termux" ] || path="$path:/data/data/com.termux/files/usr/bin"
+	[ ! "$android" ] || path"$path:/system/bin:/vendor/bin:/product/bin"
 	unset LD_PRELOAD
-	proot -0 -r "$rootfs" -b /dev -b /proc -b /sys -b /sdcard -b /data/data/com.termux/files/home -w /root /usr/bin/env -i HOME=/root TERM="$TERM" LANG=zh_CN.UTF8 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:~/.local/bin:. "$@"
+	proot -l -r "$root" -i "$id" -w "$wd" -b /dev -b /proc -b /sys \
+		-b /apex -b /system -b /linkerconfig/ld.config.txt -b /vendor -b /product \
+		-b /data -b /sdcard -b "$HOME":"$home" \
+		/usr/bin/env -i HOME="$home" TERM="$TERM" LANG="$lang" \
+		PATH="$path" "$@"
 }
 
-StartProot "$@"
+preset=default StartProot "$@"
