@@ -10,6 +10,8 @@ nmap
 proot-distro
 root-repo
 shellcheck
+strace
 termux-x11-nightly
+up
 x11-repo
 yadm

@@ -22,6 +22,7 @@ $prog: termux apt wrapper to imitate apk world
               sort     sort world file
               add      add manual package
               del      mark auto (and del package)
+              up       update packages
               help     show this help
 EOF
 exit "$1"
@@ -30,8 +31,7 @@ exit "$1"
 apply_world()
 {
 apt-mark auto "*" >/dev/null
-apt-mark manual $(cat "$world_file") >/dev/null ||
-([ "$?" = 100 ] && pkg add $(cat "$world_file"))
+pkg add $(cat "$world_file")
 }
 
 save_world()
@@ -55,7 +55,7 @@ save_world
 del_pkg()
 {
 [ "$#" = 0 ] || apt-mark auto "$@"
-apt autopurge
+apt autopurge || apt-mark manual "$@"
 save_world
 }
 
@@ -63,12 +63,13 @@ save_world
 
 [ "$#" = 0 ] && help_exit 0
 case $1 in help) help_exit
-;; list) apk-mark showmanual
+;; list) apt-mark showmanual
 ;; show) cat "$world_file"
 ;; apply) apply_world
 ;; save) save_world
 ;; sort) sort_world
 ;; add) shift; add_pkg "$@"
 ;; del) shift; del_pkg "$@"
+;; up) shift; pkg up "$@"
 ;; *) help_exit 1
 esac
