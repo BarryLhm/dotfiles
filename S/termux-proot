@@ -4,23 +4,33 @@
 
 StartProot() ## ( root ... ) ( preset )
 {
-	local root="$1" id="0:0" home="/" wd="/" lang="C" \
-		path=/usr/sbin:/usr/bin:/sbin:/bin termux android homebind
+	local	root="$1" id="0:0" home="/" wd="/" lang="C" \
+		binds="-b /dev -b /proc -b /sys" \
+		path="/usr/sbin:/usr/bin:/sbin:/bin" \
+		path_termux= path_android= \
+		share_home= share_tmp= share_system= share_data= share_storage=
 	shift
 	case "$preset" in
 	default)
-		home="/root" wd="/root" lang="zh_CN.UTF8" termux=1 android=1
+		home="/root" wd="/root" lang="zh_CN.UTF8"
+		path_termux=1 path_system=1 share_home=1 share_tmp=1 share_storage=1
 		path="/usr/local/sbin:/usr/local/bin:$path"
 ;;	*)	true
 	esac
-	[ ! "$termux" ] || path="$path:/data/data/com.termux/files/usr/bin"
-	[ ! "$android" ] || path"$path:/system/bin:/vendor/bin:/product/bin"
+
+	[ ! "$path_termux" ] || share_system=1 share_data=1 path="$path:"'"$PREFIX/bin"'
+	[ ! "$path_system" ] || share_system=1 path="$path:/system/bin:/vendor/bin:/product/bin"
+
+	[ ! "$share_tmp" ] || binds="$binds -b "'"$PREFIX/tmp:/tmp"'
+	[ ! "$share_home" ] || binds="$binds -b "'"$HOME:$home"'
+	[ ! "$share_system" ] || binds="$binds -b /apex -b /system -b /linkerconfig/ld.config.txt -b /vendor -b /product"
+	[ ! "$share_data" ] || binds="$binds -b /data"
+	[ ! "$share_storage" ] || binds="$binds -b /storage -b /sdcard"
+
 	unset LD_PRELOAD
-	proot -l -r "$root" -i "$id" -w "$wd" -b /dev -b /proc -b /sys \
-		-b /apex -b /system -b /linkerconfig/ld.config.txt -b /vendor -b /product \
-		-b /data -b /sdcard -b "$HOME":"$home" \
-		/usr/bin/env -i HOME="$home" TERM="$TERM" LANG="$lang" \
-		PATH="$path" "$@"
+	eval proot -l -r "$root" -i "$id" -w "$wd" "$binds" \
+		/usr/bin/env -i PATH="$path" HOME="$home" TERM="$TERM" LANG="$lang" \
+		"$*"
 }
 
 preset=default StartProot "$@"
