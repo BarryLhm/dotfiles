@@ -1,7 +1,11 @@
 busybox
+cowsay
 debianutils
 debootstrap
+fastfetch
+figlet
 fish
+fontconfig-utils
 gh
 git
 lsof
@@ -13,6 +17,9 @@ root-repo
 shellcheck
 strace
 termux-x11-nightly
+toilet
 up
 x11-repo
+xfce4-terminal
+xfwm4
 yadm

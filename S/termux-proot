@@ -2,35 +2,50 @@
 
 . "$(dirname "$0")/COMMON"
 
-StartProot() ## ( root ... ) ( preset )
+add_path() ## ( pos[0=pre,1=post] dirs... )
 {
-	local	root="$1" id="0:0" home="/" wd="/" lang="C" \
-		binds="-b /dev -b /proc -b /sys" \
-		path="/usr/sbin:/usr/bin:/sbin:/bin" \
-		path_termux= path_android= \
-		share_home= share_tmp= share_system= share_data= share_storage=
-	shift
-	case "$preset" in
-	default)
-		home="/root" wd="/root" lang="zh_CN.UTF8"
-		path_termux=1 path_system=1 share_home=1 share_tmp=1 share_storage=1
-		path="/usr/local/sbin:/usr/local/bin:$path"
-;;	*)	true
-	esac
-
-	[ ! "$path_termux" ] || share_system=1 share_data=1 path="$path:"'"$PREFIX/bin"'
-	[ ! "$path_system" ] || share_system=1 path="$path:/system/bin:/vendor/bin:/product/bin"
-
-	[ ! "$share_tmp" ] || binds="$binds -b "'"$PREFIX/tmp:/tmp"'
-	[ ! "$share_home" ] || binds="$binds -b "'"$HOME:$home"'
-	[ ! "$share_system" ] || binds="$binds -b /apex -b /system -b /linkerconfig/ld.config.txt -b /vendor -b /product"
-	[ ! "$share_data" ] || binds="$binds -b /data"
-	[ ! "$share_storage" ] || binds="$binds -b /storage -b /sdcard"
-
-	unset LD_PRELOAD
-	eval proot -l -r "$root" -i "$id" -w "$wd" "$binds" \
-		/usr/bin/env -i PATH="$path" HOME="$home" TERM="$TERM" LANG="$lang" \
-		"$*"
+	local pos="$1" str="$2"; shift 2
+	for i in "$@"; do str="$str:$i"; done
+	[ "$pos" = 0 ] && path="$str:$path" || path="$path:$str"
 }
 
-preset=default StartProot "$@"
+add_bind() ## ( binds... ) ( #opts[] ) -> ( new $opts[] )
+(for i in "$@"; do opts=("${opts[@]}" '-d' "$i");done)
+
+main() ## ( preset root cmdline... ) ( $preset )
+{
+	local	preset="$1" root="$2" id='0:0' home='/' wd='/' lang='C' \
+		opts=('-b' '/dev' '-b' '/proc' '-b' '/sys') \
+		system=('/system' '/vendor' '/product' '/apex' '/linkerconfig/ld.config.txt')
+		perms=('/dev/null:/proc/partitions')
+		path='/usr/sbin:/usr/bin:/sbin:/bin' \
+		share_home='' share_tmp='' share_system='' share_data='' share_storage='' \
+		path_termux='' path_system='' \
+		fix_perms=''
+	shift 2
+	case "$preset" in
+	default)
+		home='/root' wd='/root' lang='zh_CN.UTF8'
+		path_termux=1 path_system=1 share_home=1 share_tmp=1 share_storage=1
+		add_path 0 '/usr/local/sbin' '/usr/local/bin'
+;;	*):
+	esac
+	###
+	[ ! "$share_home" ] || add_bind "$HOME:$home"
+	[ ! "$share_tmp" ] || add_bind "$PREFIX/tmp:/tmp"
+	[ ! "$share_system" ] && [ ! "$path_termux" ] && [ ! "$path_system" ] || add_bind "${system[@]}"
+	[ ! "$share_data" ] && [ ! "$path_termux" ] || add_bind '/data'
+	[ ! "$share_storage" ] || add_bind '/storage' '/sdcard'
+	###
+	[ ! "$path_termux" ] || add_path 1 "$PREFIX/bin"
+	[ ! "$path_system" ] || add_path 1 '/system/bin' '/vendor/bin' '/product/bin'
+	###
+	[ ! "$fix_perms" ] || add_bind "${perms[@]}"
+
+	unset LD_PRELOAD
+	exec proot -l -r "$root" -i "$id" -w "$wd" "${opts[@]}" \
+		/usr/bin/env -i PATH="$path" HOME="$home" TERM="$TERM" LANG="$lang" \
+		"$@"
+}
+
+main default "$@"

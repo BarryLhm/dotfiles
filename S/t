@@ -3,6 +3,7 @@
 . "$(dirname "$0")/COMMON"
 
 world_file="$HOME/.termux/world"
+PATH=/data/data/com.termux/files/usr/bin
 
 error()
 {
@@ -61,8 +62,8 @@ save_world
 
 #Main
 
-[ "$#" = 0 ] && help_exit 0
-case $1 in help) help_exit
+[ "$#" = 0 ] && help_exit 1
+case $1 in help) help_exit 0
 ;; list) apt-mark showmanual
 ;; show) cat "$world_file"
 ;; apply) apply_world
