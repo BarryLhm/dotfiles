@@ -14,8 +14,10 @@ nano
 nmap
 proot-distro
 root-repo
+ruff
 shellcheck
 strace
+termux-api
 termux-x11-nightly
 toilet
 up

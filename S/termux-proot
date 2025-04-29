@@ -1,51 +1,97 @@
-#!/data/data/com.termux/files/usr/bin/bash -eu
+#!/bin/env python
+# -*- coding: utf-8 -*-
+# @Time : 2025/04/28-20//
+# @Author : BarryLhm
+# @File : termux-proot(.py)
 
-. "$(dirname "$0")/COMMON"
+import sys
+import os
+from pathlib import Path
+from typing import List
 
+debug_env = 'DEBUGGING'
+
+def print_help() -> None:
+    prog = sys.argv[0]
+    print(
+        prog
+        + ": Termux Proot Helper\n      usage: "
+        + prog
+        + """ ROOT CMDLINE
+"""
+    )
+
+
+def main(argv: List[str]) -> int:
+    if len(argv) < 2:
+        print_help()
+        exit(1)
+
+    ## defaults
+    root = Path("/")
+    id = "0:0"
+    wd = Path("/")
+    hard_to_sym = True
+    binds = ["/dev", "/proc", "/sys"]
+    cmdline = ["/bin/sh"]
+    # ---
+    PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
+    HOME = Path("/")
+    LANG = "C"
+    TERM = os.environ["TERM"]
+
+    ## conf
+    root = argv[1]
+    cmdline = argv[2:]
+
+    ## process & execute
+    opts = ["-r", root, "-i", id, "-w", wd]
+    if hard_to_sym:
+        opts += ["-l"]
+    opts += [item for path in binds for item in ["-b", path]]
+    env = {"PATH": PATH, "HOME": HOME, "LANG": LANG, "TERM": TERM}
+
+    if debug_env in os.environ and os.environ[debug_env] == '1':
+        print("execvpe(", "proot", ["proot"] + opts + cmdline, env, ")")
+    os.execvpe("proot", ["proot"] + opts + cmdline, env)
+
+
+if __name__ == "__main__":
+    exit(main(sys.argv))
+
+"""
 add_path() ## ( pos[0=pre,1=post] dirs... )
 {
-	local pos="$1" str="$2"; shift 2
-	for i in "$@"; do str="$str:$i"; done
-	[ "$pos" = 0 ] && path="$str:$path" || path="$path:$str"
+	local pos='$1' str='$2'; shift 2
+	for i in '$@'; do str='$str:$i'; done
+	[ '$pos' = 0 ] && path='$str:$path' || path='$path:$str'
 }
-
-add_bind() ## ( binds... ) ( #opts[] ) -> ( new $opts[] )
-(for i in "$@"; do opts=("${opts[@]}" '-d' "$i");done)
-
 main() ## ( preset root cmdline... ) ( $preset )
 {
-	local	preset="$1" root="$2" id='0:0' home='/' wd='/' lang='C' \
-		opts=('-b' '/dev' '-b' '/proc' '-b' '/sys') \
+	local	preset='$1' root='$2' id='0:0' home='/' wd='/' lang='C' \
 		system=('/system' '/vendor' '/product' '/apex' '/linkerconfig/ld.config.txt')
 		perms=('/dev/null:/proc/partitions')
-		path='/usr/sbin:/usr/bin:/sbin:/bin' \
-		share_home='' share_tmp='' share_system='' share_data='' share_storage='' \
-		path_termux='' path_system='' \
-		fix_perms=''
-	shift 2
-	case "$preset" in
 	default)
 		home='/root' wd='/root' lang='zh_CN.UTF8'
 		path_termux=1 path_system=1 share_home=1 share_tmp=1 share_storage=1
 		add_path 0 '/usr/local/sbin' '/usr/local/bin'
-;;	*):
-	esac
+	[ ! '$share_home' ] || add_bind '$HOME:$home'
+	[ ! '$share_tmp' ] || add_bind '$PREFIX/tmp:/tmp'
+	[ ! '$share_system' ] && [ ! '$path_termux' ] && [ ! '$path_system' ] || add_bind '${system[@]}'
+	[ ! '$share_data' ] && [ ! '$path_termux' ] || add_bind '/data'
+	[ ! '$share_storage' ] || add_bind '/storage' '/sdcard'
 	###
-	[ ! "$share_home" ] || add_bind "$HOME:$home"
-	[ ! "$share_tmp" ] || add_bind "$PREFIX/tmp:/tmp"
-	[ ! "$share_system" ] && [ ! "$path_termux" ] && [ ! "$path_system" ] || add_bind "${system[@]}"
-	[ ! "$share_data" ] && [ ! "$path_termux" ] || add_bind '/data'
-	[ ! "$share_storage" ] || add_bind '/storage' '/sdcard'
+	[ ! '$path_termux' ] || add_path 1 '$PREFIX/bin'
+	[ ! '$path_system' ] || add_path 1 '/system/bin' '/vendor/bin' '/product/bin'
 	###
-	[ ! "$path_termux" ] || add_path 1 "$PREFIX/bin"
-	[ ! "$path_system" ] || add_path 1 '/system/bin' '/vendor/bin' '/product/bin'
-	###
-	[ ! "$fix_perms" ] || add_bind "${perms[@]}"
+	[ ! '$fix_perms' ] || add_bind '${perms[@]}'
 
 	unset LD_PRELOAD
-	exec proot -l -r "$root" -i "$id" -w "$wd" "${opts[@]}" \
-		/usr/bin/env -i PATH="$path" HOME="$home" TERM="$TERM" LANG="$lang" \
-		"$@"
+	exec proot -l '${opts[@]}' \
+		 TERM='$TERM' \
+		'$@'
 }
 
-main default "$@"
+main default '$@'
+
+"""
