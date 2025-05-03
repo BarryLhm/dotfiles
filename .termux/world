@@ -10,6 +10,7 @@ fontconfig-utils
 gh
 git
 lsof
+lxc
 mesa
 mesa-demos
 mount-utils
@@ -18,6 +19,7 @@ nmap
 pipewire
 proot-distro
 root-repo
+rsync
 ruff
 shellcheck
 strace
@@ -25,6 +27,7 @@ termux-api
 termux-services
 termux-x11-nightly
 toilet
+tsu
 up
 virglrenderer-android
 vulkan-tools
