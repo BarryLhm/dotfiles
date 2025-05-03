@@ -32,7 +32,7 @@ exit "$1"
 apply_world()
 {
 apt-mark auto "*" >/dev/null
-pkg add $(cat "$world_file")
+pkg --check-mirror add $(cat "$world_file")
 }
 
 save_world()
@@ -49,7 +49,7 @@ mv "$world_file.tmp" "$world_file"
 
 add_pkg()
 {
-pkg add "$@"
+pkg --check-mirror add "$@"
 save_world
 }
 
@@ -71,6 +71,6 @@ case $1 in help) help_exit 0
 ;; sort) sort_world
 ;; add) shift; add_pkg "$@"
 ;; del) shift; del_pkg "$@"
-;; up) shift; pkg up "$@"
+;; up) shift; pkg --check-mirror up "$@"
 ;; *) help_exit 1
 esac

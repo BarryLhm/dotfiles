@@ -1,15 +1,47 @@
 #!/bin/env python
 # -*- coding: utf-8 -*-
-# @Time : 2025/04/28-20//
-# @Author : BarryLhm
-# @File : termux-proot(.py)
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (c) 2024-2025 BarryLhm<BarryLhm@outlook.com>
+
+"""termux-proot.py"""
 
 import sys
 import os
 from pathlib import Path
 from typing import List
 
-debug_env = 'DEBUGGING'
+## Static Difinitions
+debug_env = "DEBUGGING"
+termux_data = Path("/data/data/com.termux")
+termux_root = termux_data / "files"
+termux_home = termux_root / "home"
+termux_usr = termux_root / "usr"
+termux_bin = termux_usr / "bin"
+storage = [Path("/storage"), Path("/sdcard"), Path("/mnt")]
+android_inaccessible = [Path("/proc/partitions")]
+usrlocal_bin = [Path("/usr/local/sbin"), Path("/usr/local/bin")]
+
+
+def if_dir(*dirs: Path) -> list:
+    return [d for d in dirs if Path(d).is_dir()]
+
+
+def if_file(*files: Path) -> list:
+    return [f for f in files if Path(f).is_file()]
+
+
+path_android = if_dir(
+    "/system/bin",
+    "/system/xbin",
+    "/system_ext/bin",
+    "/system_ext/xbin",
+    "/vendor/bin",
+    "/product/bin",
+)
+android_runtime = if_dir("/system", "/vendor", "/product", "/apex") + if_file(
+    "/linkerconfig/ld.config.txt"
+)
+
 
 def print_help() -> None:
     prog = sys.argv[0]
@@ -22,6 +54,15 @@ def print_help() -> None:
     )
 
 
+def debug(message) -> None:
+    if debug_env in os.environ and os.environ[debug_env] == "1":
+        print("\033[2m" + str(message) + "\033[0m\n")
+
+
+def gen_bind(src: Path, dest: Path) -> str:
+    return str(src) + ":" + str(dest)
+
+
 def main(argv: List[str]) -> int:
     if len(argv) < 2:
         print_help()
@@ -31,67 +72,59 @@ def main(argv: List[str]) -> int:
     root = Path("/")
     id = "0:0"
     wd = Path("/")
-    hard_to_sym = True
+    hardlink_emu = True
     binds = ["/dev", "/proc", "/sys"]
+    masks = []
     cmdline = ["/bin/sh"]
-    # ---
-    PATH = "/usr/sbin:/usr/bin:/sbin:/bin"
-    HOME = Path("/")
-    LANG = "C"
-    TERM = os.environ["TERM"]
+    PATH = ["/usr/sbin", "/usr/bin/sbin", "/bin"]
+    env = {
+        "HOME": "/",
+        "LANG": "C",
+        "TERM": os.environ["TERM"],
+    }
 
+    ## ---
+    fix_permission_denied = path_usrlocal = share_android = (
+        share_termux
+    ) = share_storage = share_tmp = False
     ## conf
     root = argv[1]
     cmdline = argv[2:]
+    env["HOME"] = wd = Path("/root")
+    env["LANG"] = "zh_CN.UTF8"
+    binds += [termux_bin, str(termux_home) + ":" + str(env["HOME"])]
 
-    ## process & execute
+    fix_permission_denied = path_usrlocal = share_android = (
+        share_termux
+    ) = share_storage = share_tmp = True
+
+    ## config
+    masks += android_inaccessible if fix_permission_denied else None
+    binds += (
+        [
+            gen_bind(termux_usr / "tmp", Path("/tmp")),
+        ]
+        if share_tmp
+        else None
+    )
+    binds += storage if share_storage else None
+    binds += android_runtime if share_android else None
+    binds += [termux_data] if share_termux else None
+    PATH = usrlocal_bin + PATH if path_usrlocal else PATH
+
+    ## final process & execute
     opts = ["-r", root, "-i", id, "-w", wd]
-    if hard_to_sym:
+    if hardlink_emu:
         opts += ["-l"]
-    opts += [item for path in binds for item in ["-b", path]]
-    env = {"PATH": PATH, "HOME": HOME, "LANG": LANG, "TERM": TERM}
+    binds += ["/dev/null:" + str(a) for a in masks]
+    opts += [item for path in binds for item in ["-b", str(path)]]
+    env["PATH"] = ":".join([str(p) for p in PATH])
 
-    if debug_env in os.environ and os.environ[debug_env] == '1':
-        print("execvpe(", "proot", ["proot"] + opts + cmdline, env, ")")
+    debug(binds)
+    debug("execvpe(proot" + str(["proot"] + opts + cmdline) + str(env) + ")")
+
     os.execvpe("proot", ["proot"] + opts + cmdline, env)
 
 
 if __name__ == "__main__":
     exit(main(sys.argv))
-
-"""
-add_path() ## ( pos[0=pre,1=post] dirs... )
-{
-	local pos='$1' str='$2'; shift 2
-	for i in '$@'; do str='$str:$i'; done
-	[ '$pos' = 0 ] && path='$str:$path' || path='$path:$str'
-}
-main() ## ( preset root cmdline... ) ( $preset )
-{
-	local	preset='$1' root='$2' id='0:0' home='/' wd='/' lang='C' \
-		system=('/system' '/vendor' '/product' '/apex' '/linkerconfig/ld.config.txt')
-		perms=('/dev/null:/proc/partitions')
-	default)
-		home='/root' wd='/root' lang='zh_CN.UTF8'
-		path_termux=1 path_system=1 share_home=1 share_tmp=1 share_storage=1
-		add_path 0 '/usr/local/sbin' '/usr/local/bin'
-	[ ! '$share_home' ] || add_bind '$HOME:$home'
-	[ ! '$share_tmp' ] || add_bind '$PREFIX/tmp:/tmp'
-	[ ! '$share_system' ] && [ ! '$path_termux' ] && [ ! '$path_system' ] || add_bind '${system[@]}'
-	[ ! '$share_data' ] && [ ! '$path_termux' ] || add_bind '/data'
-	[ ! '$share_storage' ] || add_bind '/storage' '/sdcard'
-	###
-	[ ! '$path_termux' ] || add_path 1 '$PREFIX/bin'
-	[ ! '$path_system' ] || add_path 1 '/system/bin' '/vendor/bin' '/product/bin'
-	###
-	[ ! '$fix_perms' ] || add_bind '${perms[@]}'
-
-	unset LD_PRELOAD
-	exec proot -l '${opts[@]}' \
-		 TERM='$TERM' \
-		'$@'
-}
-
-main default '$@'
-
-"""
