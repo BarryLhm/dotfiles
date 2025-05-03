@@ -7,27 +7,30 @@
 
 import sys
 import os
-from pathlib import Path
-from typing import List
 
 ## Static Difinitions
 debug_env = "DEBUGGING"
-termux_data = Path("/data/data/com.termux")
-termux_root = termux_data / "files"
-termux_home = termux_root / "home"
-termux_usr = termux_root / "usr"
-termux_bin = termux_usr / "bin"
-storage = [Path("/storage"), Path("/sdcard"), Path("/mnt")]
-android_inaccessible = [Path("/proc/partitions")]
-usrlocal_bin = [Path("/usr/local/sbin"), Path("/usr/local/bin")]
+debug_magic = "1"
+termux_data = "/data/data/com.termux"
+termux_root = termux_data + "/files"
+termux_home = termux_root + "/home"
+termux_usr = termux_root + "/usr"
+termux_bin = termux_usr + "/bin"
+storage = ["/storage", "/sdcard", "/mnt"]
+android_inaccessible = ["/proc/partitions"]
+usrlocal_bin = ["/usr/local/sbin", "/usr/local/bin"]
+nullfile = "/dev/null"
+debugging = (
+    True if debug_env in os.environ and os.environ[debug_env] == debug_magic else False
+)
 
 
-def if_dir(*dirs: Path) -> list:
-    return [d for d in dirs if Path(d).is_dir()]
+def if_dir(*dirs: str) -> list:
+    return [d for d in dirs if os.path.isdir(d)]
 
 
-def if_file(*files: Path) -> list:
-    return [f for f in files if Path(f).is_file()]
+def if_file(*files: str) -> list:
+    return [f for f in files if os.path.isfile(f)]
 
 
 path_android = if_dir(
@@ -55,23 +58,19 @@ def print_help() -> None:
 
 
 def debug(message) -> None:
-    if debug_env in os.environ and os.environ[debug_env] == "1":
+    if debugging:
         print("\033[2m" + str(message) + "\033[0m\n")
 
 
-def gen_bind(src: Path, dest: Path) -> str:
-    return str(src) + ":" + str(dest)
-
-
-def main(argv: List[str]) -> int:
+def main(argv: list) -> int:
     if len(argv) < 2:
         print_help()
         exit(1)
 
     ## defaults
-    root = Path("/")
+    root = "/"
     id = "0:0"
-    wd = Path("/")
+    wd = "/"
     hardlink_emu = True
     binds = ["/dev", "/proc", "/sys"]
     masks = []
@@ -84,41 +83,41 @@ def main(argv: List[str]) -> int:
     }
 
     ## ---
-    fix_permission_denied = path_usrlocal = share_android = (
-        share_termux
-    ) = share_storage = share_tmp = False
+    fix_permission_denied = path_usrlocal = share_android = share_termux = (
+        share_storage
+    ) = share_tmp = False
     ## conf
     root = argv[1]
     cmdline = argv[2:]
-    env["HOME"] = wd = Path("/root")
+    env["HOME"] = wd = "/root"
     env["LANG"] = "zh_CN.UTF8"
-    binds += [termux_bin, str(termux_home) + ":" + str(env["HOME"])]
+    binds += [termux_bin, termux_home + ":" + env["HOME"]]
 
-    fix_permission_denied = path_usrlocal = share_android = (
-        share_termux
-    ) = share_storage = share_tmp = True
+    fix_permission_denied = path_usrlocal = share_android = share_termux = (
+        share_storage
+    ) = share_tmp = True
 
     ## config
-    masks += android_inaccessible if fix_permission_denied else None
-    binds += (
-        [
-            gen_bind(termux_usr / "tmp", Path("/tmp")),
-        ]
-        if share_tmp
-        else None
-    )
-    binds += storage if share_storage else None
-    binds += android_runtime if share_android else None
-    binds += [termux_data] if share_termux else None
-    PATH = usrlocal_bin + PATH if path_usrlocal else PATH
+    if fix_permission_denied:
+        masks += android_inaccessible
+    if share_tmp:
+        binds += [termux_usr + "/tmp:/tmp"]
+    if share_storage:
+        binds += storage
+    if share_android:
+        binds += android_runtime
+    if share_termux:
+        binds += [termux_data]
+    if path_usrlocal:
+        PATH = usrlocal_bin + PATH
 
     ## final process & execute
     opts = ["-r", root, "-i", id, "-w", wd]
     if hardlink_emu:
         opts += ["-l"]
-    binds += ["/dev/null:" + str(a) for a in masks]
-    opts += [item for path in binds for item in ["-b", str(path)]]
-    env["PATH"] = ":".join([str(p) for p in PATH])
+    binds += [nullfile + ":" + p for p in masks]
+    opts += [item for p in binds for item in ["-b", str(p)]]
+    env["PATH"] = ":".join(PATH)
 
     debug(binds)
     debug("execvpe(proot" + str(["proot"] + opts + cmdline) + str(env) + ")")
