@@ -9,20 +9,26 @@ import sys
 import os
 
 ## Static Difinitions
-debug_env = "DEBUGGING"
-debug_magic = "1"
-termux_data = "/data/data/com.termux"
-termux_root = termux_data + "/files"
-termux_home = termux_root + "/home"
-termux_usr = termux_root + "/usr"
-termux_bin = termux_usr + "/bin"
-storage = ["/storage", "/sdcard", "/mnt"]
-android_inaccessible = ["/proc/partitions"]
-usrlocal_bin = ["/usr/local/sbin", "/usr/local/bin"]
-nullfile = "/dev/null"
-debugging = (
-    True if debug_env in os.environ and os.environ[debug_env] == debug_magic else False
+DEBUG_ENV = "DEBUGGING"
+DEBUG_MAGIC = "1"
+TERMUX_DATA = "/data/data/com.termux"
+TERMUX_ROOT = TERMUX_DATA + "/files"
+TERMUX_HOME = TERMUX_ROOT + "/home"
+TERMUX_USR = TERMUX_ROOT + "/usr"
+TERMUX_BIN = TERMUX_USR + "/bin"
+ANDROID_STORAGE = ["/storage", "/sdcard", "/mnt"]
+ANDROID_INACCESSIBLE = ["/proc/partitions"]
+USRLOCAL_PATH = ["/usr/local/sbin", "/usr/local/bin"]
+NULLFILE = "/dev/null"
+DEBUGGING = (
+    True if DEBUG_ENV in os.environ and os.environ[DEBUG_ENV] == DEBUG_MAGIC else False
 )
+UID = os.getuid()
+GID = os.getgid()
+EUID = os.geteuid()
+EGID = os.getegid()
+WD = os.getcwd()
+PROG = os.path.basename(__file__)
 
 
 def if_dir(*dirs: str) -> list:
@@ -33,7 +39,7 @@ def if_file(*files: str) -> list:
     return [f for f in files if os.path.isfile(f)]
 
 
-path_android = if_dir(
+ANDROID_PATH = if_dir(
     "/system/bin",
     "/system/xbin",
     "/system_ext/bin",
@@ -41,25 +47,20 @@ path_android = if_dir(
     "/vendor/bin",
     "/product/bin",
 )
-android_runtime = if_dir("/system", "/vendor", "/product", "/apex") + if_file(
+ANDROID_SYSTEM = if_dir("/system", "/vendor", "/product", "/apex") + if_file(
     "/linkerconfig/ld.config.txt"
 )
 
 
-def print_help() -> None:
-    prog = sys.argv[0]
-    print(
-        prog
-        + ": Termux Proot Helper\n      usage: "
-        + prog
-        + """ ROOT CMDLINE
-"""
-    )
+def print_help():
+    print(f"{PROG}: Termux Proot Helper")
+    print(f"      usage: {PROG} ROOT CMDLINE")
+    print("")
 
 
-def debug(message) -> None:
-    if debugging:
-        print("\033[2m" + str(message) + "\033[0m\n")
+def debug(message):
+    if DEBUGGING:
+        print(f"\033[2m{message}\033[0m\n")
 
 
 def main(argv: list) -> int:
@@ -91,7 +92,7 @@ def main(argv: list) -> int:
     cmdline = argv[2:]
     env["HOME"] = wd = "/root"
     env["LANG"] = "zh_CN.UTF8"
-    binds += [termux_bin, termux_home + ":" + env["HOME"]]
+    binds += [TERMUX_BIN, TERMUX_HOME + ":" + env["HOME"]]
 
     fix_permission_denied = path_usrlocal = share_android = share_termux = (
         share_storage
@@ -99,28 +100,28 @@ def main(argv: list) -> int:
 
     ## config
     if fix_permission_denied:
-        masks += android_inaccessible
+        masks += ANDROID_INACCESSIBLE
     if share_tmp:
-        binds += [termux_usr + "/tmp:/tmp"]
+        binds += [TERMUX_USR + "/tmp:/tmp"]
     if share_storage:
-        binds += storage
+        binds += ANDROID_STORAGE
     if share_android:
-        binds += android_runtime
+        binds += ANDROID_SYSTEM
     if share_termux:
-        binds += [termux_data]
+        binds += [TERMUX_DATA]
     if path_usrlocal:
-        PATH = usrlocal_bin + PATH
+        PATH = USRLOCAL_PATH + PATH
 
     ## final process & execute
     opts = ["-r", root, "-i", id, "-w", wd]
     if hardlink_emu:
         opts += ["-l"]
-    binds += [nullfile + ":" + p for p in masks]
+    binds += [NULLFILE + ":" + p for p in masks]
     opts += [item for p in binds for item in ["-b", str(p)]]
     env["PATH"] = ":".join(PATH)
 
     debug(binds)
-    debug("execvpe(proot" + str(["proot"] + opts + cmdline) + str(env) + ")")
+    debug(f"execvpe(proot, {['proot'] + opts + cmdline}, {env})")
 
     os.execvpe("proot", ["proot"] + opts + cmdline, env)
 
