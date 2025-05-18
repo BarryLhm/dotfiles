@@ -2,7 +2,6 @@
 alpine-chimera-adapter
 amdgpu_top
 android-tools
-ansible
 ark
 asciinema
 base-full
@@ -106,6 +105,7 @@ plasma-desktop-sddm-meta
 !plasma-desktop-x11-meta
 plasma-firewall
 plasma-systemmonitor
+plasma-workspace-wallpapers=20250404.140808
 podman-tui
 power-profiles-daemon
 python-pip
