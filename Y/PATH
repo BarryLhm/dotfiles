@@ -4,6 +4,8 @@
 .config/pip/pip.conf
 .config/user-dirs.dirs
 .config/user-dirs.locale
+.dev-sidecar/config.json
+.dev-sidecar/setting.json
 .gitconfig
 .local/share/flatpak/overrides/
 .npmrc
