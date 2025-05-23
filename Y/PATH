@@ -16,6 +16,7 @@
 .root_archlinux/etc/pam.d/system-auth
 .root_archlinux/etc/security/faillock.conf
 .root_archlinux/usr/local/lib/systemd/system/htop.service
+.root_chimera/etc/NetworkManager/NetworkManager.conf
 .root_chimera/etc/apk/world
 .root_chimera/etc/default/console-setup
 .root_chimera/etc/hostname

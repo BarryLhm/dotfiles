@@ -1,10 +1,9 @@
-7zip
 amdgpu_top
 android-tools
 ark
 asciinema
 audacity
-avahi
+audit
 avahi-ui-progs
 base-full
 bat
@@ -19,6 +18,7 @@ clang
 cmake
 conky
 cups
+dhcpcd=20250523.155501
 discount-progs
 discover
 distrobox
@@ -29,16 +29,14 @@ elisa
 exo-devel
 eza
 fastfetch
-fcitx5
 fcitx5-configtool-kde
 fd
 ffmpeg
 filelight
 firefox
-firewalld
+firewalld-firewall-config
 firmware-linux-misc
 fish-shell
-flatpak
 flatpak-kcm
 fonts-monaspace-otf
 fonts-nerd-symbols-only
@@ -49,7 +47,6 @@ gawk
 gcompat
 gettext
 gimp
-git
 github-cli
 glow
 gmake
@@ -62,6 +59,7 @@ imhex
 initramfs-tools
 inkscape
 iproute2
+ipset
 iputils
 java-jre-openjdk21-default
 kde-cli-tools
@@ -86,7 +84,6 @@ linux-stable
 lldb
 llvm
 lsof
-lxc
 meson
 mpv
 nano
@@ -101,9 +98,7 @@ pciutils
 pkgconf
 plasma-desktop
 !plasma-desktop-meta
-plasma-desktop-sddm-meta
 !plasma-desktop-x11-meta
-plasma-firewall
 plasma-systemmonitor
 plasma-workspace-wallpapers=20250518.153434
 power-profiles-daemon
@@ -124,7 +119,6 @@ systemsettings
 systeroid
 tangle
 thunderbird
-traceroute
 ucode-amd
 ucode-intel
 util-linux
@@ -133,16 +127,13 @@ valgrind
 virt-manager
 vulkan-tools
 waydroid
-wayfire
 wayland-devel
-wayland-protocols
-wf-shell
 wine
 wireshark
 wlroots0.18-devel
+wpa_supplicant=20250523.155444
 xeyes
 !xfce4-settings-default-themes
-!xserver-xorg
 xserver-xorg-devel
 xserver-xorg-input-libinput=20250518.153653
 xwayland-devel
