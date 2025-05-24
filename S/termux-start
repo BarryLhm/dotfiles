@@ -1,8 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash -eu
-
-. "$(dirname "$0")/COMMON"
-
-"$dir/termux-greet"
-echo "PID: $(getshpid)"
-"$dir/hitokoto"
-"$dir/todo"

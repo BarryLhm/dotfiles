@@ -1,4 +1,7 @@
 .cargo/config.toml
+.config/fish/conf.d/
+.config/fish/config.fish
+.config/fish/fish_variables
 .config/fontconfig/fonts.conf
 .config/htop/htoprc
 .config/pip/pip.conf
