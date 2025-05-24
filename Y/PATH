@@ -1,9 +1,13 @@
 .cargo/config.toml
+.config/fcitx5/conf/rime.conf
+.config/fcitx5/config
+.config/fcitx5/profile
 .config/fish/conf.d/
 .config/fish/config.fish
 .config/fish/fish_variables
 .config/fontconfig/fonts.conf
 .config/htop/htoprc
+.config/kwinrulesrc
 .config/pip/pip.conf
 .config/user-dirs.dirs
 .config/user-dirs.locale

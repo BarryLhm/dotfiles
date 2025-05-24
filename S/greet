@@ -6,3 +6,4 @@
 echo "PID: $(getshpid)"
 "$dir/hitokoto"
 "$dir/todo"
+echo 'ps: One pull a day keep merge conflicts away'
