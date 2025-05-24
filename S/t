@@ -2,6 +2,8 @@
 
 . "$(dirname "$0")/COMMON"
 
+[ "$in_termux" = 1 ] && echo 'Must be used in Termux' && exit 1 || :
+
 world_file="$HOME/.termux/world"
 PATH=/data/data/com.termux/files/usr/bin
 

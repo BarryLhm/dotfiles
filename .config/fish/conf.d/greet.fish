@@ -1,3 +1,3 @@
 function S-greet
-    ~/S/termux-greet
+    ~/S/greet
 end

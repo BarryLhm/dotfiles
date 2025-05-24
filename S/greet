@@ -2,8 +2,7 @@
 
 . "$(dirname "$0")/COMMON"
 
-[ $in_termux = 1 ] || exit 0
-"$dir/termux-banner"
+[ "$in_termux" = 1 ] && "$dir/termux-banner" || "$dir/banner" || :
 echo "PID: $(getshpid)"
 "$dir/hitokoto"
 "$dir/todo"
