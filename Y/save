@@ -35,4 +35,4 @@ fi
 
 show_result
 
-echo 'Don\'t forget to push'
+echo "Don't forget to push"
