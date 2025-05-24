@@ -34,3 +34,5 @@ else do_commit "update"
 fi
 
 show_result
+
+echo 'Don\'t forget to push'
