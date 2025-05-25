@@ -2,7 +2,7 @@ dir="$(realpath "$(dirname "$0")")"
 prog="$(basename "$0")"
 repeat()
 {
-	printf %"$1"s | tr ' ' "$2"
+	printf %"$1"s | sed s/' '/"$2"/g
 }
 getshpid()
 {
