@@ -1,0 +1,8 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+if [ "$(tput cols)" -ge "$(wc -mL "$dir/BANNER_DEFAULT" | awk '{print $2}')" ]
+then cat "$dir/BANNER_DEFAULT"
+else echo 'Chimera Linux!'; repeat "$(tput cols)" '─'
+fi
