@@ -42,5 +42,6 @@ sfdisk
 shadow
 udev-init-scripts
 udev-init-scripts-openrc
+util-linux
 uutils-coreutils
 yadm
