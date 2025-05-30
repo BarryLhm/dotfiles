@@ -9,6 +9,7 @@
 ::once:/sbin/openrc default
 
 # Set up a couple of getty's
+tty4::respawn:/sbin/agetty -a root 38400 tty4
 tty5::respawn:/sbin/getty 38400 tty5
 tty6::respawn:/sbin/getty 38400 tty6
 tty7::respawn:/sbin/getty 38400 tty7
