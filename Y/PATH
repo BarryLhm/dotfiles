@@ -33,11 +33,11 @@
 .root_chimera/usr/local/bin/sc
 .root_chimera/usr/local/bin/uc
 .root_chimera/usr/local/lib/dinit.d/
-.root_common/etc/fstab
-.root_common/etc/locale.conf
-.root_common/etc/sddm.conf
-.root_common/etc/sddm.conf.d/10-wayland.conf
-.root_common/etc/sysctl.d/
+.root_chimera/etc/fstab
+.root_chimera/etc/locale.conf
+.root_chimera/etc/sddm.conf
+.root_chimera/etc/sddm.conf.d/10-wayland.conf
+.root_chimera/etc/sysctl.d/
 .root_common/usr/local/bin/afork
 .root_common/usr/local/bin/cmd
 .root_common/usr/local/bin/f
