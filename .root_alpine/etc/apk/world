@@ -14,6 +14,7 @@ debootstrap
 doas
 dosfstools
 dropbear
+elogind
 eudev
 fish
 gcompat
@@ -25,8 +26,10 @@ ifupdown-ng-ppp
 ifupdown-ng-wifi
 iproute2
 iwd
+labwc
 lang
 less
+linux-firmware
 linux-lts
 losetup
 lsblk
@@ -38,6 +41,7 @@ nginx
 nmap
 openssl
 parted
+polkit-elogind
 sfdisk
 shadow
 udev-init-scripts
