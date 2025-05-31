@@ -1,0 +1,4 @@
+UUID=bd49a7ac-9f80-495f-82c6-3c4efb834851 / btrfs subvol=/alpine,noatime 0 0
+UUID=6838-48F2 /boot/efi/ vfat flush 0 2
+/ /root/.root_alpine/ none bind 0 0
+/ /root/.root_common/ none bind 0 0

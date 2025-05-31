@@ -3,7 +3,7 @@
 . "$(dirname "$0")/COMMON"
 
 export LC_ALL=C
-< "$pathlist" tr -s '\n' | sort -u > "$pathlist.tmp"
+tr -s '\n' < "$pathlist" | sort -u > "$pathlist.tmp"
 mv "$pathlist.tmp" "$pathlist"
-<  "$excludelist" tr -s '\n' | sort -u > "$excludelist.tmp"
+tr -s '\n' < "$excludelist" | sort -u > "$excludelist.tmp"
 mv "$excludelist.tmp" "$excludelist"
