@@ -1,3 +1,4 @@
+activate-linux
 amdgpu_top
 android-tools
 ark
@@ -50,6 +51,7 @@ go
 grub-x86_64-efi
 gsed
 gtk-layer-shell-devel
+gtk4-devel
 htop
 imhex
 inkscape
