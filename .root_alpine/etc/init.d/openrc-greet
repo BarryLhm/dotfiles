@@ -1,7 +1,0 @@
-#!/sbin/openrc-run
-
-name="openrc-greet"
-RUNLEVEL="$(rc-status --runlevel 2>/dev/null || echo "default")"
-
-start()( /root/S/openrc-greet "$RUNLEVEL" )
-stop()( exit 0 )

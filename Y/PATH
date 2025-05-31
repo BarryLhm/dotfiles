@@ -22,7 +22,6 @@
 .root_alpine/etc/apk/world
 .root_alpine/etc/doas.conf
 .root_alpine/etc/fstab
-.root_alpine/etc/init.d/openrc-greet
 .root_alpine/etc/inittab
 .root_alpine/etc/mini_httpd/
 .root_alpine/etc/modules

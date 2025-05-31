@@ -3,10 +3,10 @@
 ::sysinit:/sbin/openrc sysinit
 ::sysinit:/sbin/openrc boot
 ::wait:/sbin/openrc default
-::wait:/sbin/openrc before-late
-::wait:/sbin/openrc late
-::wait:/sbin/openrc after-late
-::once:/sbin/openrc default
+::wait:/root/S/openrc-greet before-late
+::wait:/sbin/openrc -n late
+::wait:/root/S/openrc-greet after-late
+::wait:/sbin/openrc -n default
 
 # Set up a couple of getty's
 tty4::respawn:/sbin/agetty -a root 38400 tty4
