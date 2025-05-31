@@ -25,6 +25,7 @@
 .root_alpine/etc/inittab
 .root_alpine/etc/mini_httpd/
 .root_alpine/etc/modules
+.root_alpine/etc/rc.conf
 .root_alpine/etc/runlevels/
 .root_archlinux/etc/issue
 .root_archlinux/etc/locale.gen
