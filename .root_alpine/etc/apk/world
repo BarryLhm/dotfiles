@@ -8,14 +8,17 @@ btrfs-progs
 busybox-binsh=20250530.160750
 cfdisk
 chrony
+command-not-found
 curl
 dash-binsh
 debootstrap
 doas
+docs
 dosfstools
 dropbear
 elogind
 eudev
+figlet
 fish
 gcompat
 git
