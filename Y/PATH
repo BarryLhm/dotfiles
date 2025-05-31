@@ -20,6 +20,8 @@
 .root_alpine/etc/apk/interactive
 .root_alpine/etc/apk/repositories
 .root_alpine/etc/apk/world
+.root_alpine/etc/conf.d/dropbear
+.root_alpine/etc/default/grub
 .root_alpine/etc/doas.conf
 .root_alpine/etc/fstab
 .root_alpine/etc/inittab

@@ -6,11 +6,13 @@ agetty
 alpine-base
 btrfs-progs
 busybox-binsh=20250530.160750
+certbot
 cfdisk
 chrony
 command-not-found
 curl
 dash-binsh
+ddnsc
 debootstrap
 doas
 docs
@@ -36,6 +38,7 @@ linux-firmware
 linux-lts
 losetup
 lsblk
+mandoc-apropos
 mini_httpd
 mkinitfs
 nano
