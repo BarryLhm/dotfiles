@@ -15,6 +15,7 @@ btop
 cage
 cargo
 chimera-repo-user
+chromium
 cmake
 conky
 cups
@@ -53,6 +54,7 @@ gsed
 gtk-layer-shell-devel
 gtk4-devel
 htop
+iftop
 imhex
 inkscape
 ipset
@@ -110,11 +112,13 @@ tangle
 thunderbird
 ucode-amd
 ucode-intel
+unrar
 util-linux
 util-linux-ns
 valgrind
 virt-manager
 vulkan-tools
+waycheck
 waydroid
 wine
 wireshark
