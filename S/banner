@@ -8,6 +8,7 @@ calculate_length()( python3 -c 'import sys; from wcwidth import wcswidth; print(
 ## specify $variant
 print_banner()
 {
+	[ -f "$dir/BANNER_$variant" ] || exit 1
 	if [ "$(tput cols)" -ge "$( tail +2 "$dir/BANNER_$variant" | calculate_length)" ]
 	then tail +2 "$dir/BANNER_$variant"
 	else head -1 "$dir/BANNER_$variant"; repeat "$(tput cols)" '─'
@@ -26,5 +27,5 @@ variant="DEFAULT"
 
 ## main
 ## variant override
-[ "${b+x}" ] && variant="$1" || get_variant
+[ "${1+x}" ] && variant="$1" || get_variant
 print_banner
