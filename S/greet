@@ -2,8 +2,14 @@
 
 . "$(dirname "$0")/COMMON"
 
-[ "$in_termux" = 1 ] && "$dir/termux-banner" || "$dir/banner" || :
+## preload
+
+fifo="$(mktemp -u)"
+mkfifo "$fifo"
+"$dir/hitokoto" > "$fifo" 2>&1 &
+
+"$dir/banner"
 echo "PID: $(getshpid)"
-"$dir/hitokoto"
+cat "$fifo"; rm -f "$fifo"
 "$dir/todo"
-echo 'ps: One pull a day keep merge conflicts away'
+cat "$dir/PS"
