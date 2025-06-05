@@ -17,6 +17,9 @@ mesa-demos
 mount-utils
 nano
 nmap
+nodejs
+openssl
+openssl-tool
 pipewire
 proot-distro
 root-repo
@@ -27,6 +30,7 @@ strace
 termux-api
 termux-services
 termux-x11-nightly
+timg
 toilet
 up
 virglrenderer-android
