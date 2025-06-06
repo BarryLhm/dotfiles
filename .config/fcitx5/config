@@ -56,7 +56,7 @@ CompactInputMethodInformation=True
 # 显示第一个输入法的信息
 ShowFirstInputMethodInformation=True
 # 默认页大小
-DefaultPageSize=5
+DefaultPageSize=10
 # 覆盖 Xkb 选项
 OverrideXkbOption=False
 # 自定义 Xkb 选项

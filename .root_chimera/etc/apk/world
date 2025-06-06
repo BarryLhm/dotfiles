@@ -33,6 +33,7 @@ elisa
 eza
 fastfetch
 fcitx5-configtool-kde
+fcitx5-qt-devel
 fcitx5-rime
 fd
 figlet
@@ -46,6 +47,9 @@ fonts-monaspace-otf
 fonts-nerd-symbols-only
 fonts-noto-extra
 fonts-noto-serif-cjk
+fuse-devel
+fuse-devel-static
+fuse-emulator
 gawk
 gcompat
 gettext
@@ -103,6 +107,7 @@ power-profiles-daemon
 python-pip
 python-wcwidth
 qemu-system-x86_64
+qt6-qtbase-devel
 radeontop
 ripgrep
 ruff

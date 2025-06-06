@@ -15,6 +15,7 @@ wmclassmatch=1
 
 [60f6db00-c85d-4182-9128-7f79823f67a5]
 Description=OpenUtau trackeditor
+Enabled=false
 above=true
 aboverule=3
 title=-
