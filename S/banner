@@ -18,11 +18,11 @@ print_banner()
 get_variant()
 {
 [ "$in_termux" = 1 ] && variant="TERMUX" && return || :
-case "(lsb_release -sc)" in
+case "$(lsb_release -sc)" in
 chimera) variant="CHIMERA";;
 alpine) variant="ALPINE";;
+*) variant="DEFAULT"
 esac
-variant="DEFAULT"
 }
 
 ## main

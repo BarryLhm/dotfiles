@@ -95,6 +95,7 @@ plasma-vault
 plasma-workspace-wallpapers=20250518.153434
 power-profiles-daemon
 python-pip
+python-wcwidth
 qemu-system-x86_64
 radeontop
 ripgrep
