@@ -5,6 +5,8 @@ ark
 asciinema
 audacity
 audit
+autoconf
+automake
 avahi-ui-progs
 base-full
 bat
@@ -15,8 +17,10 @@ btop
 cage
 cargo
 chimera-repo-user
-chromium
 cmake
+cmd:autopoint
+cmd:makeinfo
+cmd:texi2pdf
 conky
 cups
 discount-progs
@@ -49,6 +53,7 @@ gimp
 github-cli
 glow
 go
+gperf
 grub-x86_64-efi
 gsed
 gtk-layer-shell-devel
@@ -81,6 +86,7 @@ llvm
 lsof
 meson
 mpv
+musl-devel
 ncurses-devel
 nftables
 nmap
