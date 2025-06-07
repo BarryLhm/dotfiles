@@ -6,10 +6,10 @@
 
 fifo="$(mktemp -u)"
 mkfifo "$fifo"
-"$dir/hitokoto" > "$fifo" 2>&1 &
-
+[ "$in_fbcon" = 1 ] || "$dir/hitokoto" > "$fifo" 2>&1 &
 "$dir/banner"
 echo "PID: $(getshpid)"
-cat "$fifo"; rm -f "$fifo"
+[ "$in_fbcon" = 1 ] || cat "$fifo"
+rm -f "$fifo"
 "$dir/todo"
 cat "$dir/PS"
