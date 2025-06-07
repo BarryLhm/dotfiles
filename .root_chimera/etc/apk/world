@@ -5,7 +5,6 @@ ark
 asciinema
 audacity
 audit
-autoconf
 automake
 avahi-ui-progs
 base-full
@@ -19,7 +18,6 @@ cargo
 chimera-repo-user
 cmake
 cmd:autopoint
-cmd:makeinfo
 cmd:texi2pdf
 conky
 cups
@@ -47,12 +45,10 @@ fonts-monaspace-otf
 fonts-nerd-symbols-only
 fonts-noto-extra
 fonts-noto-serif-cjk
-fuse-devel
 fuse-devel-static
 fuse-emulator
 gawk
 gcompat
-gettext
 gimp
 github-cli
 glow
@@ -68,7 +64,6 @@ imhex
 inkscape
 ipset
 java-jre-openjdk21-default
-kcrash
 kde-cli-tools
 kde-gtk-config
 kdeconnect
@@ -90,7 +85,6 @@ llvm
 lsof
 meson
 mpv
-musl-devel
 ncurses-devel
 nftables
 nmap
