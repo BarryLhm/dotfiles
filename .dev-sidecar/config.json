@@ -10,5 +10,14 @@
 		"theme": "system",
 		"showShutdownTip": false,
 		"closeStrategy": 1
+	},
+	"plugin": {
+		"node": {
+			"enabled": true,
+			"setting": {
+				"yarnRegistry": "https://registry.npmmirror.com",
+				"registry": "https://registry.npmmirror.com"
+			}
+		}
 	}
 }
