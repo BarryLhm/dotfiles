@@ -4,7 +4,7 @@ Name=默认
 # Layout
 Default Layout=us
 # Default Input Method
-DefaultIM=rime
+DefaultIM=mozc
 
 [Groups/0/Items/0]
 # Name
@@ -17,6 +17,12 @@ Layout=
 Name=rime
 # Layout
 Layout=us
+
+[Groups/0/Items/2]
+# Name
+Name=mozc
+# Layout
+Layout=
 
 [GroupOrder]
 0=默认
