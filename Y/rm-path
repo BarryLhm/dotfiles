@@ -8,4 +8,3 @@ mv "$pathlist.tmp" "$pathlist"
 done
 
 "$dir/sort"
-"$dir/git-update"
