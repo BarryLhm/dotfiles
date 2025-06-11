@@ -1,4 +1,5 @@
 .cargo/config.toml
+.config/dinit.d/
 .config/fcitx5/conf/rime.conf
 .config/fcitx5/config
 .config/fcitx5/profile
@@ -48,9 +49,15 @@
 .root_chimera/etc/sddm.conf
 .root_chimera/etc/sddm.conf.d/10-wayland.conf
 .root_chimera/etc/sysctl.d/
+.root_chimera/usr/lib/fcitx5/fcitx5-mozc.so
+.root_chimera/usr/lib/mozc
 .root_chimera/usr/local/bin/sc
 .root_chimera/usr/local/bin/uc
 .root_chimera/usr/local/lib/dinit.d/
+.root_chimera/usr/share/fcitx5/addon/mozc.conf
+.root_chimera/usr/share/fcitx5/inputmethod/mozc.conf
+.root_chimera/usr/share/locale/zh_CN/LC_MESSAGES/fcitx5-mozc.mo
+.root_chimera/usr/share/metainfo/org.fcitx.Fcitx5.Addon.Mozc.metainfo.xml
 .root_common/usr/local/bin/afork
 .root_common/usr/local/bin/cmd
 .root_common/usr/local/bin/f

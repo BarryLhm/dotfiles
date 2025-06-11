@@ -1,0 +1,1 @@
+/var/lib/flatpak/runtime/org.fcitx.Fcitx5.Addon.Mozc/x86_64/stable/active/files/share/locale/zh_CN/LC_MESSAGES/fcitx5-mozc.mo
