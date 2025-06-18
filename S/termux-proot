@@ -1,0 +1,130 @@
+#!/bin/env python
+# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (c) 2024-2025 BarryLhm<BarryLhm@outlook.com>
+
+"""termux-proot.py"""
+
+import sys
+import os
+
+## Static Difinitions
+DEBUG_ENV = "DEBUGGING"
+DEBUG_MAGIC = "1"
+TERMUX_DATA = "/data/data/com.termux"
+TERMUX_ROOT = TERMUX_DATA + "/files"
+TERMUX_HOME = TERMUX_ROOT + "/home"
+TERMUX_USR = TERMUX_ROOT + "/usr"
+TERMUX_BIN = TERMUX_USR + "/bin"
+ANDROID_STORAGE = ["/storage", "/sdcard", "/mnt"]
+ANDROID_INACCESSIBLE = ["/proc/partitions"]
+USRLOCAL_PATH = ["/usr/local/sbin", "/usr/local/bin"]
+NULLFILE = "/dev/null"
+DEBUGGING = (
+    True if DEBUG_ENV in os.environ and os.environ[DEBUG_ENV] == DEBUG_MAGIC else False
+)
+UID = os.getuid()
+GID = os.getgid()
+EUID = os.geteuid()
+EGID = os.getegid()
+WD = os.getcwd()
+PROG = os.path.basename(__file__)
+
+
+def if_dir(*dirs: str) -> list:
+    return [d for d in dirs if os.path.isdir(d)]
+
+
+def if_file(*files: str) -> list:
+    return [f for f in files if os.path.isfile(f)]
+
+
+ANDROID_PATH = if_dir(
+    "/system/bin",
+    "/system/xbin",
+    "/system_ext/bin",
+    "/system_ext/xbin",
+    "/vendor/bin",
+    "/product/bin",
+)
+ANDROID_SYSTEM = if_dir("/system", "/vendor", "/product", "/apex") + if_file(
+    "/linkerconfig/ld.config.txt"
+)
+
+
+def print_help():
+    print(f"{PROG}: Termux Proot Helper")
+    print(f"      usage: {PROG} ROOT CMDLINE")
+    print("")
+
+
+def debug(message):
+    if DEBUGGING:
+        print(f"\033[2m{message}\033[0m\n")
+
+
+def main(argv: list) -> int:
+    if len(argv) < 2:
+        print_help()
+        exit(1)
+
+    ## defaults
+    root = "/"
+    id = "0:0"
+    wd = "/"
+    hardlink_emu = True
+    binds = ["/dev", "/proc", "/sys"]
+    masks = []
+    cmdline = ["/bin/sh"]
+    PATH = ["/usr/sbin", "/usr/bin/sbin", "/bin"]
+    env = {
+        "HOME": "/",
+        "LANG": "C",
+        "TERM": os.environ["TERM"],
+    }
+
+    ## ---
+    fix_permission_denied = path_usrlocal = share_android = share_termux = (
+        share_storage
+    ) = share_tmp = False
+    ## conf
+    root = argv[1]
+    cmdline = argv[2:]
+    env["HOME"] = wd = "/root"
+    env["LANG"] = "zh_CN.UTF8"
+    binds += [TERMUX_BIN, TERMUX_HOME + ":" + env["HOME"]]
+
+    fix_permission_denied = path_usrlocal = share_android = share_termux = (
+        share_storage
+    ) = share_tmp = True
+
+    ## config
+    if fix_permission_denied:
+        masks += ANDROID_INACCESSIBLE
+    if share_tmp:
+        binds += [TERMUX_USR + "/tmp:/tmp"]
+    if share_storage:
+        binds += ANDROID_STORAGE
+    if share_android:
+        binds += ANDROID_SYSTEM
+    if share_termux:
+        binds += [TERMUX_DATA]
+    if path_usrlocal:
+        PATH = USRLOCAL_PATH + PATH
+
+    ## final process & execute
+    opts = ["-r", root, "-i", id, "-w", wd]
+    if hardlink_emu:
+        opts += ["-l"]
+    binds += [NULLFILE + ":" + p for p in masks]
+    opts += [item for p in binds for item in ["-b", str(p)]]
+    env["PATH"] = ":".join(PATH)
+
+    debug(binds)
+    debug(f"execvpe(proot, {['proot'] + opts + cmdline}, {env})")
+
+    os.execvpe("proot", ["proot"] + opts + cmdline, env)
+
+
+if __name__ == "__main__":
+    exit(main(sys.argv))

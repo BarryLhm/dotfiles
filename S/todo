@@ -1,0 +1,11 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+cat << EOF
+╔═════╗
+║Todo:╟$(repeat "$(( $(tput cols) - 7 ))" '─')
+╚═════╝
+$(cat ~/TODO)
+$(repeat "$(tput cols)" '─')
+EOF

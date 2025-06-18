@@ -1,0 +1,30 @@
+[527dd1fa-4ca3-4ef3-bcc7-2ab2ce743256]
+Description=OpenUtau mainwindow
+ignoregeometry=true
+ignoregeometryrule=2
+position=0,0
+positionrule=3
+size=840,525
+sizerule=3
+title=^OpenUtau v\\d+\\.\\d+\\.\\d+\\.\\d+
+titlematch=3
+types=1
+wmclass=OpenUtau OpenUtau
+wmclasscomplete=true
+wmclassmatch=1
+
+[60f6db00-c85d-4182-9128-7f79823f67a5]
+Description=OpenUtau trackeditor
+Enabled=false
+above=true
+aboverule=3
+title=-
+titlematch=2
+types=1
+wmclass=OpenUtau OpenUtau
+wmclasscomplete=true
+wmclassmatch=1
+
+[General]
+count=2
+rules=527dd1fa-4ca3-4ef3-bcc7-2ab2ce743256,60f6db00-c85d-4182-9128-7f79823f67a5

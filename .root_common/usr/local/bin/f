@@ -1,0 +1,59 @@
+#!/bin/sh
+shift=1; allowempty=0; cmd=run; extargs=""; ret=114
+case "$1" in
+	-f) :;;
+	-k) cmd=kill;;
+	-l) cmd=list; allowempty=1;;
+	-u) cmd=update; allowempty=1;;
+	-i) cmd=install;;
+	-*) echo "Unknown mode: $1"; exit 114;;
+	*) shift=0; out="$(mktemp)"; err="$(mktemp)"; extargs="2>$err>$err&"
+esac
+shift "$shift"
+read prog <"/proc/self/comm"
+case "$1" in
+	"")	if [ "$allowempty" != "1" ]
+		then	echo "$prog: Flatpak quick launcher"
+			echo "Usage:"
+			echo "     $prog [mode] app [options]"
+			echo
+			echo "MODES"
+			echo "    -f   run in frontground"
+			echo "    -k   kill"
+			echo "    -l   list"
+			echo "    -u   update"
+			echo "    -i   install"
+			rm -f "$err" "$out"
+			exit 114
+		else app=""
+		fi
+;;	steam|st)	app=com.valvesoftware.Steam
+;;	steamlink|sl)	app=com.valvesoftware.SteamLink
+;;	thunder|xl)	app=com.xunlei.Thunder
+;;	turbowarp|tw)	app=org.turbowarp.TurboWarp
+;;	wechat|wx)	app=com.tencent.WeChat
+;;	flatseal|fs)	app=com.github.tchx84.Flatseal
+;;	flatsweep|fc)	app=io.github.giantpinkrobots.flatsweep
+;;	easyflat|ef)	app=org.dupot.easyflatpak
+;;	github|gh)	app=io.github.shiftey.Desktop
+#;;	|)	app=
+#;;	|)	app=
+#;;	|)	app=
+#;;	|)	app=
+#;;	|)	app=
+#;;	|)	app=
+;;	*) app="$1"
+esac
+shift
+eval flatpak "$cmd" "$app" "$*" "$extargs"
+if [ "$shift" == "0" ]
+then	sleep 0.05
+	if	[ -s "$err" ]
+	then	echo "$prog: Error occured"
+		cat "$err"
+		ret=114
+	else ret=0
+	fi
+fi
+rm -f "$err" "$out"
+exit "$ret"

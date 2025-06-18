@@ -1,0 +1,20 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+oper="$1"; shift
+
+case "$oper" in
+	ap|add-path) for i in "$@"; do echo "$i" >> "$(getpath PATH)"; done;;
+	ae|add-exclude) for i in "$@"; do echo "$i" >> "$excludelist"; done;;
+	rp|rm-path) for i in "$@"; do grep -v -x "$i" "$pathlist" > "$pathlist.tmp"
+		mv "$pathlist.tmp" "$pathlist"; done;;
+	re|rm-exclude) for i in "$@"; do grep -v -x "$i" "$excludelist" > "$excludelist.tmp"
+		mv "$excludelist.tmp" "$excludelist"; done;;
+	ep|edit-path) nano "$pathlist";;
+	ee|edit-exclude) nano "$excludelist";;
+	*) error "unknown operation $oper";;
+esac
+
+"$dir/sort" "$config"
+

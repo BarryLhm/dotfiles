@@ -1,0 +1,10 @@
+# See fstab(5).
+#
+# <file system>                             <dir>     <type> <options>                                             <dump> <pass>
+  UUID=bc7d699b-24d0-475b-863d-bc1dbf5c53d3 /         btrfs  rw,noatime,subvol=/Volumes/@root                      0      1
+  UUID=E6F67A5CF67A2CC5                     /storage  ntfs3  rw,noatime,gid=wheel,umask=0002,sparse,windows_names,prealloc 0      0
+  UUID=4968-EAE6                            /boot/efi vfat   rw,noatime,gid=wheel,umask=0027                                 0      2
+ #UUID=f1a7a265-8185-4634-a911-fddf7d287b60 none      swap   defaults                                              0      0
+# <source> <target>                     none bind <options> 0 0
+  /        /home/barrylhm/.root_chimera none bind,          0 0
+  /        /home/barrylhm/.root_common  none bind,          0 0

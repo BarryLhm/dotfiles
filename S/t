@@ -1,0 +1,78 @@
+#!/data/data/com.termux/files/usr/bin/bash -eu
+
+. "$(dirname "$0")/COMMON"
+
+[ "$in_termux" = 0 ] && echo 'Must be used in Termux' && exit 1 || :
+
+world_file="$HOME/.termux/world"
+PATH=/data/data/com.termux/files/usr/bin
+
+error()
+{
+echo "$1"
+exit 1
+}
+
+help_exit()
+{
+cat <<EOF
+$prog: termux apt wrapper to imitate apk world
+    usage: $prog COMMAND
+    command:  list     list manual packages
+              world    show world content
+              apply    apply world list
+              save     save current state to world
+              sort     sort world file
+              add      add manual package
+              del      mark auto (and del package)
+              up       update packages
+              help     show this help
+EOF
+exit "$1"
+}
+
+apply_world()
+{
+apt-mark auto "*" >/dev/null
+pkg --check-mirror add $(cat "$world_file")
+}
+
+save_world()
+{
+apt-mark showmanual > "$world_file"
+}
+
+sort_world()
+{
+export LC_ALL=C
+< "$world_file" tr -s '\n' | sort -u > "$world_file.tmp"
+mv "$world_file.tmp" "$world_file"
+}
+
+add_pkg()
+{
+pkg --check-mirror add "$@"
+save_world
+}
+
+del_pkg()
+{
+[ "$#" = 0 ] || apt-mark auto "$@"
+apt autopurge || apt-mark manual "$@"
+save_world
+}
+
+#Main
+
+[ "$#" = 0 ] && help_exit 1
+case $1 in help) help_exit 0
+;; list) apt-mark showmanual
+;; show) cat "$world_file"
+;; apply) apply_world
+;; save) save_world
+;; sort) sort_world
+;; add) shift; add_pkg "$@"
+;; del) shift; del_pkg "$@"
+;; up) shift; pkg --check-mirror up "$@"
+;; *) help_exit 1
+esac

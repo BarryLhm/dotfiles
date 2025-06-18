@@ -1,0 +1,5 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+curl --connect-timeout 0.6 --max-time 0.6 https://v1.hitokoto.cn?encode=text 2>/dev/null && echo || echo 'Cannot get hitokoto'

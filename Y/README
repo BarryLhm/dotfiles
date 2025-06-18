@@ -1,0 +1,30 @@
+Y/: yadm helper scripts
+This is a set of yadm helper scripts.
+
+brief documents (may not accurate, please refer to actual scripts):
+SCRIPTS
+    Y/ar <config> <operation> [args... ]: perform path/exclude list operations
+        OPERATIONS
+            ap/add-path
+            ae/add-exclude
+            rp/rm-path
+            re/rm-exclude
+            ep/edit-path
+            ee/edit-exclude
+    Y/save <config> [commit_message]: save files (yadm add and commit)
+    Y/sort <config>: sort and uniq path and exclude lists
+FILES
+    Y/template: executable, copy one to create a new script
+    Y/COMMON: common parts of the scripts, non-executable
+    Y/CONFIG/<config>/: config directory
+        CONTENT
+            PATH: path(include) list
+            EXCLUDE: exclude(ignore) list
+            yadm/: yadm config dir, refer to yadm(1):FILES
+    Y/DATA/<config>/: yadm data dir, refer to yadm(1):FILES
+        CONTENT
+            repo.git/: yadm git repo
+            ...
+
+AS THE `LICENSE` SYMLINK, THEY'RE DISTRIBUTED
+UNDER THE SAME LICENSE OF THE WHOLE REPO

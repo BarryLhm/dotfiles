@@ -1,0 +1,16 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+clear
+echo 'Enter password to start deduplication'
+echo 'Current WORLD:'
+cat /etc/apk/world | xargs
+for i in $(cat /etc/apk/world)
+do echo n | doas apk --interactive del "$i" || true
+clear
+echo 'Deduplicating...'
+echo 'Current WORLD:'
+cat /etc/apk/world | xargs
+done
+echo 'Deduplication finished'

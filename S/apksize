@@ -1,0 +1,6 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+apk --version || (echo E: apk not found; exit 1)
+apk list -I --manifest | awk '{print $1}' | xargs -J {} apk info -s --verbose "{}" | awk '{print $2 $3 " " $1}' | sed 's/\:$//' | sort -h 

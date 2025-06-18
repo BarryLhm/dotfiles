@@ -1,0 +1,2 @@
+#!/bin/sh
+distrobox-host-exec "$0" "$@"

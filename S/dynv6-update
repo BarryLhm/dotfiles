@@ -1,0 +1,21 @@
+#!/bin/sh -eu
+
+echo 'Reading token file...'
+tokenfile="$1"
+IFS=' ' read -r < "$tokenfile" zone interval token
+echo 'Update interval is '"$interval"' seconds.'
+
+counter=1
+echo 'Entering loop...'
+while true; do
+    echo 'In loop '"$counter"'.'
+    echo "$counter"': Fetching IP address...'
+    ipv4="$(curl -s --connect-timeout 3 -m 3 ifconfig.me)"
+    ipv6=6to4
+    ipv6prefix=6to4
+    echo "$counter"': Sending request...'
+    curl -s --connect-timeout 3 -m 3 'https://dynv6.com/api/update?zone='"$zone"'&token='"$token"'&ipv4='"$ipv4"'&ipv6='"$ipv6"'&ipv6prefix='"$ipv6prefix" || true
+    echo '\n'"$counter"': Sleeping...'
+    sleep "$interval"
+    counter=$(( $counter + 1 ))
+done

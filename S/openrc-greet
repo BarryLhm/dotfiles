@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$1" in
+before-late) MESSAGE="System initialization half finished, you can switch to tty5-8 to start operation." ;;
+after-late) MESSAGE="System initialization finished." ;;
+*) MESSAGE="Current runlevel: $1"
+esac
+
+echo "### --- $MESSAGE --- "
+exit 0

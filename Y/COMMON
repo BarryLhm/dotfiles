@@ -1,0 +1,34 @@
+#!/bin/sh ## not executable, just for syntax highlighting
+
+. "$(dirname "$(realpath "$(dirname "$0")")")/S/COMMON"
+
+config="${1-}"; shift
+config_default="dotfiles"
+
+allconfig()
+{
+	ls -1 "$dir/CONFIG/"
+}
+getpath()
+{
+	[ "$config" != "" ] || config="$config_default"
+	case "$1" in
+	PATH) echo "$dir/CONFIG/$config/PATH";;
+	EXCLUDE) echo "$dir/CONFIG/$config/EXCLUDE";;
+	config) echo "$dir/CONFIG/$config/yadm/";;
+	data) echo "$dir/DATA/$config/";;
+	repo) echo "$dir/DATA/$config/repo.git/";;
+	esac
+}
+_yadm() ## hooked yadm
+{
+	#[ -d "$(getpath repo)" ] || error "repo not found"
+	yadm -Y "$(getpath config)" --yadm-data "$(getpath data)" "$@"
+}
+getworktree() ## must be async to avoid loop
+{
+	worktree="$(_yadm gitconfig get core.worktree)"
+}
+
+pathlist="$(getpath PATH)"
+excludelist="$(getpath EXCLUDE)"

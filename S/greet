@@ -1,0 +1,15 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+## preload
+
+fifo="$(mktemp -u)"
+mkfifo "$fifo"
+[ "$in_fbcon" = 1 ] || "$dir/hitokoto" > "$fifo" 2>&1 &
+"$dir/banner"
+echo "PID: $(getshpid)"
+[ "$in_fbcon" = 1 ] || cat "$fifo"
+rm -f "$fifo"
+"$dir/todo"
+cat "$dir/PS"
