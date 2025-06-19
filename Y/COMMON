@@ -25,4 +25,4 @@ _yadm() ## hooked yadm
 	yadm -Y "$yadmconfig" --yadm-data "$yadmdata" "$@"
 }
 
-useconfig "${1-}"; shift
+[ "${noautoload-}" = 1 ] || useconfig "${1-}"; shift
