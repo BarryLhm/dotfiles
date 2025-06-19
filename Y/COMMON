@@ -2,33 +2,27 @@
 
 . "$(dirname "$(realpath "$(dirname "$0")")")/S/COMMON"
 
-config="${1-}"; shift
 config_default="dotfiles"
 
-allconfig()
+allconfigs()
 {
 	ls -1 "$dir/CONFIG/"
 }
-getpath()
+useconfig()
 {
+	config="$1"
 	[ "$config" != "" ] || config="$config_default"
-	case "$1" in
-	PATH) echo "$dir/CONFIG/$config/PATH";;
-	EXCLUDE) echo "$dir/CONFIG/$config/EXCLUDE";;
-	config) echo "$dir/CONFIG/$config/yadm/";;
-	data) echo "$dir/DATA/$config/";;
-	repo) echo "$dir/DATA/$config/repo.git/";;
-	esac
+	pathlist="$dir/CONFIG/$config/PATH"
+	excludelist="$dir/CONFIG/$config/EXCLUDE"
+	yadmconfig="$dir/CONFIG/$config/yadm/"
+	yadmdata="$dir/DATA/$config/"
+	repodir="$dir/DATA/$config/repo.git/"
+	worktree="$(_yadm gitconfig get core.worktree)"
 }
 _yadm() ## hooked yadm
 {
-	#[ -d "$(getpath repo)" ] || error "repo not found"
-	yadm -Y "$(getpath config)" --yadm-data "$(getpath data)" "$@"
-}
-getworktree() ## must be async to avoid loop
-{
-	worktree="$(_yadm gitconfig get core.worktree)"
+	[ -d "$yadmdata" ] || error "config not enabled"
+	yadm -Y "$yadmconfig" --yadm-data "$yadmdata" "$@"
 }
 
-pathlist="$(getpath PATH)"
-excludelist="$(getpath EXCLUDE)"
+useconfig "${1-}"; shift

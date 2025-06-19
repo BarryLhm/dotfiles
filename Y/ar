@@ -5,7 +5,7 @@
 oper="$1"; shift
 
 case "$oper" in
-	ap|add-path) for i in "$@"; do echo "$i" >> "$(getpath PATH)"; done;;
+	ap|add-path) for i in "$@"; do echo "$i" >> "$pathlist"; done;;
 	ae|add-exclude) for i in "$@"; do echo "$i" >> "$excludelist"; done;;
 	rp|rm-path) for i in "$@"; do grep -v -x "$i" "$pathlist" > "$pathlist.tmp"
 		mv "$pathlist.tmp" "$pathlist"; done;;

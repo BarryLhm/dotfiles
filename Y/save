@@ -26,7 +26,6 @@ _yadm --no-pager show --stat
 }
 
 termux_gen_world
-getworktree
 add_files
 
 if [ "$#" -gt 0 ]
