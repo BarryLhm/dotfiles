@@ -14,7 +14,6 @@ bluedevil
 broot
 btop
 cage
-cargo
 chimera-repo-user
 cmake
 cmd:autopoint
@@ -74,6 +73,9 @@ kpipewire
 kwrite
 lazygit
 libgcc-chimera
+libreoffice
+!libreoffice-lang_en_us
+libreoffice-lang_zh_cn
 libxfce4util-devel
 libyaml-devel
 limine
@@ -117,6 +119,7 @@ sweeper
 systeroid
 tangle
 thunderbird
+timg
 ucode-amd
 ucode-intel
 unrar

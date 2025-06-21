@@ -25,4 +25,10 @@ _yadm() ## hooked yadm
 	yadm -Y "$yadmconfig" --yadm-data "$yadmdata" "$@"
 }
 
-[ "${noautoload-}" = 1 ] || useconfig "${1-}"; shift
+if [ "${noautoload-}" = 1 ]
+then :
+else	if [ "$#" == 0 ]
+	then error "please specify config or use '' to use default: $config_default"
+	else useconfig "${1-}"; shift
+	fi
+fi
