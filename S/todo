@@ -2,6 +2,8 @@
 
 . "$(dirname "$0")/COMMON"
 
+require cmd:tput
+
 cat << EOF
 ╔═════╗
 ║Todo:╟$(repeat "$(( $(tput cols) - 7 ))" '─')

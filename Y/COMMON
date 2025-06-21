@@ -2,6 +2,8 @@
 
 . "$(dirname "$(realpath "$(dirname "$0")")")/S/COMMON"
 
+require cmd:yadm 
+
 config_default="dotfiles"
 
 allconfigs()

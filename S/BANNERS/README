@@ -1,5 +1,5 @@
 FORMAT
-	1| print-width of full sized ascii-like art 
+	1| print-width of full sized ascii-like art
 	2| singleline for narrow screens
 	3|  ___________________
 	.| |                   |

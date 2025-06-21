@@ -13,11 +13,37 @@ getshpid()
 }
 error()
 {
-	echo "$prog: $1" >/dev/tty; exit "${2-1}"
+	echo "$prog: ${errormsg-}$1${errormsg2-}" >&2; exit "${2-1}"
 }
 is_empty()
 {
         awk 'NF {exit 1}' "$1"
+}
+head_except() ### head_except <-c|-v> <n> <file>
+{
+	head "$1" "$(("$(wc -l < "$3")" - "$2"))" "$3"
+}
+require()
+{
+	notfound()
+	{
+		errormsg="${errormsg-"error: need "}"
+		errormsg2="${errormsg2-", please check system environment"}"
+		error "${1-"$i"}"
+	}
+	for i in "$@"
+	do	case "$1" in
+		apk) apk -V || notfound;;
+		python) python -V || notfound;;
+		android|termux) [ "$in_termux" = 1 ] || notfound "android(termux) environment";;
+		python-*) modname="${i#python-}"; python -c import "$modname" || notfound "python module $modname";;
+		dir:*) [ -d "${i#dir:}" ] || notfound;;
+		file:*) [ -f "${i#file:}" ] || notfound;;
+		fsentry:*) [ -e "${i#fsentry:}" ] || notfound "file $i";;
+		cmd:*) type "${i#cmd:}" >/dev/null 2>&1 || notfound;;
+		*) errormsg="unknown requirement: " errormsg2= notfound;;
+		esac
+	done
 }
 
 [ "${TERMUX_VERSION+x}" ] && in_termux=1 || in_termux=0

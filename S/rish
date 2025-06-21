@@ -1,25 +1,18 @@
-#!/system/bin/sh
-BASEDIR=$(dirname "$0")
-DEX="$BASEDIR"/rish_shizuku.dex
+#!/bin/sh -eu
 
-if [ ! -f "$DEX" ]; then
-  echo "Cannot find $DEX, please check the tutorial in Shizuku app"
-  exit 1
+. "$(dirname "$0")/COMMON"
+
+require android cmd:/system/bin/app_process
+
+### remade from shizuku's rish script
+
+dexfile="$dir/RES/rish_shizuku.dex"
+[ -f "$dexfile" ] || error "dexfile file not found, please put rish_shizuku.dexfile in $dir/RES/"
+
+if [ $(getprop ro.build.version.sdk) -ge 34 ]
+then	[ ! -w $dexfile ] || chmod a-w $dexfile
+	[ ! -w $dexfile ] || error "cannot chmod a-x $dexfilefile, please locate problem yourself"
 fi
 
-if [ $(getprop ro.build.version.sdk) -ge 34 ]; then
-  if [ -w $DEX ]; then
-    echo "On Android 14+, app_process cannot load writable dex."
-    echo "Attempting to remove the write permission..."
-    chmod 400 $DEX
-  fi
-  if [ -w $DEX ]; then
-    echo "Cannot remove the write permission of $DEX."
-    echo "You can copy to file to terminal app's private directory (/data/data/<package>, so that remove write permission is possible"
-    exit 1
-  fi
-fi
-
-# Replace "PKG" with the application id of your terminal app
-[ -z "$RISH_APPLICATION_ID" ] && export RISH_APPLICATION_ID="com.termux"
-/system/bin/app_process -Djava.class.path="$DEX" /system/bin --nice-name=rish rikka.shizuku.shell.ShizukuShellLoader "$@"
+[ "${RISH_APPLICATION_ID-}" ] || export RISH_APPLICATION_ID="com.termux"
+/system/bin/app_process -Djava.class.path="$dexfile" /system/bin --nice-name=rish rikka.shizuku.shell.ShizukuShellLoader "$@"

@@ -2,6 +2,8 @@
 
 . "$(dirname "$0")/COMMON"
 
+require apk
+
 clear
 echo 'Enter password to start deduplication'
 echo 'Current WORLD:'

@@ -1,2 +1,7 @@
-#!/bin/sh
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+require cmd:distrobox-host-exec
+
 distrobox-host-exec "$0" "$@"

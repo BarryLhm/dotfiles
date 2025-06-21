@@ -1,0 +1,7 @@
+#!/bin/sh -eu
+
+. "$(dirname "$0")/COMMON"
+
+require file:/etc/os-release
+
+grep -F "${1-}=" /etc/os-release | grep -o '".*[^"]' | tail -c +2

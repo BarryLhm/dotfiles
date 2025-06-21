@@ -2,6 +2,8 @@
 
 . "$(dirname "$0")/COMMON"
 
+require cmd:mktemp cmd:mkfifo
+
 ## preload
 
 fifo="$(mktemp -u)"

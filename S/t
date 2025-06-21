@@ -2,7 +2,7 @@
 
 . "$(dirname "$0")/COMMON"
 
-[ "$in_termux" = 0 ] && echo 'Must be used in Termux' && exit 1 || :
+require termux cmd:pkg cmd:apt-mark
 
 world_file="$HOME/.termux/world"
 PATH=/data/data/com.termux/files/usr/bin
