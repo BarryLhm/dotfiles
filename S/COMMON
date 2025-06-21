@@ -3,12 +3,14 @@
 dir="$(realpath "$(dirname "$0")")"
 prog="$(basename "$0")"
 
-repeat()
+repeat() ### ( <count> <string> )
 {
+	echo "$1" | grep -qE '[0-9]+' || error "$1: invalid number"
 	printf %"$1"s | sed s/' '/"$2"/g
 }
 getshpid()
 {
+require linux
 	grep PPid: /proc/"$$"/status | awk '{print $2}'
 }
 error()
@@ -33,9 +35,11 @@ require()
 	}
 	for i in "$@"
 	do	case "$1" in
-		apk) apk -V || notfound;;
-		python) python -V || notfound;;
+		apk) apk -V >/dev/null 2>&1 || notfound;;
+		python) python -V >/dev/null 2>&1 || notfound;;
 		android|termux) [ "$in_termux" = 1 ] || notfound "android(termux) environment";;
+		non_android|non_termux) [ "$in_termux" = 0 ] || notfound "non-android(linux distro) environment";;
+		linux) [ "$on_linux" = 1 ] || notfound "system running on linux kernel";;
 		python-*) modname="${i#python-}"; python -c import "$modname" || notfound "python module $modname";;
 		dir:*) [ -d "${i#dir:}" ] || notfound;;
 		file:*) [ -f "${i#file:}" ] || notfound;;
@@ -47,4 +51,5 @@ require()
 }
 
 [ "${TERMUX_VERSION+x}" ] && in_termux=1 || in_termux=0
+[ "$(uname -s)" == "Linux" ] && on_linux=1 || on_linux=0
 [ "$TERM" = "linux" ] && in_fbcon=1 || in_fbcon=0
