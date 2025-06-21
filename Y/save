@@ -4,29 +4,54 @@
 
 termux_gen_world()
 {
-[ "$in_termux" = 1 ] || return 0
-apt-mark showmanual > "$HOME/.termux/world"
+	[ "$in_termux" = 1 ] || return 0
+	apt-mark showmanual > "$HOME/.termux/world"
 }
 
 add_files()
 {
-_yadm rm -rqf --ignore-unmatch --cached "$worktree"
-_yadm -C "$worktree" add --pathspec-from-file="$pathlist"
-is_empty "$excludelist" || _yadm -C "$worktree" rm -rqf --ignore-unmatch --cached --pathspec-from-file="$excludelist"
+	_yadm rm -rqf --ignore-unmatch --cached "$worktree"
+	_yadm -C "$worktree" add --pathspec-from-file="$pathlist"
+	is_empty "$excludelist" || _yadm -C "$worktree" rm -rqf --ignore-unmatch --cached --pathspec-from-file="$excludelist"
+}
+
+confirmation()
+{
+	_yadm diff --cached --stat
+	while true
+	do echo "Continue?"
+	echo "y:commit n:discard v:verbose"
+	read input
+	case "$input" in
+	y|Y) return;;
+	n/N) error "operation cancelled";;
+	v/V)	_yadm diff --cached
+		while true
+		do echo "Confirm?"
+		echo "y:commit n:discard"
+		read input
+		case "$input" in
+		y|Y) return;;
+		n/N) error "operation cancelled";;
+		esac
+		done;;
+	esac
+	done
 }
 
 do_commit()
 {
-_yadm commit -qm "$1"
+	_yadm commit -qm "$1"
 }
 
 show_result()
 {
-_yadm --no-pager show --stat
+	_yadm --no-pager show --stat
 }
 
 termux_gen_world
 add_files
+confirmation
 
 if [ "$#" -gt 0 ]
 then do_commit "$1"

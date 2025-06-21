@@ -6,8 +6,8 @@ require cmd:tput
 
 print_banner() ### ( file )
 {
-	banner="$dir/BANNERS/$variant"
-	[ -f "$banner" ] || error "banner file not found"
+	banner="$dir/BANNERS/$1"
+	[ -f "$banner" ] || return 1
 	if [ "$(tput cols)" -ge "$(head -1 "$banner")" ]
 	then tail +3 "$banner"
 	else tail +2 "$banner" | head -1 ; repeat "$(tput cols)" '─'
@@ -26,4 +26,4 @@ variant="$("$dir/distinfo" ID)"
 variant="${1-}"
 [ "$variant" ] || get_variant
 
-print_banner "$(get_variant)" || print_banner DEFAULT
+print_banner "$variant" || print_banner DEFAULT
