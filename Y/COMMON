@@ -11,7 +11,7 @@ allconfigs()
 useconfig()
 {
 	config="$1"
-	[ "$config" != "" ] || config="$config_default"
+	[ "$config" ] || config="$config_default"
 	pathlist="$dir/CONFIG/$config/PATH"
 	excludelist="$dir/CONFIG/$config/EXCLUDE"
 	yadmconfig="$dir/CONFIG/$config/yadm/"

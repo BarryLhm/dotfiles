@@ -5,27 +5,28 @@
 ## pipe to it
 calculate_length()( python3 -c 'import sys; from wcwidth import wcswidth; print(max(wcswidth(line[:-1]) for line in sys.stdin))' )
 
-## specify $variant
-print_banner()
+print_banner() ### var $variant
 {
-	[ -f "$dir/BANNER_$variant" ] || exit 1
-	if [ "$(tput cols)" -ge "$( tail +2 "$dir/BANNER_$variant" | calculate_length)" ]
-	then tail +2 "$dir/BANNER_$variant"
-	else head -1 "$dir/BANNER_$variant"; repeat "$(tput cols)" '─'
+	banner="$dir/BANNERS/$variant"
+	[ -f "$banner" ] || exit 1
+	if [ "$(tput cols)" -ge "$(head -1 "$banner")" ]
+	then tail +3 "$banner"
+	else tail +2 "$banner" | head -1 ; repeat "$(tput cols)" '─'
 	fi
 }
 
 get_variant()
 {
-[ "$in_termux" = 1 ] && variant="TERMUX" && return || :
+[ "$in_termux" = 1 ] && variant="termux" && return || :
 case "$(lsb_release -sc)" in
-chimera) variant="CHIMERA";;
-alpine) variant="ALPINE";;
+chimera) variant="chimera";;
+alpine) variant="alpine";;
 *) variant="DEFAULT"
 esac
 }
 
 ## main
 ## variant override
-[ "${1+x}" ] && variant="$1" || get_variant
+variant="${1-}"
+[ "$variant" ] || get_variant
 print_banner
