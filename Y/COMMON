@@ -1,5 +1,10 @@
 #!/bin/sh ## not executable, just for syntax highlighting
 
+if [ "${_Y_initialized-}" = 1 ]
+then :
+else :
+## start of main
+
 . "$(dirname "$(realpath "$(dirname "$0")")")/S/COMMON"
 
 require cmd:yadm 
@@ -33,4 +38,8 @@ else	if [ "$#" = 0 ]
 	then error "please specify config or use '' to use default: $config_default"
 	else useconfig "${1-}"; shift
 	fi
+fi
+
+## end of main
+_Y_initialized=1
 fi

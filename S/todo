@@ -6,7 +6,7 @@ require cmd:tput
 
 cat << EOF
 ╔═════╗
-║Todo:╟$(repeat "$(( $COLUNNS - 7 ))" '─')
+║Todo:╟$(repeat "$(( $COLUMNS - 7 ))" '─')
 ╚═════╝
 $(cat ~/TODO)
 $(repeat "$COLUMNS" '─')

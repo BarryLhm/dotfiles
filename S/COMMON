@@ -1,5 +1,10 @@
 #!/bin/sh ## not executable, just for syntax highlighting
 
+if [ "${_initialized-}" = 1 ]
+then :
+else :
+## start of main
+
 dir="$(realpath "$(dirname "$0")")"
 prog="$(basename "$0")"
 
@@ -55,3 +60,7 @@ require()
 [ "$TERM" = "linux" ] && in_fbcon=1 || in_fbcon=0
 require cmd:tput
 [ "${COLUMNS-}" ] || COLUMNS="$(tput cols)"
+
+## end of main
+_initialized=1
+fi
