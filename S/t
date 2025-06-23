@@ -9,13 +9,13 @@ PATH=/data/data/com.termux/files/usr/bin
 
 error()
 {
-echo "$1"
-exit 1
+	echo "$1"
+	exit 1
 }
 
 help_exit()
 {
-cat <<EOF
+	cat <<EOF
 $prog: termux apt wrapper to imitate apk world
     usage: $prog COMMAND
     command:  list     list manual packages
@@ -28,38 +28,38 @@ $prog: termux apt wrapper to imitate apk world
               up       update packages
               help     show this help
 EOF
-exit "$1"
+	exit "$1"
 }
 
 apply_world()
 {
-apt-mark auto "*" >/dev/null
-pkg --check-mirror add $(cat "$world_file")
+	apt-mark auto "*" >/dev/null
+	pkg --check-mirror add $(cat "$world_file")
 }
 
 save_world()
 {
-apt-mark showmanual > "$world_file"
+	apt-mark showmanual > "$world_file"
 }
 
 sort_world()
 {
-export LC_ALL=C
-< "$world_file" tr -s '\n' | sort -u > "$world_file.tmp"
-mv "$world_file.tmp" "$world_file"
+	export LC_ALL=C
+	< "$world_file" tr -s '\n' | sort -u > "$world_file.tmp"
+	mv "$world_file.tmp" "$world_file"
 }
 
 add_pkg()
 {
-pkg --check-mirror add "$@"
-save_world
+	pkg --check-mirror add "$@"
+	save_world
 }
 
 del_pkg()
 {
-[ "$#" = 0 ] || apt-mark auto "$@"
-apt autopurge || apt-mark manual "$@"
-save_world
+	[ "$#" = 0 ] || apt-mark auto "$@"
+	apt autopurge || apt-mark manual "$@"
+	save_world
 }
 
 #Main

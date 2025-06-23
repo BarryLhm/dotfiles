@@ -8,16 +8,15 @@ print_banner() ### ( file )
 {
 	banner="$dir/BANNERS/$1"
 	[ -f "$banner" ] || return 1
-	if [ "$(tput cols)" -ge "$(head -1 "$banner")" ]
+	if [ "$COLUMNS" -ge "$(head -1 "$banner")" ]
 	then tail +3 "$banner"
-	else tail +2 "$banner" | head -1 ; repeat "$(tput cols)" '─'
+	else tail +2 "$banner" | head -1 ; repeat "$COLUMNS" '─'
 	fi
 }
 
 get_variant()
 {
-[ "$in_termux" = 1 ] && variant="termux" && return || :
-variant="$("$dir/distinfo" ID)"
+variant="$(. "$dir/distinfo" ID)"
 }
 
 ## main

@@ -16,5 +16,5 @@ case "$oper" in
 	*) error "unknown operation $oper";;
 esac
 
-"$dir/sort" "$config"
+. "$dir/sort" "$config"
 

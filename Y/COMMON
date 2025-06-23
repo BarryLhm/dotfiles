@@ -29,7 +29,7 @@ _yadm() ## hooked yadm
 
 if [ "${noautoload-}" = 1 ]
 then :
-else	if [ "$#" == 0 ]
+else	if [ "$#" = 0 ]
 	then error "please specify config or use '' to use default: $config_default"
 	else useconfig "${1-}"; shift
 	fi

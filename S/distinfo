@@ -2,6 +2,8 @@
 
 . "$(dirname "$0")/COMMON"
 
+[ "$in_termux" = 1 ] && echo termux; exit 0 || :
+
 require file:/etc/os-release
 
 grep -F "${1-}=" /etc/os-release | grep -o '".*[^"]' | tail -c +2
