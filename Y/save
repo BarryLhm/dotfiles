@@ -23,16 +23,16 @@ confirmation()
 	echo "y:commit n:discard v:verbose"
 	read input
 	case "$input" in
-	y|Y) return;;
-	n/N) error "operation cancelled";;
-	v/V)	_yadm diff --cached
+	y|Y) return 0;;
+	n|N) error "operation cancelled";;
+	v|V)	_yadm diff --cached
 		while true
 		do echo "Confirm?"
 		echo "y:commit n:discard"
 		read input
 		case "$input" in
-		y|Y) return;;
-		n/N) error "operation cancelled";;
+		y|Y) return 0;;
+		n|N) error "operation cancelled";;
 		esac
 		done;;
 	esac

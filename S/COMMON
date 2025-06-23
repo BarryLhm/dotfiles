@@ -7,6 +7,8 @@ else :
 
 dir="$(realpath "$(dirname "$0")")"
 prog="$(basename "$0")"
+errormsg=
+errormsg2=
 
 repeat() ### ( <count> <string> )
 {
@@ -20,7 +22,7 @@ require linux
 }
 error()
 {
-	echo "$prog: ${errormsg-}$1${errormsg2-}" >&2; exit "${2-1}"
+	echo "$prog: ${errormsg}$1${errormsg2}" >&2; exit "${2-1}"
 }
 is_empty()
 {
