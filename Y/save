@@ -56,8 +56,8 @@ ask_push()
 	echo "y:push f:push(force) n:skip"
 	read -r input
 	case "$input" in
-	y|Y) _yadm push; return 0;;
-	f|F) _yadm push -f; return 0;;
+	y|Y) _yadm push; pushed=1; return 0;;
+	f|F) _yadm push -f; pushed=1; return 0;;
 	n|N) return 0;;
 	esac
 	done
@@ -73,6 +73,5 @@ else do_commit "update"
 fi
 
 show_result
-ask_push
-
-echo "Don't forget to push"
+ask_push || error "Push failed, try to manually push"
+[ "$pushed" = 1 ] || ( echo "Don't forget to push" )
