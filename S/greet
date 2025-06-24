@@ -15,3 +15,4 @@ echo "PID: $(getshpid)"
 rm -f "$fifo"
 . "$dir/todo"
 cat "$dir/PS"
+[ ! -f ~/PS_EXT ] || cat ~/PS_EXT
