@@ -9,5 +9,6 @@ cat << EOF
 ║Todo:╟$(repeat "$(( $COLUMNS - 7 ))" '─')
 ╚═════╝
 $(cat ~/TODO)
+$(cat ~/TODO_EXT)
 $(repeat "$COLUMNS" '─')
 EOF
