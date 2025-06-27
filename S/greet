@@ -4,6 +4,7 @@
 
 require cmd:mktemp cmd:mkfifo
 
+rm -f "$PREFIX/etc/motd"
 ## preload
 
 fifo="$(mktemp -u)"

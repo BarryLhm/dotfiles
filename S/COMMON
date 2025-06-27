@@ -5,6 +5,8 @@ then :
 else :
 ## start of main
 
+[ "${NO_SETEU-}" = 1 ] || set -eu
+
 dir="$(realpath "$(dirname "$0")")"
 prog="$(basename "$0")"
 errormsg=
