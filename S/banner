@@ -19,7 +19,7 @@ print_banner() ### ( file )
 
 get_variant()
 {
-variant="$(. "$dir/distinfo" ID)"
+variant="$("$dir/distinfo" ID)"
 }
 
 ## main

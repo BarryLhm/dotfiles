@@ -1,8 +1,6 @@
 #!/bin/sh ## not executable, just for syntax highlighting
 
-if [ "${_Y_initialized-}" = 1 ]
-then :
-else :
+[ "${_Y_initialized-}" = 1 ] && error "Y already initialized" || : 
 ## start of main
 
 . "$(dirname "$(realpath "$(dirname "$0")")")/S/COMMON"
@@ -42,4 +40,3 @@ fi
 
 ## end of main
 _Y_initialized=1
-fi

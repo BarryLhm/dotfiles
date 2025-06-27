@@ -17,7 +17,7 @@ add_files()
 
 confirmation()
 {
-	_yadm diff --cached --stat
+	_yadm --no-pager diff --cached --stat
 	while true
 	do echo "Continue?"
 	echo "y:commit n:discard v:verbose"
@@ -25,7 +25,7 @@ confirmation()
 	case "$input" in
 	y|Y) return 0;;
 	n|N) error "operation cancelled";;
-	v|V)	_yadm diff --cached
+	v|V)	_yadm --no-pager diff --cached
 		while true
 		do echo "Confirm?"
 		echo "y:commit n:discard"
