@@ -6,11 +6,14 @@ require cmd:tput
 
 print_banner() ### ( file )
 {
-	banner="$dir/BANNERS/$1"
+	local banner="$dir/BANNERS/$1"
 	[ -f "$banner" ] || return 1
-	if [ "$COLUMNS" -ge "$(head -1 "$banner")" ]
-	then tail +3 "$banner"
-	else tail +2 "$banner" | head -1 ; repeat "$COLUMNS" '─'
+	local singleline=0
+	[ "$in_fbcon" = 0 ] || singleline=1
+	[ "$COLUMNS" -ge "$(head -1 "$banner")" ] || singleline=1
+	if [ "$singleline" = 1 ]
+	then tail +2 "$banner" | head -1 ; repeat "$COLUMNS" '─'
+	else tail +3 "$banner"
 	fi
 }
 

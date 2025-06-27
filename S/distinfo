@@ -2,7 +2,7 @@
 
 . "$(dirname "$0")/COMMON"
 
-[ "$in_termux" = 1 ] && echo termux; exit 0 || :
+[ "$in_termux" = 1 ] && echo termux && exit 0 || :
 
 require file:/etc/os-release
 

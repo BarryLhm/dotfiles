@@ -4,7 +4,7 @@
 
 require cmd:mktemp cmd:mkfifo
 
-rm -f "$PREFIX/etc/motd"
+[ "$in_termux" != 1 ] || rm -f "$PREFIX/etc/motd"
 ## preload
 
 fifo="$(mktemp -u)"
