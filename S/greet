@@ -4,16 +4,16 @@
 
 require cmd:mktemp cmd:mkfifo
 
-rm -f "$PREFIX/etc/motd"
+[ "$in_termux" != 1 ] || rm -f "$PREFIX/etc/motd"
 ## preload
 
 fifo="$(mktemp -u)"
 mkfifo "$fifo"
 [ "$in_fbcon" = 1 ] || "$dir/hitokoto" > "$fifo" 2>&1 &
-. "$dir/banner"
+"$dir/banner"
 echo "PID: $(getshpid)"
 [ "$in_fbcon" = 1 ] || cat "$fifo"
 rm -f "$fifo"
-. "$dir/todo"
+"$dir/todo"
 cat "$dir/PS"
 [ ! -f ~/PS_EXT ] || cat ~/PS_EXT

@@ -1,8 +1,6 @@
 #!/bin/sh ## not executable, just for syntax highlighting
 
-if [ "${_initialized-}" = 1 ]
-then :
-else :
+[ "${_initialized-}" = 1 ] && error "S already initialized" || : 
 ## start of main
 
 [ "${NO_SETEU-}" = 1 ] || set -eu
@@ -67,4 +65,3 @@ require cmd:tput
 
 ## end of main
 _initialized=1
-fi
