@@ -4,11 +4,9 @@
 
 require cmd:tput
 
-cat << EOF
-╔═════╗
-║Todo:╟$(repeat "$(( $COLUMNS - 7 ))" '─')
-╚═════╝
-$(cat ~/TODO)
-$([ ! -f ~/TODO_EXT ] || cat ~/TODO_EXT)
-$(repeat "$COLUMNS" '─')
-EOF
+echo ╔═════╗
+echo ║Todo:╟$(repeat "$(( $COLUMNS - 7 ))" '─')
+echo ╚═════╝
+echo "$(cat ~/TODO)"
+[ ! -f ~/TODO_EXT ] || echo "$(cat ~/TODO_EXT)"
+repeat "$COLUMNS" '─'; echo
