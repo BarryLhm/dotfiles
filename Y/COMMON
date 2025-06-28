@@ -3,7 +3,7 @@
 [ "${_Y_initialized-}" = 1 ] && error "Y already initialized" || : 
 ## start of main
 
-. "$(dirname "$(realpath "$(dirname "$0")")")/S/COMMON"
+. "$(dirname "$(dirname "$(realpath "$0")")")/S/COMMON"
 
 require cmd:yadm 
 

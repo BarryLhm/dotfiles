@@ -5,8 +5,10 @@
 
 [ "${NO_SETEU-}" = 1 ] || set -eu
 
-dir="$(realpath "$(dirname "$0")")"
+exe="$(realpath "$0")"
+dir="$(dirname "$exe")"
 prog="$(basename "$0")"
+realprog="$(basename "$exe")"
 errormsg=
 errormsg2=
 

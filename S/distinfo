@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 
-. "$(dirname "$0")/COMMON"
+. "$(dirname "$(realpath "$0")")/COMMON"
 
 [ "$in_termux" = 1 ] && echo termux && exit 0 || :
 
