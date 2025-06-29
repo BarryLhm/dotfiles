@@ -9,7 +9,7 @@ print_banner() ### ( file )
 	local banner="$dir/BANNERS/$1"
 	[ -f "$banner" ] || return 1
 	local singleline=0
-	[ "$in_fbcon" = 0 ] || singleline=1
+	[ "$in_fbcon" = 0 ] || : #singleline=1
 	[ "$COLUMNS" -ge "$(head -1 "$banner")" ] || singleline=1
 	if [ "$singleline" = 1 ]
 	then tail +2 "$banner" | head -1 ; repeat "$COLUMNS" '─'
