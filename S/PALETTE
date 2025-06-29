@@ -13,8 +13,8 @@ cbGrey='\e[40m\e[1m' cbRed='\e[41m\e[1m' cbGreen='\e[42m\e[1m'
 cbYellow='\e[43m\e[1m' cbBlue='\e[44m\e[1m' cbMagenta='\e[45m\e[1m'
 cbCyan='\e[46m\e[1m' cbWhite='\e[47m\e[1m' 
 
-PrintRed()(echo -ne "${cfRed}${1}${CsReset}")
-PrintGreen()(echo -ne "${cfGreen}${1}${CsReset}")
-PrintYellow()(echo -ne "${cfYellow}${1}${CsReset}")
-PrintBlue()(echo -ne "${cfBlue}${1}${CsReset}")
-PrintMagenta()(echo -ne "${cfMagenta}${1}${CsReset}")
+PrintRed()(echo -e "${cfRed}${1}${CsReset}")
+PrintGreen()(echo -e "${cfGreen}${1}${CsReset}")
+PrintYellow()(echo -e "${cfYellow}${1}${CsReset}")
+PrintBlue()(echo -e "${cfBlue}${1}${CsReset}")
+PrintMagenta()(echo -e "${cfMagenta}${1}${CsReset}")
