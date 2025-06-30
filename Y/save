@@ -8,6 +8,12 @@ termux_gen_world()
 	apt-mark showmanual > "$HOME/.termux/world"
 }
 
+flatpak_gen_world()
+{
+	require cmd:flatpak || return 0
+	LANG=C flatpak list --app --columns=name | tail +2 > "$dir/FLATPAK_WORLD"
+}
+
 add_files()
 {
 	_yadm rm -rqf --ignore-unmatch --cached "$worktree"
@@ -64,6 +70,7 @@ ask_push()
 }
 
 termux_gen_world
+flatpak_gen_world
 add_files
 confirmation
 
