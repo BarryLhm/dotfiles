@@ -40,7 +40,8 @@ require()
 	{
 		errormsg="${errormsg-"error: need "}"
 		errormsg2="${errormsg2-", please check system environment"}"
-		error "${1-"$i"}"
+		echo "$errormsg${1-"$i"}$errormsg2"
+		return 1
 	}
 	for i in "$@"
 	do	case "$1" in
