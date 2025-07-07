@@ -5,10 +5,10 @@
 
 [ "${NO_SETEU-}" = 1 ] || set -eu
 
-exe="$(realpath "$0")"
-dir="$(dirname "$exe")"
+script="$(realpath "$0")"
+dir="$(dirname "$script")"
 prog="$(basename "$0")"
-realprog="$(basename "$exe")"
+realprog="$(basename "$script")"
 errormsg=
 errormsg2=
 
@@ -24,7 +24,7 @@ require linux
 }
 error()
 {
-	echo "$prog: ${errormsg}$1${errormsg2}" >&2; exit "${2-1}"
+	echo "$prog: ${errormsg}$1${errormsg2}" >&2; return "${2-1}"
 }
 is_empty()
 {
@@ -36,15 +36,15 @@ head_except() ### head_except <-c|-v> <n> <file>
 }
 require()
 {
+	local errormsg="error: need "
+	local errormsg2=", please check system environment"
 	notfound()
 	{
-		errormsg="${errormsg-"error: need "}"
-		errormsg2="${errormsg2-", please check system environment"}"
-		echo "$errormsg${1-"$i"}$errormsg2"
-		return 1
+		error "${1-"$i"}"
 	}
 	for i in "$@"
 	do	case "$1" in
+		root) [ "$(id -u)" = 0 ] || errormsg2=" privilege" notfound;;
 		apk) apk -V >/dev/null 2>&1 || notfound;;
 		python) python -V >/dev/null 2>&1 || notfound;;
 		android|termux) [ "$in_termux" = 1 ] || notfound "android(termux) environment";;
