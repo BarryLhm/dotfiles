@@ -17,6 +17,10 @@ EnumerateGroupBackwardKeys=
 ActivateKeys=
 # 取消激活输入法
 DeactivateKeys=
+# 默认跳转前一个候选词
+PrevCandidate=
+# 默认跳转下一个候选词
+NextCandidate=
 # 触发修饰键快捷键的时限 (毫秒)
 ModifierOnlyKeyTimeout=250
 
@@ -28,12 +32,6 @@ ModifierOnlyKeyTimeout=250
 
 [Hotkey/NextPage]
 0=Down
-
-[Hotkey/PrevCandidate]
-0=Shift+Tab
-
-[Hotkey/NextCandidate]
-0=Tab
 
 [Hotkey/TogglePreedit]
 0=Control+Alt+P
