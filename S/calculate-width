@@ -2,7 +2,7 @@
 
 . "$(dirname "$(realpath "$0")")/COMMON"
 
-require python python-wcwidth
+require python-wcwidth
 
 ## pipe to it
 calculate_length()( python3 -c 'import sys; from wcwidth import wcswidth; print(max(wcswidth(line[:-1]) for line in sys.stdin))' )

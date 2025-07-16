@@ -2,7 +2,7 @@
 
 . "$(dirname "$(realpath "$0")")/COMMON"
 
-require apk
+require cmd:apk
 
 clear
 echo 'Enter password to start deduplication'

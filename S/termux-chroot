@@ -25,10 +25,10 @@ add_bind()
 }
 
 ## self remount
-add_bind "$target" "/" -o suid
+add_bind "$target" "/" -o suid,dev
 ## linux & android runtime
-for i in /proc /sys /dev /apex/com.android.runtime /linkerconfig /system /sdcard /data/data/com.termux
-do add_bind "$i" "$i" -r
+for i in /proc /sys /dev /debug_ramdisk/pts /apex/com.android.runtime /linkerconfig /system /sdcard /data/data/com.termux
+do add_bind "$i" "$i" #-r
 done
 ## share tmp
 add_bind "$TMPDIR" /tmp
@@ -37,5 +37,7 @@ cd "$target"
 busybox pivot_root "$target" .
 umount -l -f .
 cd /
+
 unset LD_PRELOAD
-eval env -i "$@"
+#eval env -i "$@"
+eval "$@"

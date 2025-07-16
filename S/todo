@@ -5,7 +5,7 @@
 require cmd:tput
 
 echo ╔═════╗
-echo ║Todo:╟$(repeat "$(( $COLUMNS - 7 ))" '─')
+echo ║Todo:╟$(repeat "$(($COLUMNS - 7))" '─')
 echo ╚═════╝
 echo "$(cat ~/TODO)"
 [ ! -f ~/TODO_EXT ] || echo "$(cat ~/TODO_EXT)"

@@ -12,28 +12,34 @@ realprog="$(basename "$script")"
 errormsg=
 errormsg2=
 
+## Public Functions
 repeat() ### ( <count> <string> )
 {
 	echo "$1" | grep -qE '[0-9]+' || error "$1: invalid number"
 	printf %"$1"s | sed s/' '/"$2"/g
 }
+
 getshpid()
 {
 require linux
 	grep PPid: /proc/"$$"/status | awk '{print $2}'
 }
+
 error()
 {
 	echo "$prog: ${errormsg}$1${errormsg2}" >&2; return "${2-1}"
 }
+
 is_empty()
 {
         awk 'NF {exit 1}' "$1"
 }
+
 head_except() ### head_except <-c|-v> <n> <file>
 {
 	head "$1" "$(("$(wc -l < "$3")" - "$2"))" "$3"
 }
+
 require()
 {
 	local errormsg="error: need "
@@ -45,8 +51,6 @@ require()
 	for i in "$@"
 	do	case "$1" in
 		root) [ "$(id -u)" = 0 ] || errormsg2=" privilege" notfound;;
-		apk) apk -V >/dev/null 2>&1 || notfound;;
-		python) python -V >/dev/null 2>&1 || notfound;;
 		android|termux) [ "$in_termux" = 1 ] || notfound "android(termux) environment";;
 		non_android|non_termux) [ "$in_termux" = 0 ] || notfound "non-android(linux distro) environment";;
 		linux) [ "$on_linux" = 1 ] || notfound "system running on linux kernel";;
@@ -58,6 +62,35 @@ require()
 		*) errormsg="unknown requirement: " errormsg2= notfound;;
 		esac
 	done
+}
+
+debugsh()
+{
+	local tty="/dev/tty" shell="${1-bash}"; [ "$#" = 0 ] || shift 1
+	echo "For convenient of debugging, retval 1 will be taken as 0." >/dev/tty
+	if PS1="debug> " "$shell" "$@" <"$tty" >"$tty" 2>"$tty"
+	then :
+	## Catch empty exit
+	else local ret="$?"; [ "$ret" = 1 ] || return "$ret"
+	fi
+}
+
+justdo()
+{
+	for i in "$@"
+	do eval "$i" >/dev/null 2>&1 || :
+	done
+}
+
+countdown() ### ( time/s: 5, [msg], [finmsg] )
+{
+	local i="$1" msg="${2-}" finmsg="${3-}"
+	while [ "$i" -gt 0 ]
+	do	echo "$msg$i"
+		sleep 1
+		i="$(($i - 1))"
+	done
+	[ "$finmsg" = "" ] || echo "$finmsg"
 }
 
 [ "${TERMUX_VERSION+x}" ] && in_termux=1 || in_termux=0

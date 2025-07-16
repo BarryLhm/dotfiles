@@ -19,6 +19,8 @@ gptfdisk
 htop
 imagemagick
 inkscape
+iproute2
+jq
 lazygit
 lsof
 lxc
@@ -34,6 +36,7 @@ openssl-tool
 pacman
 pipewire
 proot-distro
+ripgrep
 root-repo
 ruff
 rust
@@ -47,6 +50,7 @@ toilet
 tsu
 tur-repo
 up
+virglrenderer
 virglrenderer-android
 vulkan-tools
 which

@@ -1,0 +1,29 @@
+#!/bin/sh -eu
+
+. "$(dirname "$(realpath "$0")")/COMMON"
+
+require cmd:termux-api-start cmd:termux-sensor cmd:jq
+
+read_sensor() ## ( interval: 1000 )
+{
+	justdo termux-api-start; countdown 3 >&2
+	termux-sensor -s shaking -d "${1-1000}" | jq --unbuffered '.shaking.values[0]'
+}
+
+action()
+{
+	sudo locksettings require-strong-auth --user 0 STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN
+	sudo input keyevent POWER
+	sleep 10
+}
+
+testing()
+{
+	while true;
+	do read -r val
+	[ "$val" != 1 ] || action
+	done
+}
+
+
+read_sensor 1000 | testing
