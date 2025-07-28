@@ -93,6 +93,13 @@ countdown() ### ( time/s: 5, [msg], [finmsg] )
 	[ "$finmsg" = "" ] || echo "$finmsg"
 }
 
+calculate_sum() ### ( column: 1, [file], ... )
+{
+	col="${1-}"
+	[ "$col" = "" ] && col=1 || shift
+	awk '{gsub(/,/, "", $'"$col"'); sum += $'"$col"'} END {print sum}' "$@"
+}
+
 [ "${TERMUX_VERSION+x}" ] && in_termux=1 || in_termux=0
 [ "$(uname -s)" = "Linux" ] && on_linux=1 || on_linux=0
 [ "$TERM" = "linux" ] && in_fbcon=1 || in_fbcon=0

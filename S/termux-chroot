@@ -27,7 +27,7 @@ add_bind()
 ## self remount
 add_bind "$target" "/" -o suid,dev
 ## linux & android runtime
-for i in /proc /sys /dev /debug_ramdisk/pts /apex/com.android.runtime /linkerconfig /system /sdcard /data/data/com.termux
+for i in /proc /sys /dev /apex/com.android.runtime /linkerconfig /system /sdcard /data/data/com.termux
 do add_bind "$i" "$i" #-r
 done
 ## share tmp
@@ -39,5 +39,4 @@ umount -l -f .
 cd /
 
 unset LD_PRELOAD
-#eval env -i "$@"
-eval "$@"
+eval env -i "$@"

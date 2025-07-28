@@ -7,11 +7,11 @@ require android cmd:/system/bin/app_process
 ### remade from shizuku's rish script
 
 dexfile="$dir/RES/rish_shizuku.dex"
-[ -f "$dexfile" ] || error "dexfile file not found, please put rish_shizuku.dexfile in $dir/RES/"
+[ -f "$dexfile" ] || error "dex file not found, please put rish_shizuku.dex in $dir/RES/"
 
 if [ $(getprop ro.build.version.sdk) -ge 34 ]
-then	[ ! -w $dexfile ] || chmod a-w $dexfile
-	[ ! -w $dexfile ] || error "cannot chmod a-x $dexfilefile, please locate problem yourself"
+then	[ ! -w "$dexfile" ] || chmod a-w "$dexfile"
+	[ ! -w "$dexfile" ] || error "cannot chmod a-x $dexfile, please fix it yourself"
 fi
 
 [ "${RISH_APPLICATION_ID-}" ] || export RISH_APPLICATION_ID="com.termux"
