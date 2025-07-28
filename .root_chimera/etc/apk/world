@@ -58,6 +58,7 @@ gawk
 gcompat
 gimp
 github-cli
+gitoxide
 glow
 go
 gperf
@@ -65,12 +66,16 @@ grub-x86_64-efi
 gsed
 gtk-layer-shell-devel
 gtk4-devel
+hdf5
+hdf5-devel
 htop
 iftop
+imagemagick
 imhex
 inkscape
 ipset
 java-jre-openjdk21-default
+kate
 kde-cli-tools
 kde-gtk-config
 kdeconnect
@@ -91,6 +96,7 @@ linux-lts
 linux-lts-devel
 lldb
 llvm
+lm-sensors
 lshw
 lsof
 maliit-keyboard
@@ -111,15 +117,17 @@ plasma-vault
 plasma-workspace-dbg
 plasma-workspace-wallpapers=20250518.153434
 power-profiles-daemon
-python-pip
+python-devel
 python-wcwidth
 qemu-system-x86_64
 qt6-qtbase-devel
 radeontop
 ripgrep
 ruff
+rust-analyzer
 ryzen_smu-ckms
 sassc
+scdoc
 showmethekey
 smartmontools
 snapper
@@ -129,6 +137,7 @@ strace
 sweeper
 systeroid
 tangle
+thinkfan
 thunderbird
 tig
 timg
@@ -137,6 +146,7 @@ ucode-intel
 unrar
 util-linux
 util-linux-ns
+uv
 v4l2loopback
 valgrind
 virt-manager
