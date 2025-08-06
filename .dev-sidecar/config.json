@@ -1,23 +1,7 @@
 {
-	"server": {
-		"host": "0.0.0.0",
-		"whiteList": {
-			"*.moeyy.xyz": true,
-			"*.chimera-linux.org": true
-		}
-	},
 	"app": {
-		"theme": "system",
+		"closeStrategy": 1,
 		"showShutdownTip": false,
-		"closeStrategy": 1
-	},
-	"plugin": {
-		"node": {
-			"enabled": true,
-			"setting": {
-				"yarnRegistry": "https://registry.npmmirror.com",
-				"registry": "https://registry.npmmirror.com"
-			}
-		}
+		"theme": "system"
 	}
 }

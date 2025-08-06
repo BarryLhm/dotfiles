@@ -1,9 +1,0 @@
-# system monitor on tty9
-type                = process
-command             = /usr/bin/agetty -a sysmon tty9
-restart             = true
-depends-on          = login.target
-termsignal          = HUP
-restart-delay       = 1.0
-restart-limit-count = 0
-smooth-recovery     = true

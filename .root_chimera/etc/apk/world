@@ -9,6 +9,7 @@ automake
 avahi-ui-progs
 base-full
 bat
+binwalk
 bison
 bluedevil
 bottom
@@ -68,6 +69,7 @@ gtk-layer-shell-devel
 gtk4-devel
 hdf5
 hdf5-devel
+helvum
 htop
 iftop
 imagemagick
@@ -82,6 +84,7 @@ kdeconnect
 kdenlive
 kdeplasma-addons
 kolourpaint
+kpartx
 kpipewire
 kwrite
 lazygit
@@ -102,6 +105,7 @@ lsof
 maliit-keyboard
 meson
 mpv
+mtools
 ncurses-devel
 nftables
 nmap
@@ -165,5 +169,6 @@ xwayland-devel
 xxd
 yadm
 yakuake
+ydotool
 zip
 zoxide
