@@ -54,7 +54,7 @@ require()
 		android|termux) [ "$in_termux" = 1 ] || notfound "android(termux) environment";;
 		non_android|non_termux) [ "$in_termux" = 0 ] || notfound "non-android(linux distro) environment";;
 		linux) [ "$on_linux" = 1 ] || notfound "system running on linux kernel";;
-		python-*) modname="${i#python-}"; python -c import "$modname" || notfound "python module $modname";;
+		python-*) local modname="${i#python-}"; python -c "import $modname" || notfound "python module $modname";;
 		dir:*) [ -d "${i#dir:}" ] || notfound;;
 		file:*) [ -f "${i#file:}" ] || notfound;;
 		fsentry:*) [ -e "${i#fsentry:}" ] || notfound "file $i";;
