@@ -59,8 +59,7 @@ show_result()
 
 ask_push()
 {
-	while true
-	do echo "Push now?"
+	echo "Push now?"
 	echo "y:push f:push(force) n:skip"
 	read -r input
 	case "$input" in
@@ -68,7 +67,6 @@ ask_push()
 	f|F) _y push -f; pushed=1;;
 	n|N) echo "Don't forget to push";;
 	esac
-	done
 }
 
 useconfig "${1-}"; shift
