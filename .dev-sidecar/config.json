@@ -2,6 +2,9 @@
 	"app": {
 		"closeStrategy": 1,
 		"showShutdownTip": false,
-		"theme": "system"
+		"theme": "system",
+		"autoStart": {
+			"enabled": true
+		}
 	}
 }
