@@ -1,42 +1,71 @@
 #!/bin/sh ## not executable, just for syntax highlighting
 
-[ "${_Y_initialized-}" = 1 ] && error "Y already initialized" || : 
+[ ! "${_Y_initialized-}" ] || error "Y already initialized"
 ## start of main
 
 . "$(dirname "$(dirname "$(realpath "$0")")")/S/COMMON"
 
-require cmd:yadm 
+require cmd:git
 
 config_default="dotfiles"
 
 allconfigs()
 {
-	ls -1 "$dir/CONFIG/"
-}
-useconfig()
-{
-	config="$1"
-	[ "$config" ] || config="$config_default"
-	pathlist="$dir/CONFIG/$config/PATH"
-	excludelist="$dir/CONFIG/$config/EXCLUDE"
-	yadmconfig="$dir/CONFIG/$config/yadm/"
-	yadmdata="$dir/DATA/$config/"
-	repodir="$dir/DATA/$config/repo.git/"
-	worktree="$(_yadm gitconfig get core.worktree)"
-}
-_yadm() ## hooked yadm
-{
-	[ -d "$yadmdata" ] || error "config not enabled"
-	yadm -Y "$yadmconfig" --yadm-data "$yadmdata" "$@"
+	ls "$dir/CONFIG/"
 }
 
-if [ "${noautoload-}" = 1 ]
-then :
-else	if [ "$#" = 0 ]
-	then error "please specify config or use '' to use default: $config_default"
-	else useconfig "${1-}"; shift
-	fi
-fi
+useconfig()
+{
+	config="${1-}"
+	[ "$config" ] || config="$config_default"
+	. "$dir/CONFIG/$config/CONFIG"
+	[ "$worktree" ] || error "invalid config"
+	pathlist="$dir/CONFIG/$config/PATH"
+	excludelist="$dir/CONFIG/$config/EXCLUDE"
+	gitdir="$dir/DATA/$config/repo.git/"
+}
+
+sortlist()
+{
+	echo -n "sorting..."
+	export LC_ALL=C
+	local i
+	for i in "pathlist" "excludelist"
+	do	tr -s '\n' < "$1" | sort -u > "$1.tmp"
+		mv "$1.tmp" "$1"
+	done
+	echo " ok"
+}
+
+ar()
+{
+	local oper="$1"; shift
+	case "$oper" in
+	ap|add-path|rp|rm-path|ep|edit-path) :
+		local listfile="$pathlist";;
+	ae|add-exclude|re|rm-exclude|ee|edit-exclude) :
+		local listfile="$excludelist";;
+	*) error "unknown operation $oper";;
+	esac
+	case "$oper" in
+	ap|add-path|ae|add-exclude) :
+		for i in "$@"
+		do echo "$i" >> "$excludelist"
+		done;;
+	rp|rm-path|re|rm-exclude) :
+		for i in "$@"
+		do	grep -v -x "$i" "$excludelist" > "$excludelist.tmp"
+			mv "$excludelist.tmp" "$excludelist"
+		done;;
+	ep|edit-path|ee|edit-exclude) :
+		editor "$listfile";;
+	esac
+	sortlist
+}
+_y() ## git wrapper
+{
+	git --git-dir="$gitdir" --work-tree="$worktree" "$@"
+}
 
 ## end of main
 _Y_initialized=1

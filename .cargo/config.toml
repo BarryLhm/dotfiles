@@ -1,5 +1,5 @@
 [source.crates-io]
-replace-with = 'ustc'
+replace-with = "aliyun"
 
-[source.ustc]
-registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+[source.aliyun]
+registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"

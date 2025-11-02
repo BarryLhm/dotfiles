@@ -16,14 +16,16 @@ flatpak_gen_world()
 
 add_files()
 {
-	_yadm rm -rqf --ignore-unmatch --cached "$worktree"
-	_yadm -C "$worktree" add --pathspec-from-file="$pathlist"
-	is_empty "$excludelist" || _yadm -C "$worktree" rm -rqf --ignore-unmatch --cached --pathspec-from-file="$excludelist"
+	_y rm -rqf --ignore-unmatch --cached "$worktree"
+	_y -C "$worktree" add --pathspec-from-file="$pathlist"
+	is_empty "$excludelist" || \
+	  _y -C "$worktree" rm -rqf --ignore-unmatch --cached \
+	  --pathspec-from-file="$excludelist"
 }
 
 confirmation()
 {
-	_yadm --no-pager diff --cached --stat
+	_y --no-pager diff --cached --stat
 	while true
 	do echo "Continue?"
 	echo "y:commit n:discard v:verbose"
@@ -31,7 +33,7 @@ confirmation()
 	case "$input" in
 	y|Y) return 0;;
 	n|N) error "operation cancelled";;
-	v|V)	_yadm --no-pager diff --cached
+	v|V)	_y --no-pager diff --cached
 		while true
 		do echo "Confirm?"
 		echo "y:commit n:discard"
@@ -47,12 +49,12 @@ confirmation()
 
 do_commit()
 {
-	_yadm commit -qm "$1"
+	_y commit -qm "$1"
 }
 
 show_result()
 {
-	_yadm --no-pager show --stat
+	_y --no-pager show --stat
 }
 
 ask_push()
@@ -62,23 +64,21 @@ ask_push()
 	echo "y:push f:push(force) n:skip"
 	read -r input
 	case "$input" in
-	y|Y) _yadm push; pushed=1; return 0;;
-	f|F) _yadm push -f; pushed=1; return 0;;
-	n|N) return 0;;
+	y|Y) _y push; pushed=1;;
+	f|F) _y push -f; pushed=1;;
+	n|N) echo "Don't forget to push";;
 	esac
 	done
 }
+
+useconfig "${1-}"; shift
 
 termux_gen_world
 flatpak_gen_world
 add_files
 confirmation
 
-if [ "$#" -gt 0 ]
-then do_commit "$1"
-else do_commit "update"
-fi
+do_commit "${1-update}"
 
 show_result
 ask_push || error "Push failed, try to manually push"
-[ "$pushed" = 1 ] || ( echo "Don't forget to push" )

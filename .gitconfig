@@ -12,3 +12,7 @@
 	name = BarryLhm
 [core]
 	editor = nano
+[safe]
+	directory = /storage/emulated/0/reclist
+[url "https://github.akams.cn/https://github.com/"]
+	insteadOf = https://github.com/

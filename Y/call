@@ -2,4 +2,4 @@
 
 . "$(dirname "$(realpath "$0")")/COMMON"
 
-_yadm push "$@"
+"$@"

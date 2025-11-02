@@ -52,7 +52,6 @@
 .root_chimera/etc/sysctl.d/
 .root_chimera/usr/local/bin/sc
 .root_chimera/usr/local/bin/uc
-.root_chimera/usr/local/lib/dinit.d/
 .root_common/usr/local/bin/afork
 .root_common/usr/local/bin/cmd
 .root_common/usr/local/bin/f
