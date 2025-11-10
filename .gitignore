@@ -1,3 +1,8 @@
-Y/DATA
+Y/DATA/
 .termux/font.ttf
 .config/fish/conf.d/rustup.fish
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+S/TMP/

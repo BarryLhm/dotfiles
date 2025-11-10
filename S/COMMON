@@ -1,53 +1,48 @@
-#!/bin/sh ## not executable, just for syntax highlighting
+#!/bin/sh
+## not executable, just for syntax highlighting
 
-[ "${_initialized-}" = 1 ] && error "S already initialized" || : 
+[ "${_initialized-}" = 1 ] && error "S already initialized" || :
 ## start of main
 
 [ "${NO_SETEU-}" = 1 ] || set -eu
 
 script="$(realpath "$0")"
-dir="$(dirname "$script")"
-prog="$(basename "$0")"
-realprog="$(basename "$script")"
+dir="${script%/*}"
+prog="${0##*/}"
+realprog="{$script##*/}"
 errormsg=
 errormsg2=
 
+## dynloaded functions
+debugsh(){ include misc; debugsh "$@"; }
+justdo(){ include misc; justdo "$@"; }
+countdown(){ include misc; countdown "$@"; }
+head_except(){ include misc; head_except "$@"; }
+
+banner(){ include greet; banner "$@"; }
+todo(){ include greet; todo "$@"; }
+greet(){ include greet; greet "$@"; }
+
+apksize(){ include pkg; apksize "$@"; }
+apk_world_dedup(){ include pkg; apk_world_dedup "$@"; }
+
+hitokoto(){ include net; hitokoto "$@"; }
+dynv6_update(){ include net; dynv6_update "$@"; }
+
 ## Public Functions
-repeat() ### ( <count> <string> )
-{
-	echo "$1" | grep -qE '[0-9]+' || error "$1: invalid number"
-	printf %"$1"s | sed s/' '/"$2"/g
-}
-
-getshpid()
-{
-require linux
-	grep PPid: /proc/"$$"/status | awk '{print $2}'
-}
-
-error()
-{
-	echo "$prog: ${errormsg}$1${errormsg2}" >&2; return "${2-1}"
-}
-
-is_empty()
-{
-        awk 'NF {exit 1}' "$1"
-}
-
-head_except() ### head_except <-c|-v> <n> <file>
-{
-	head "$1" "$(("$(wc -l < "$3")" - "$2"))" "$3"
-}
+call(){ "$@"; }
+error(){ echo "$prog: ${errormsg}$1${errormsg2}" >&2; return "${2-1}"; }
+is_empty(){ awk 'NF {exit 1}' "$1"; }
+include(){ local i; for i in "$@"; do . "$dir/LIB/$i"; done; }
+getshpid(){ require linux; grep PPid: "/proc/$$/status" | awk '{print $2}'; }
+repeat(){ awk -v n="$1" -v s="$2" 'BEGIN{++n;while(--n)printf "%s",s}'; }
 
 require()
 {
+	local i
 	local errormsg="error: need "
 	local errormsg2=", please check system environment"
-	notfound()
-	{
-		error "${1-"$i"}"
-	}
+	notfound(){ error "${1-"$i"}"; }
 	for i in "$@"
 	do	case "$1" in
 		root) [ "$(id -u)" = 0 ] || errormsg2=" privilege" notfound;;
@@ -64,49 +59,18 @@ require()
 	done
 }
 
-debugsh()
-{
-	local tty="/dev/tty" shell="${1-bash}"; [ "$#" = 0 ] || shift 1
-	echo "For convenient of debugging, retval 1 will be taken as 0." >/dev/tty
-	if PS1="debug> " "$shell" "$@" <"$tty" >"$tty" 2>"$tty"
-	then :
-	## Catch empty exit
-	else local ret="$?"; [ "$ret" = 1 ] || return "$ret"
-	fi
-}
-
-justdo()
-{
-	for i in "$@"
-	do eval "$i" >/dev/null 2>&1 || :
-	done
-}
-
-countdown() ### ( time/s: 5, [msg], [finmsg] )
-{
-	local i="$1" msg="${2-}" finmsg="${3-}"
-	while [ "$i" -gt 0 ]
-	do	echo "$msg$i"
-		sleep 1
-		i="$(($i - 1))"
-	done
-	[ "$finmsg" = "" ] || echo "$finmsg"
-}
-
 calculate_sum() ### ( column: 1, [file], ... )
 {
-	col="${1-}"
-	[ "$col" = "" ] && col=1 || shift
+	local col="${1-}"; [ "$col" ] || col=1; [ "$#" = 0 ] || shift
 	awk '{gsub(/,/, "", $'"$col"'); sum += $'"$col"'} END {print sum}' "$@"
 }
 
-include()
+distinfo()
 {
-	for i in "$@"
-	do . "$dir/$i"
-	done
+	[ "$in_termux" = 0 ] || { echo termux; return; }
+require file:/etc/os-release || { echo "unknown"; return; }
+	grep "^${1-}=\".*\"" /etc/os-release | grep -o '".*[^"]' | tail -c +2
 }
-
 
 [ "${TERMUX_VERSION+x}" ] && in_termux=1 || in_termux=0
 [ "$(uname -s)" = "Linux" ] && on_linux=1 || on_linux=0

@@ -1,12 +1,1 @@
-#!/bin/sh -eu
-
-. "$(dirname "$(realpath "$0")")/COMMON"
-
-require cmd:tput
-
-echo ╔═════╗
-echo ║Todo:╟$(repeat "$(($COLUMNS - 7))" '─')
-echo ╚═════╝
-echo "$(cat ~/TODO)"
-[ ! -f ~/TODO_EXT ] || echo "$(cat ~/TODO_EXT)"
-repeat "$COLUMNS" '─'; echo
+.wrapper

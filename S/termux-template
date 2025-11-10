@@ -1,5 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash -eu
-
-. "$(dirname "$(realpath "$0")")/COMMON"
-
-require termux

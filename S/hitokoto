@@ -1,7 +1,1 @@
-#!/bin/sh -eu
-
-. "$(dirname "$(realpath "$0")")/COMMON"
-
-require cmd:curl
-
-curl --connect-timeout 2 --max-time 2 https://v1.hitokoto.cn?encode=text 2>/dev/null && echo || echo 'Cannot get hitokoto'
+.wrapper

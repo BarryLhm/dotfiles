@@ -1,0 +1,36 @@
+#!/bin/sh
+## not executable, just for syntax highlighting
+
+rsync_size()
+{
+require cmd:rsync
+	rsync -a --no-motd -r --list-only "$1" | calculate_sum 2
+}
+
+hitokoto()
+{
+require cmd:curl
+	curl --connect-timeout 0.6 --max-time 0.6 https://v1.hitokoto.cn?encode=text 2>/dev/null && echo || echo 'Cannot get hitokoto'
+}
+
+dynv6_update()
+{
+	local tokenfile="$1" zone interval token comment
+	echo 'Reading token file...'
+	IFS=' ' read -r < "$tokenfile" zone interval token comment
+	echo 'Update interval is '"$interval"' seconds.'
+	local i=1
+	echo 'Entering loop...'
+	while true
+	do	echo 'In loop '"$counter"'.'
+		echo "$counter"': Fetching IP address...'
+		local ipv4="$(curl -s --connect-timeout 3 -m 3 ifconfig.me)"
+		local ipv6=6to4
+		local ipv6prefix=6to4
+		echo "$counter"': Sending request...'
+		curl -s --connect-timeout 3 -m 3 'https://dynv6.com/api/update?zone='"$zone"'&token='"$token"'&ipv4='"$ipv4"'&ipv6='"$ipv6"'&ipv6prefix='"$ipv6prefix" || true
+		echo '\n'"$counter"': Sleeping...'
+		sleep "$interval"
+		: "$(( a=a+1 ))"
+	done
+}
