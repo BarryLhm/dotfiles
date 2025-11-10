@@ -58,7 +58,7 @@ ar()
 			mv "$excludelist.tmp" "$excludelist"
 		done;;
 	ep|edit-path|ee|edit-exclude) :
-		editor "$listfile";;
+		nano "$listfile";;
 	esac
 	sortlist
 }

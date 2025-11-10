@@ -46,7 +46,7 @@ case "$1" in
 esac
 shift
 eval flatpak "$cmd" "$app" "$*" "$extargs"
-if [ "$shift" == "0" ]
+if [ "$shift" = "0" ]
 then	sleep 0.05
 	if	[ -s "$err" ]
 	then	echo "$prog: Error occured"
