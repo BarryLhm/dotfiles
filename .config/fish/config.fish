@@ -3,4 +3,5 @@ if status is-interactive
     if [ "$TERM" = linux ]
         set -gx LANG C
     end
+    set PATH "$HOME/.local/bin:$PATH"
 end

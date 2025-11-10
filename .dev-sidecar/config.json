@@ -1,11 +1,11 @@
 {
 	"app": {
 		"theme": "system",
-		"autoStart": {
-			"enabled": true
-		},
 		"skipPreRelease": false,
 		"showShutdownTip": false,
-		"closeStrategy": 2
+		"closeStrategy": 1,
+		"autoStart": {
+			"enabled": true
+		}
 	}
 }
