@@ -35,6 +35,6 @@ dynv6_update()
 		curl -s --connect-timeout 3 -m 3 'https://dynv6.com/api/update?zone='"$zone"'&token='"$token"'&ipv4='"$ipv4"'&ipv6='"$ipv6"'&ipv6prefix='"$ipv6prefix" || true
 		echo '\n'"$counter"': Sleeping...'
 		sleep "$interval"
-		: "$(( a=a+1 ))"
+		: $(( a += 1 ))
 	done
 }

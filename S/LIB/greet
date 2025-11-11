@@ -24,7 +24,7 @@ todo()
 {
 	echo "╔═════╗"
 	echo -n "║Todo:╟"
-	repeat "$(($COLUMNS - 7))" '─'; echo
+	repeat "$(( COLUMNS - 7 ))" '─'; echo
 	echo "╚═════╝"
 	cat ~/TODO
 	[ ! -f ~/TODO_EXT ] || cat ~/TODO_EXT

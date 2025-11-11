@@ -26,7 +26,7 @@ countdown() ### ( time/s: 5, [msg], [finmsg] )
 	while [ "$i" -gt 0 ]
 	do	echo "$msg$i"
 		sleep 1
-		i="$(($i - 1))"
+		: $(( i -= 1))
 	done
 	[ "$finmsg" = "" ] || echo "$finmsg"
 }
