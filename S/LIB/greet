@@ -15,7 +15,7 @@ banner() ### ( name )
 	[ "$in_fbcon" = 0 ] || singleline=1
 	[ "$COLUMNS" -ge "$(head -1 "$banner")" ] || singleline=1
 	if [ "$singleline" = 1 ]
-	then tail +2 "$banner" | head -1 ; repeat "$COLUMNS" '─'
+	then tail +2 "$banner" | head -1 ; repeat "$COLUMNS" '─'; echo
 	else tail +3 "$banner"
 	fi
 }
@@ -33,7 +33,7 @@ todo()
 
 greet()
 {
-	[ "$in_fbcon" = 0 ] || setfont 
+	[ "$in_fbcon" = 0 ] || setfont
 	#[ "$in_termux" = 0 ] || rm -f "$PREFIX/etc/motd"
 	BANNER_FALLBACK=1 banner
 	[ "$in_fbcon" = 0 ] && [ -f "$dir/TMP/hitokoto" ] && cat "$dir/TMP/hitokoto" && echo || \
