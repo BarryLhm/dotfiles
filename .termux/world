@@ -1,6 +1,7 @@
 alsa-utils
 android-tools
 ant
+bat
 blk-utils
 bsd-finger
 bubblewrap
@@ -12,9 +13,6 @@ debootstrap
 dex2jar
 dotnet-host-9.0
 dotnet-hostfxr-9.0
-dotnet-runtime-8.0
-dotnet-sdk-9.0
-dotnet9.0
 e2fsprogs
 espeak
 fastfetch
@@ -57,6 +55,7 @@ mpv
 mtr
 nano
 ndk-sysroot
+ninja
 nmap
 nodejs
 openjdk-17

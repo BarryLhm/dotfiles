@@ -53,6 +53,7 @@
 .root_chimera/usr/local/bin/sc
 .root_chimera/usr/local/bin/uc
 .termux/
+C/
 LICENSE
 S/
 TODO
