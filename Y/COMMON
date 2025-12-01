@@ -22,7 +22,7 @@ useconfig()
 	[ "$worktree" ] || error "invalid config"
 	pathlist="$dir/CONFIG/$config/PATH"
 	excludelist="$dir/CONFIG/$config/EXCLUDE"
-	gitdir="$dir/DATA/$config/repo.git/"
+	gitdir="$dir/CONFIG/$config/repo.git/"
 }
 
 sortlist()

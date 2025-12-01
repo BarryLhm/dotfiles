@@ -1,4 +1,4 @@
-Y/DATA/
+Y/CONFIG/*/repo.git
 .termux/font.ttf
 .config/fish/conf.d/rustup.fish
 __pycache__/
