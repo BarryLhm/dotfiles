@@ -73,7 +73,10 @@ require file:/etc/os-release || { echo "unknown"; return; }
 }
 
 [ "${TERMUX_VERSION+x}" ] && in_termux=1 || in_termux=0
-[ "$(uname -s)" = "Linux" ] && on_linux=1 || on_linux=0
+case "$(uname -s)" in
+Linux|MSYS*) on_linux=1;;
+*) on_linux=0;;
+esac
 [ "$TERM" = "linux" ] && in_fbcon=1 || in_fbcon=0
 require cmd:tput
 [ "${COLUMNS-}" ] || COLUMNS="$(tput cols)"

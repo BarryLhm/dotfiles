@@ -37,7 +37,7 @@ greet()
 	BANNER_FALLBACK=1 banner
 	[ "$in_fbcon" = 0 ] && [ -f "$dir/TMP/hitokoto" ] && cat "$dir/TMP/hitokoto" && \
 	  echo || echo 'Be yourself.'
-	echo -n "PID: "; getshpid
+	require linux 2> /dev/null && echo -n "PID:" && getshpid || :
 	todo
 	cat "$dir/PS"
 	[ ! -f ~/PS_EXT ] || cat ~/PS_EXT
