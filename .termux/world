@@ -41,6 +41,7 @@ jq
 just
 lazygit
 ldd
+libacl
 libshout
 lldb
 lsof
@@ -98,4 +99,5 @@ xfce4-terminal
 xfwm4
 xxd
 yadm
+yazi
 zsh
