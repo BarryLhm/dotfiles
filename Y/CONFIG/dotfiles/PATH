@@ -16,6 +16,7 @@
 .dev-sidecar/setting.json
 .gitconfig
 .gitignore
+.local/share/fcitx5/rime/default.custom.yaml
 .local/share/flatpak/overrides/
 .npmrc
 .root_alpine/etc/apk/cache

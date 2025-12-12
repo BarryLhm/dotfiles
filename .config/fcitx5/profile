@@ -4,7 +4,7 @@ Name=默认
 # Layout
 Default Layout=us
 # Default Input Method
-DefaultIM=rime
+DefaultIM=mozc
 
 [Groups/0/Items/0]
 # Name
@@ -14,13 +14,19 @@ Layout=
 
 [Groups/0/Items/1]
 # Name
-Name=rime
+Name=mozc
 # Layout
 Layout=
 
 [Groups/0/Items/2]
 # Name
-Name=skk
+Name=pinyin
+# Layout
+Layout=
+
+[Groups/0/Items/3]
+# Name
+Name=rime
 # Layout
 Layout=
 
