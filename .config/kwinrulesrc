@@ -1,6 +1,5 @@
 [527dd1fa-4ca3-4ef3-bcc7-2ab2ce743256]
 Description=OpenUtau mainwindow
-below=true
 belowrule=3
 ignoregeometry=true
 ignoregeometryrule=2
