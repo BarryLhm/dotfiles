@@ -9,6 +9,7 @@
 .config/fontconfig/fonts.conf
 .config/htop/htoprc
 .config/kwinrulesrc
+.config/mozc/config1.db
 .config/pip/pip.conf
 .config/user-dirs.conf
 .config/user-dirs.dirs
