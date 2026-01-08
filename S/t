@@ -34,6 +34,7 @@ EOF
 apply_world()
 {
 	apt-mark auto "*" >/dev/null
+	pkg add root-repo x11-repo
 	pkg --check-mirror add $(cat "$world_file")
 }
 

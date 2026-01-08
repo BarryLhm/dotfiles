@@ -14,6 +14,12 @@
 	editor = nano
 [safe]
 	directory = /storage/emulated/0/reclist
+	directory = /storage/emulated/0
+	directory = /storage/emulated/0/FCL/.minecraft/versions/Main/mods
+	directory = /storage/emulated/0/mcserv/mods
+	directory = /storage/emulated/0/mcserv
+	directory = /storage/emulated/0/mcserv/world
+	directory = /storage/emulated/0/mcserv/logs
 [url "https://github.akams.cn/https://github.com/"]
 #	insteadOf = https://github.com/
 [diff "moss"]
