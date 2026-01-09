@@ -1,4 +1,4 @@
-#!/bin/sh ## not executable, just for syntax highlighting
+#!/bin/bash ## not executable, just for syntax highlighting
 
 [ ! "${_Y_initialized-}" ] || error "Y already initialized"
 ## start of main

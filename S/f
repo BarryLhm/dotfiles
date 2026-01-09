@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bssh
 shift=1; allowempty=0; cmd=run; extargs=""; ret=114
 case "$1" in
 	-f) :;;
