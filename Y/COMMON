@@ -50,12 +50,12 @@ ar()
 	case "$oper" in
 	ap|add-path|ae|add-exclude) :
 		for i in "$@"
-		do echo "$i" >> "$excludelist"
+		do echo "$i" >> "$listfile"
 		done;;
 	rp|rm-path|re|rm-exclude) :
 		for i in "$@"
-		do	grep -v -x "$i" "$excludelist" > "$excludelist.tmp"
-			mv "$excludelist.tmp" "$excludelist"
+		do	grep -v -x "$i" "$listfile" > "$listfile.tmp"
+			mv "$listfile.tmp" "$listfile"
 		done;;
 	ep|edit-path|ee|edit-exclude) :
 		nano "$listfile";;
