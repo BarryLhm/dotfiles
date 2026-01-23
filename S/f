@@ -1,5 +1,5 @@
 #!/bin/bash
-shift=1; allowempty=0; cmd=run; extargs=""; ret=114
+shift=1; allowempty=0; cmd=run; quiet=0; ret=114
 case "$1" in
 	-f) :;;
 	-k) cmd=kill;;
@@ -7,7 +7,7 @@ case "$1" in
 	-u) cmd=update; allowempty=1;;
 	-i) cmd=install;;
 	-*) echo "Unknown mode: $1"; exit 114;;
-	*) shift=0; out="$(mktemp)"; err="$(mktemp)"; extargs="2>$err>$err&"
+	*) shift=0; out="$(mktemp)"; err="$(mktemp)"; quiet=1
 esac
 shift "$shift"
 read prog <"/proc/self/comm"
@@ -45,8 +45,11 @@ case "$1" in
 ;;	*) app="$1"
 esac
 shift
-eval flatpak "$cmd" "$app" "$*" "$extargs"
-if [ "$shift" = "0" ]
+if [ "$quiet" = 1 ]
+then flatpak "$cmd" "$app" "$@" 2>"$err">"$err"&
+else flatpak "$cmd" "$app" "$@"
+fi
+if [ "$shift" = 0 ]
 then	sleep 0.05
 	if	[ -s "$err" ]
 	then	echo "$prog: Error occured"
