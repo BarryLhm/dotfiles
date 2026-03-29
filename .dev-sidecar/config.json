@@ -11,7 +11,8 @@
 		},
 		"showShutdownTip": false,
 		"closeStrategy": 2,
-		"startShowWindow": false
+		"startShowWindow": false,
+		"showHideShortcut": "无"
 	},
 	"server": {
 		"dns": {
