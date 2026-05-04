@@ -26,3 +26,12 @@ require cmd:apk
 	done
 	echo 'Deduplication finished'
 }
+
+pacman_minimize_explicit()
+{
+require cmd:pacman
+	LANG=C pacman -Qei |
+	  grep -E '^Name|^Required By' |
+	  awk '{ if(NR%2) {line=$3} else { if ($4!="None") {print line} } }' |
+	  xargs -or sudo pacman -D --asdeps
+}

@@ -13,21 +13,22 @@ realprog="{$script##*/}"
 errormsg=
 errormsg2=
 
+libfunc_register()
+{
+	local lib="$1" i; shift
+	lib="$(printf %q "$lib")"
+	for i in "$@"
+	do	i="$(printf %q "$i")"
+		eval "$i(){ include $lib; $i \"\$@\"; }"
+	done
+}
+
 ## dynloaded functions
-debugsh(){ include misc; debugsh "$@"; }
-justdo(){ include misc; justdo "$@"; }
-countdown(){ include misc; countdown "$@"; }
-head_except(){ include misc; head_except "$@"; }
 
-banner(){ include greet; banner "$@"; }
-todo(){ include greet; todo "$@"; }
-greet(){ include greet; greet "$@"; }
-
-apksize(){ include pkg; apksize "$@"; }
-apk_world_dedup(){ include pkg; apk_world_dedup "$@"; }
-
-hitokoto(){ include net; hitokoto "$@"; }
-dynv6_update(){ include net; dynv6_update "$@"; }
+libfunc_register misc debugsh justdo countdown head_except
+libfunc_register greet banner todo greet
+libfunc_register pkg apksize apk_world_dedup pacman_minimize_explicit
+libfunc_register net hitokoto dynv6_update
 
 ## Public Functions
 call(){ "$@"; }
