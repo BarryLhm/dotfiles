@@ -14,6 +14,7 @@
 .config/pip/pip.conf
 .config/user-dirs.conf
 .config/user-dirs.dirs
+.config/uv/uv.toml
 .dev-sidecar/config.json
 .dev-sidecar/setting.json
 .gitconfig

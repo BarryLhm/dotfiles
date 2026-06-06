@@ -21,6 +21,9 @@
 	directory = /storage/emulated/0/FCL/.minecraft/versions/Main/kubejs
 	directory = /storage/emulated/0/FCL/.minecraft/versions/Bedrockoid
 	directory = /storage/emulated/0/FCL/.minecraft/versions/Bedrockoid/saves/Real
+	directory = /storage/emulated/0/gauss
+	directory = /storage/emulated/0/gauss/deps/deps/godot-xterm
+	directory = /storage/emulated/0/FCL/.minecraft/versions/Mach/mods
 [url "https://github.akams.cn/https://github.com/"]
 #	insteadOf = https://github.com/
 [diff "moss"]
