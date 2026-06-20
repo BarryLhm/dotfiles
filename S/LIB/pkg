@@ -35,3 +35,25 @@ require cmd:pacman
 	  awk '{ if(NR%2) {line=$3} else { if ($4!="None") {print line} } }' |
 	  xargs -or sudo pacman -D --asdeps
 }
+
+parse_apt_rdepends()
+{
+	local dep=0 line pkg
+	while IFS= read -r line
+		do case "$line" in
+		'  '*|' |'*) dep=1;;
+		'Reverse Depends:');;
+		*)	[ "$dep" == 0 ] || echo "$pkg"
+			pkg="$line"; dep=0;;
+		esac
+	done
+	[ "$dep" == 0 ] || echo "$pkg"
+}
+
+apt_minimize_manual()
+{
+require cmd:apt-mark cmd:apt-cache
+	local pkgs="$(apt-cache rdepends -i --installed $(apt-mark showmanual) | parse_apt_rdepends)"
+	[ "$pkgs" ] || return 0
+	sudo apt-mark auto
+}

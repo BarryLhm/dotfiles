@@ -19,7 +19,7 @@ libfunc_register()
 	lib="$(printf %q "$lib")"
 	for i in "$@"
 	do	i="$(printf %q "$i")"
-		eval "$i(){ include $lib; $i \"\$@\"; }"
+		eval "$i(){ unset -f $i; include $lib; $i \"\$@\"; }"
 	done
 }
 
@@ -27,7 +27,7 @@ libfunc_register()
 
 libfunc_register misc debugsh justdo countdown head_except
 libfunc_register greet banner todo greet
-libfunc_register pkg apksize apk_world_dedup pacman_minimize_explicit
+libfunc_register pkg apksize apk_world_dedup pacman_minimize_explicit apt_parse_rdepends apt_minimize_manual
 libfunc_register net hitokoto dynv6_update
 
 ## Public Functions
@@ -70,7 +70,7 @@ distinfo()
 {
 	[ "$in_termux" = 0 ] || { echo termux; return; }
 require file:/etc/os-release || { echo "unknown"; return; }
-	grep "^${1-}=\".*\"" /etc/os-release | grep -o '".*[^"]' | tail -c +2
+	awk -F= -v key="$1" '$1 == key {gsub(/^"|"$/, "", $2); print $2; exit}' /etc/os-release
 }
 
 [ "${TERMUX_VERSION+x}" ] && in_termux=1 || in_termux=0
