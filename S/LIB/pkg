@@ -55,5 +55,5 @@ apt_minimize_manual()
 require cmd:apt-mark cmd:apt-cache
 	local pkgs="$(apt-cache rdepends -i --installed $(apt-mark showmanual) | parse_apt_rdepends)"
 	[ "$pkgs" ] || return 0
-	elevate apt-mark auto "$pkgs"
+	elevate apt-mark auto $pkgs
 }

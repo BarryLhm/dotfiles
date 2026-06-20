@@ -67,6 +67,7 @@ lxc
 lynx
 lz4
 lzip
+mariadb
 maven
 mesa
 mesa-demos
@@ -76,6 +77,7 @@ mtools
 mtr
 nano
 ndk-sysroot
+nethogs
 ninja
 nmap
 nodejs
@@ -88,6 +90,7 @@ pipewire
 proot
 pulseaudio
 python-yt-dlp
+qemu-system-aarch64
 qemu-system-x86-64
 ripgrep
 root-repo
@@ -96,6 +99,7 @@ rust
 sccache
 shellcheck
 socat
+sqlite
 strace
 taplo
 termux-api
@@ -106,6 +110,7 @@ timg
 tmux
 toilet
 traceroute
+tree
 tsu
 up
 usbutils
