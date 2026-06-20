@@ -6,10 +6,10 @@
 
 [ "${NO_SETEU-}" = 1 ] || set -eu
 
+s_lib="$(realpath "${BASH_SOURCE[0]}")"
+s_dir="${s_lib%/*}"
 script="$(realpath "$0")"
-dir="${script%/*}"
 prog="${0##*/}"
-realprog="{$script##*/}"
 errormsg=
 errormsg2=
 
@@ -34,7 +34,7 @@ libfunc_register net hitokoto dynv6_update
 call(){ "$@"; }
 error(){ echo "$prog: ${errormsg}$1${errormsg2}" >&2; return "${2-1}"; }
 is_empty(){ awk 'NF {exit 1}' "$1"; }
-include(){ local i; for i in "$@"; do . "$dir/LIB/$i"; done; }
+include(){ local i; for i in "$@"; do . "$s_dir/LIB/$i"; done; }
 getshpid(){ require linux; grep PPid: "/proc/$$/status" | awk '{print $2}'; }
 repeat(){ awk -v n="$1" -v s="$2" 'BEGIN{++n;while(--n)printf "%s",s}'; }
 

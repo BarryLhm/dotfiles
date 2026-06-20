@@ -5,10 +5,10 @@ banner() ### ( name )
 {
 	local variant="${1-}"
 	[ "$variant" ] || variant="$(distinfo ID)"
-	local banner="$dir/RES/BANNERS/$variant"
+	local banner="$s_dir/RES/BANNERS/$variant"
 	[ -f "$banner" ] || {
 		[ "${BANNER_FALLBACK-}" = 1 ] || return 1
-		banner="$dir/RES/BANNERS/DEFAULT"
+		banner="$s_dir/RES/BANNERS/DEFAULT"
 	}
 	local singleline=0
 	[ "$in_fbcon" = 0 ] || singleline=1
@@ -35,11 +35,11 @@ greet()
 	[ "$in_fbcon" = 0 ] || setfont
 	#[ "$in_termux" = 0 ] || rm -f "$PREFIX/etc/motd"
 	BANNER_FALLBACK=1 banner
-	[ "$in_fbcon" = 0 ] && [ -f "$dir/TMP/hitokoto" ] && cat "$dir/TMP/hitokoto" && \
+	[ "$in_fbcon" = 0 ] && [ -f "$s_dir/TMP/hitokoto" ] && cat "$s_dir/TMP/hitokoto" && \
 	  echo || echo 'Be yourself.'
 	require linux 2> /dev/null && echo -n "PID:" && getshpid || :
 	todo
-	cat "$dir/PS"
+	cat "$s_dir/PS"
 	[ ! -f ~/PS_EXT ] || cat ~/PS_EXT
-	[ "$in_fbcon" = 1 ] || hitokoto "$dir/TMP/hitokoto" 30 30 &
+	[ "$in_fbcon" = 1 ] || hitokoto "$s_dir/TMP/hitokoto" 30 30 &
 }

@@ -3,7 +3,10 @@
 [ ! "${_Y_initialized-}" ] || error "Y already initialized"
 ## start of main
 
-. "$(dirname "$(dirname "$(realpath "$0")")")/S/COMMON"
+y_lib="$(realpath "${BASH_SOURCE[0]}")"
+y_dir="${y_lib%/*}"
+
+. "$y_dir/S/COMMON"
 
 require cmd:git
 
@@ -11,18 +14,18 @@ config_default="dotfiles"
 
 allconfigs()
 {
-	ls "$dir/CONFIG/"
+	ls "$y_dir/CONFIG/"
 }
 
 useconfig()
 {
 	config="${1-}"
 	[ "$config" ] || config="$config_default"
-	. "$dir/CONFIG/$config/CONFIG"
+	. "$y_dir/CONFIG/$config/CONFIG"
 	[ "$worktree" ] || error "invalid config"
-	pathlist="$dir/CONFIG/$config/PATH"
-	excludelist="$dir/CONFIG/$config/EXCLUDE"
-	gitdir="$dir/CONFIG/$config/repo.git/"
+	pathlist="$y_dir/CONFIG/$config/PATH"
+	excludelist="$y_dir/CONFIG/$config/EXCLUDE"
+	gitdir="$y_dir/CONFIG/$config/repo.git/"
 }
 
 sortlist()

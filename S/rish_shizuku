@@ -6,8 +6,8 @@ require android cmd:/system/bin/app_process
 
 ### remade from shizuku's rish script
 
-dexfile="$dir/RES/rish_shizuku.dex"
-[ -f "$dexfile" ] || error "dex file not found, please put rish_shizuku.dex in $dir/RES/"
+dexfile="$s_dir/RES/rish_shizuku.dex"
+[ -f "$dexfile" ] || error "dex file not found, please put rish_shizuku.dex in $s_dir/RES/"
 
 if [ $(getprop ro.build.version.sdk) -ge 34 ]
 then	[ ! -w "$dexfile" ] || chmod a-w "$dexfile"

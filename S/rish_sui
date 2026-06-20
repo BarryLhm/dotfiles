@@ -6,9 +6,9 @@ require android cmd:/system/bin/app_process
 
 ### remade from sui's rish script
 
-dexfile="$dir/RES/rish_sui.dex"
-[ -f "$dexfile" ] || error "dex file not found, please put rish_sui.dex in $dir/RES/"
-[ -f "$dir/RES/librish.so" ] || error "lib file not found, please put librish.so in $dir/RES/"
+dexfile="$s_dir/RES/rish_sui.dex"
+[ -f "$dexfile" ] || error "dex file not found, please put rish_sui.dex in $s_dir/RES/"
+[ -f "$s_dir/RES/librish.so" ] || error "lib file not found, please put librish.so in $s_dir/RES/"
 
 if [ $(getprop ro.build.version.sdk) -ge 34 ]
 then	[ ! -w "$dexfile" ] || chmod a-w "$dexfile"
@@ -16,4 +16,4 @@ then	[ ! -w "$dexfile" ] || chmod a-w "$dexfile"
 fi
 
 [ "${RISH_APPLICATION_ID-}" ] || export RISH_APPLICATION_ID="com.termux"
-/system/bin/app_process -Djava.class.path="$dexfile" -Dsui.library.path="$dir/RES" /system/bin --nice-name=rish rikka.sui.shell.Shell "$@"
+/system/bin/app_process -Djava.class.path="$dexfile" -Dsui.library.path="$s_dir/RES" /system/bin --nice-name=rish rikka.sui.shell.Shell "$@"
