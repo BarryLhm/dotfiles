@@ -33,7 +33,7 @@ require cmd:pacman
 	LANG=C pacman -Qei |
 	  grep -E '^Name|^Required By' |
 	  awk '{ if(NR%2) {line=$3} else { if ($4!="None") {print line} } }' |
-	  xargs -or sudo pacman -D --asdeps
+	  xargs -or elevate pacman -D --asdeps
 }
 
 parse_apt_rdepends()
@@ -55,5 +55,5 @@ apt_minimize_manual()
 require cmd:apt-mark cmd:apt-cache
 	local pkgs="$(apt-cache rdepends -i --installed $(apt-mark showmanual) | parse_apt_rdepends)"
 	[ "$pkgs" ] || return 0
-	sudo apt-mark auto
+	elevate apt-mark auto "$pkgs"
 }
