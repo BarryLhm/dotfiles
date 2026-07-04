@@ -33,7 +33,7 @@ require cmd:pacman
 	LANG=C pacman -Qei |
 	  grep -E '^Name|^Required By' |
 	  awk '{ if(NR%2) {line=$3} else { if ($4!="None") {print line} } }' |
-	  xargs -or elevate pacman -D --asdeps
+	  elevate xargs -or pacman -D --asdeps
 }
 
 parse_apt_rdepends()
