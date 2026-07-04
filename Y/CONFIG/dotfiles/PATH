@@ -8,7 +8,6 @@
 .config/fish/conf.d/
 .config/fish/config.fish
 .config/fish/fish_variables
-.config/htop/htoprc
 .config/kwinrulesrc
 .config/mozc/config1.db
 .config/pip/pip.conf

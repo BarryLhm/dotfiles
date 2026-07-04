@@ -1,1 +1,8 @@
+*.pyc
+*.pyd
+*.pyo
+.config/fish/conf.d/rustup.fish
 .termux/font.ttf
+S/TMP/
+Y/CONFIG/*/repo.git
+__pycache__/

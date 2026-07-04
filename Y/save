@@ -19,9 +19,6 @@ add_files()
 {
 	_y rm -rqf --ignore-unmatch --cached "$worktree"
 	_y -C "$worktree" add --pathspec-from-file="$pathlist"
-	is_empty "$excludelist" || \
-	  _y -C "$worktree" rm -rqf --ignore-unmatch --cached \
-	  --pathspec-from-file="$excludelist"
 }
 
 confirmation()

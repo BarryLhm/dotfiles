@@ -68,7 +68,7 @@ ar()
 
 _y() ## git wrapper
 {
-	git --git-dir="$gitdir" --work-tree="$worktree" "$@"
+	git --git-dir="$gitdir" --work-tree="$worktree" -c core.excludesFile="$excludelist" "$@"
 }
 
 ## end of main
