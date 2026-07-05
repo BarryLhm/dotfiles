@@ -1,6 +1,7 @@
 alsa-utils
 android-tools
 ant
+apt-file
 ascii
 automake
 bat
@@ -53,6 +54,7 @@ ldd
 libdevmapper
 libseccomp-static
 libshout
+libtool
 lldb
 lsof
 lxc
@@ -73,6 +75,7 @@ onefetch
 p7zip
 parted
 pipewire
+proot-distro
 python-yt-dlp
 qemu-system-aarch64
 qemu-system-x86-64
@@ -95,6 +98,8 @@ toilet
 traceroute
 tree
 tsu
+tur-repo
+unzip
 up
 usbutils
 uv

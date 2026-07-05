@@ -21,11 +21,12 @@ useconfig()
 {
 	config="${1-}"
 	[ "$config" ] || config="$config_default"
-	. "$y_dir/CONFIG/$config/CONFIG"
+	configdir="$y_dir/CONFIG/$config/"
+	. "$configdir/CONFIG"
 	[ "$worktree" ] || error "invalid config"
-	pathlist="$y_dir/CONFIG/$config/PATH"
-	excludelist="$y_dir/CONFIG/$config/EXCLUDE"
-	gitdir="$y_dir/CONFIG/$config/repo.git/"
+	pathlist="$configdir/PATH"
+	excludelist="$configdir/EXCLUDE"
+	gitdir="$configdir/repo.git/"
 }
 
 sortlist()

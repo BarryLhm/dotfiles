@@ -17,7 +17,7 @@ require cmd:apk
 	echo 'Enter password to start deduplication'
 	echo 'Current WORLD:'
 	cat /etc/apk/world | xargs
-	for i in $(cat /etc/apk/world)
+	for i in $(< /etc/apk/world)
 	do echo n | doas apk --interactive del "$i" || true
 	clear
 	echo 'Deduplicating...'
