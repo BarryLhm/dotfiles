@@ -6,7 +6,7 @@ head_except(){ head "$1" "$(("$(wc -l < "$3")" - "$2"))" "$3";}
 
 debugsh()
 {
-	local tty="/dev/tty" shell="${1-bash}"; [ "$#" = 0 ] || shift 1
+	local tty=/dev/tty shell=${1-bash}; [ "$#" = 0 ] || shift 1
 	echo "For convenience of debugging, only retval 114 will raise an error." >/dev/tty
 	PS1="debug> " "$shell" "$@" <"$tty" >"$tty" 2>"$tty" || \
 	  [ "$?" != 114 ] || return 1
@@ -16,17 +16,17 @@ justdo()
 {
 	local i
 	for i in "$@"
-	do eval "$i" >/dev/null 2>&1 || :
+	do quietly eval "$i" >/dev/null || :
 	done
 }
 
 countdown() ### ( time/s: 5, [msg], [finmsg] )
 {
-	local i="$1" msg="${2-}" finmsg="${3-}"
+	local i=$1 msg=${2-} finmsg=${3-}
 	while [ "$i" -gt 0 ]
 	do	echo "$msg$i"
 		sleep 1
-		: $(( i -= 1))
+		let --i
 	done
 	[ "$finmsg" = "" ] || echo "$finmsg"
 }

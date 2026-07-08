@@ -7,10 +7,10 @@ case "$1" in
 	-u) cmd=update; allowempty=1;;
 	-i) cmd=install;;
 	-*) echo "Unknown mode: $1"; exit 114;;
-	*) shift=0; out="$(mktemp)"; err="$(mktemp)"; quiet=1
+	*) shift=0; out=$(mktemp); err=$(mktemp); quiet=1
 esac
 shift "$shift"
-read prog <"/proc/self/comm"
+read -r prog <"/proc/self/comm"
 case "$1" in
 	"")	if [ "$allowempty" != "1" ]
 		then	echo "$prog: Flatpak quick launcher"
@@ -25,7 +25,7 @@ case "$1" in
 			echo "    -i   install"
 			rm -f "$err" "$out"
 			exit 114
-		else app=""
+		else app=
 		fi
 ;;	steam|st)	app=com.valvesoftware.Steam
 ;;	steamlink|sl)	app=com.valvesoftware.SteamLink
@@ -42,7 +42,7 @@ case "$1" in
 #;;	|)	app=
 #;;	|)	app=
 #;;	|)	app=
-;;	*) app="$1"
+;;	*) app=$1
 esac
 shift
 if [ "$quiet" = 1 ]

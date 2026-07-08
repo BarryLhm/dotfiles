@@ -6,14 +6,14 @@ require android cmd:/system/bin/app_process
 
 ### remade from sui's rish script
 
-dexfile="$s_dir/RES/rish_sui.dex"
+dexfile=$s_dir/RES/rish_sui.dex
 [ -f "$dexfile" ] || error "dex file not found, please put rish_sui.dex in $s_dir/RES/"
 [ -f "$s_dir/RES/librish.so" ] || error "lib file not found, please put librish.so in $s_dir/RES/"
 
-if [ $(getprop ro.build.version.sdk) -ge 34 ]
+if [ "$(getprop ro.build.version.sdk)" -ge 34 ]
 then	[ ! -w "$dexfile" ] || chmod a-w "$dexfile"
 	[ ! -w "$dexfile" ] || error "cannot chmod a-x $dexfile, please fix it yourself"
 fi
 
-[ "${RISH_APPLICATION_ID-}" ] || export RISH_APPLICATION_ID="com.termux"
+[ "${RISH_APPLICATION_ID-}" ] || export RISH_APPLICATION_ID=com.termux
 /system/bin/app_process -Djava.class.path="$dexfile" -Dsui.library.path="$s_dir/RES" /system/bin --nice-name=rish rikka.sui.shell.Shell "$@"

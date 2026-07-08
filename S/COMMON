@@ -6,19 +6,19 @@
 
 [ "${NO_SETEU-}" = 1 ] || set -eu
 
-s_lib="$(realpath "${BASH_SOURCE[0]}")"
-s_dir="${s_lib%/*}"
-script="$(realpath "$0")"
-prog="${0##*/}"
+s_lib=$(realpath "${BASH_SOURCE[0]}")
+s_dir=${s_lib%/*}
+script=$(realpath "$0")
+prog=${0##*/}
 errormsg=
 errormsg2=
 
 libfunc_register()
 {
-	local lib="$1" i; shift
-	lib="$(printf %q "$lib")"
-	for i in "$@"
-	do	i="$(printf %q "$i")"
+	local lib=$1 i; shift
+	lib=$(printf %q "$lib")
+	for i
+	do	i=$(printf %q "$i")
 		eval "$i(){ unset -f $i; include $lib; $i \"\$@\"; }"
 	done
 }
@@ -34,9 +34,10 @@ libfunc_register net hitokoto dynv6_update
 call(){ "$@"; }
 error(){ echo "$prog: ${errormsg}$1${errormsg2}" >&2; return "${2-1}"; }
 is_empty(){ awk 'NF {exit 1}' "$1"; }
-include(){ local i; for i in "$@"; do . "$s_dir/LIB/$i"; done; }
+include(){ local i; for i; do . "$s_dir/LIB/$i"; done; }
 getshpid(){ require linux; grep PPid: "/proc/$$/status" | awk '{print $2}'; }
 repeat(){ awk -v n="$1" -v s="$2" 'BEGIN{++n;while(--n)printf "%s",s}'; }
+quietly(){ "$@" 2>/dev/null; }
 
 require()
 {(
@@ -44,18 +45,18 @@ require()
 	local errormsg="error: need "
 	local errormsg2=", please check system environment"
 	notfound(){ [ "$quiet" != 0 ] || error "${1-"$i"}"; return 1; }
-	for i in "$@"
+	for i
 	do	case "$i" in
 		-q) quiet=1;;
 		root) [ "$(id -u)" = 0 ] || errormsg2=" privilege" notfound;;
 		android|termux) [ "$in_termux" = 1 ] || notfound "android(termux) environment";;
 		non_android|non_termux) [ "$in_termux" = 0 ] || notfound "non-android(linux distro) environment";;
 		linux) [ "$on_linux" = 1 ] || notfound "system running on linux kernel";;
-		python-*) local modname="${i#python-}"; python -c "import $modname" || notfound "python module $modname";;
+		python-*) local modname=${i#python-}; python -c "import $modname" || notfound "python module $modname";;
 		dir:*) [ -d "${i#dir:}" ] || notfound;;
 		file:*) [ -f "${i#file:}" ] || notfound;;
 		fsentry:*) [ -e "${i#fsentry:}" ] || notfound "file $i";;
-		cmd:*) type "${i#cmd:}" >/dev/null 2>&1 || notfound;;
+		cmd:*) quietly type "${i#cmd:}" >/dev/null || notfound;;
 		*) errormsg="unknown requirement: " errormsg2= notfound;;
 		esac
 	done
@@ -63,7 +64,7 @@ require()
 
 calculate_sum() ### ( column: 1, [file], ... )
 {
-	local col="${1-}"; [ "$col" ] || col=1; [ "$#" = 0 ] || shift
+	local col=${1-}; [ "$col" ] || col=1; [ "$#" = 0 ] || shift
 	awk '{gsub(/,/, "", $'"$col"'); sum += $'"$col"'} END {print sum}' "$@"
 }
 
@@ -77,8 +78,10 @@ require file:/etc/os-release || { echo "unknown"; return; }
 elevate()
 {
 	[ "$in_termux" = 0 ] || { "$@"; return; }
-	require cmd:sudo && { sudo -- "$@"; return; } ||
-	require cmd:doas && { doas -- "$@"; return; } ||
+	for i in sudo doas
+	do	quietly require cmd:"$i" && echo "$i" -- "$@"
+		return
+	done
 	error "no elevator available"
 }
 

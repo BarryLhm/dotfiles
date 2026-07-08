@@ -11,7 +11,7 @@ termux_gen_world()
 
 flatpak_gen_world()
 {
-	require cmd:flatpak 2>/dev/null || return 0
+	quietly require cmd:flatpak || return 0
 	LANG=C flatpak list --app --columns=name > "$y_dir/FLATPAK_WORLD"
 }
 

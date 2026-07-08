@@ -1,0 +1,6 @@
+dont use quotes in assigning:
+- a="" -> a=
+- a="$b" -> a=$b
+
+dont use for in "$@":
+- for i in "$@" -> for i

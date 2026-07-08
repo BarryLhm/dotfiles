@@ -30,10 +30,12 @@ require cmd:apk
 pacman_minimize_explicit()
 {
 require cmd:pacman
-	LANG=C pacman -Qei |
-	  grep -E '^Name|^Required By' |
-	  awk '{ if(NR%2) {line=$3} else { if ($4!="None") {print line} } }' |
-	  elevate xargs -or pacman -D --asdeps
+	local pkgs
+	pkgs=$(LANG=C pacman -Qei | grep -E '^Name|^Required By' |
+	  awk '{if (NR%2) {line=$3} else {if ($4!="None") {print line}}}')
+	[ "$pkgs" ] || return 0
+	echo "marking as dep: $pkgs"
+	elevate xargs -or pacman -D --asdeps $pkgs
 }
 
 parse_apt_rdepends()
@@ -53,7 +55,9 @@ parse_apt_rdepends()
 apt_minimize_manual()
 {
 require cmd:apt-mark cmd:apt-cache
-	local pkgs="$(apt-cache rdepends -i --installed $(apt-mark showmanual) | parse_apt_rdepends)"
+	local pkgs
+	pkgs=$(apt-cache rdepends -i --installed $(apt-mark showmanual) | parse_apt_rdepends)
 	[ "$pkgs" ] || return 0
+	echo "marking as auto: $pkgs"
 	elevate apt-mark auto $pkgs
 }

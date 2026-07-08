@@ -4,7 +4,7 @@
 
 require termux cmd:pkg cmd:apt-mark
 
-world_file="$HOME/.termux/world"
+world_file=$HOME/.termux/world
 PATH=/data/data/com.termux/files/usr/bin
 
 error()

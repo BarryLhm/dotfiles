@@ -1,10 +1,11 @@
-#!/bin/bash ## not executable, just for syntax highlighting
+#!/bin/bash
+## not executable, just for syntax highlighting
 
 [ ! "${_Y_initialized-}" ] || error "Y already initialized"
 ## start of main
 
-y_lib="$(realpath "${BASH_SOURCE[0]}")"
-y_dir="${y_lib%/*}"
+y_lib=$(realpath "${BASH_SOURCE[0]}")
+y_dir=${y_lib%/*}
 
 . "$y_dir/S/COMMON"
 
@@ -19,14 +20,14 @@ allconfigs()
 
 useconfig()
 {
-	config="${1-}"
-	[ "$config" ] || config="$config_default"
-	configdir="$y_dir/CONFIG/$config/"
+	config=${1-}
+	[ "$config" ] || config=$config_default
+	configdir=$y_dir/CONFIG/$config/
 	. "$configdir/CONFIG"
 	[ "$worktree" ] || error "invalid config"
-	pathlist="$configdir/PATH"
-	excludelist="$configdir/EXCLUDE"
-	gitdir="$configdir/repo.git/"
+	pathlist=$configdir/PATH
+	excludelist=$configdir/EXCLUDE
+	gitdir=$configdir/repo.git/
 }
 
 sortlist()
@@ -43,21 +44,21 @@ sortlist()
 
 ar()
 {
-	local oper="$1"; shift
+	local oper=$1; shift
 	case "$oper" in
 	ap|add-path|rp|rm-path|ep|edit-path) :
-		local listfile="$pathlist";;
+		local listfile=$pathlist;;
 	ae|add-exclude|re|rm-exclude|ee|edit-exclude) :
-		local listfile="$excludelist";;
+		local listfile=$excludelist;;
 	*) error "unknown operation $oper";;
 	esac
 	case "$oper" in
 	ap|add-path|ae|add-exclude) :
-		for i in "$@"
+		for i
 		do echo "$i" >> "$listfile"
 		done;;
 	rp|rm-path|re|rm-exclude) :
-		for i in "$@"
+		for i
 		do	grep -v -x "$i" "$listfile" > "$listfile.tmp"
 			mv "$listfile.tmp" "$listfile"
 		done;;
