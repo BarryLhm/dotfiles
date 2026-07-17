@@ -16,10 +16,9 @@ errormsg2=
 libfunc_register()
 {
 	local lib=$1 i; shift
-	lib=$(printf %q "$lib")
 	for i
 	do	i=$(printf %q "$i")
-		eval "$i(){ unset -f $i; include $lib; $i \"\$@\"; }"
+		eval "$i(){ unset -f $i; include $(printf %q "$lib"); $i \"\$@\"; }"
 	done
 }
 
