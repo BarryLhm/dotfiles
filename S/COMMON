@@ -79,7 +79,7 @@ elevate()
 {
 	[ "$in_termux" = 0 ] || { "$@"; return; }
 	for i in sudo doas
-	do	quietly require cmd:"$i" && echo "$i" -- "$@"
+	do	quietly require cmd:"$i" && "$i" -- "$@"
 		return
 	done
 	error "no elevator available"
