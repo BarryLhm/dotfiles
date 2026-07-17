@@ -16,7 +16,6 @@
 .dev-sidecar/config.json
 .dev-sidecar/setting.json
 .gitconfig
-.gitignore
 .local/share/fcitx5/rime/default.custom.yaml
 .local/share/flatpak/overrides/
 .npmrc

@@ -52,6 +52,7 @@ just
 lazygit
 ldd
 libdevmapper
+libqrencode
 libseccomp-static
 libshout
 libtool
@@ -109,7 +110,6 @@ which
 whois
 x11-repo
 xfwm4
-xorgproto
 xxd
 yadm
 yazi
