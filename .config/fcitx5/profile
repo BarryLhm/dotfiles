@@ -14,13 +14,13 @@ Layout=
 
 [Groups/0/Items/1]
 # Name
-Name=mozc
+Name=rime
 # Layout
 Layout=
 
 [Groups/0/Items/2]
 # Name
-Name=rime
+Name=mozc
 # Layout
 Layout=
 

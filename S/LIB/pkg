@@ -35,7 +35,7 @@ require cmd:pacman
 	  awk '{if (NR%2) {line=$3} else {if ($4!="None") {print line}}}')
 	[ "$pkgs" ] || return 0
 	echo "marking as dep: $pkgs"
-	elevate xargs -or pacman -D --asdeps $pkgs
+	elevate pacman -D --asdeps $pkgs
 }
 
 parse_apt_rdepends()

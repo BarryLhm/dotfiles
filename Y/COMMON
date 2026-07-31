@@ -32,14 +32,14 @@ useconfig()
 
 sortlist()
 {
-	echo -n "sorting..."
-	export LC_ALL=C
 	local i
-	for i in "$pathlist" "$excludelist"
-	do	tr -s '\n' < "$i" | sort -u > "$i.tmp"
+	echo -n "sorting..." >&2
+	for i
+	do	echo -n " $i" >&2
+		tr -s '\n' < "$i" | LC_ALL=C sort -u > "$i.tmp"
 		mv "$i.tmp" "$i"
 	done
-	echo " ok"
+	echo " ok" >&2
 }
 
 ar()
@@ -65,7 +65,7 @@ ar()
 	ep|edit-path|ee|edit-exclude) :
 		nano "$listfile";;
 	esac
-	sortlist
+	sortlist "$listfile"
 }
 
 _y() ## git wrapper
