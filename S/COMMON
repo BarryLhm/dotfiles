@@ -26,7 +26,7 @@ libfunc_register()
 
 libfunc_register misc debugsh justdo countdown head_except
 libfunc_register greet banner todo greet
-libfunc_register pkg apksize apk_world_dedup pacman_minimize_explicit apt_parse_rdepends apt_minimize_manual arch_rate_mirrors
+libfunc_register pkg apksize apk_world_dedup pacman_minimize_explicit apt_parse_rdepends apt_minimize_manual arch_rate_mirrors pacsize
 libfunc_register net hitokoto dynv6_update
 
 ## Public Functions
@@ -92,6 +92,8 @@ esac
 [ "$TERM" = "linux" ] && in_fbcon=1 || in_fbcon=0
 require cmd:tput
 [ "${COLUMNS-}" ] || COLUMNS="$(tput cols)"
+
+. "$s_dir/PALETTE"
 
 ## end of main
 _initialized=1

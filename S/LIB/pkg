@@ -75,3 +75,14 @@ arch_rate_mirrors()
 	do sed -e "s/\$arch/x86_64_$i/g" "$target/cachyos" > elevate tee "$target/cachyos_$i" > /dev/null
 	done
 }
+
+pacsize()
+{
+	LANG=C pacman -Qi | \
+	  grep -E '^Name|^Installed Size|^Install Reason' | \
+	  sed -e 's/^Install Reason  : Installed as a dependency for another package$/dep/g' \
+	    -e 's/^Install Reason  : Explicitly installed$/exp/g' | \
+	  xargs -L 3 | awk '{print $7$8" "$9" "$3"'"$CsReset"'"}' | \
+	  sort -h | \
+	  sed -e 's/exp /'"$cfBlue"'/g' -e 's/dep //g'
+}
