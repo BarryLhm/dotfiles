@@ -61,3 +61,17 @@ require cmd:apt-mark cmd:apt-cache
 	echo "marking as auto: $pkgs"
 	elevate apt-mark auto $pkgs
 }
+
+
+arch_rate_mirrors()
+{
+	local i target=${1-/etc/pacman.d/mirror.d}
+	elevate mkdir -p "$target"
+	for i in arch archlinuxcn cachyos
+	do rate-mirrors "$i" | elevate tee "$target/$i"
+	done
+
+	for i in v3 #_v4
+	do sed -e "s/\$arch/x86_64_$i/g" "$target/cachyos" > elevate tee "$target/cachyos_$i" > /dev/null
+	done
+}

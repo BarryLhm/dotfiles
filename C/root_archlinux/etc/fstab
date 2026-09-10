@@ -1,0 +1,13 @@
+/dev/mapper/cryptroot	/			btrfs	ssd,noatime,compress=zstd,subvol=@		0 0
+/dev/mapper/cryptroot	/home			btrfs	ssd,noatime,compress=zstd,subvol=@home		0 0
+/dev/mapper/cryptroot	/root			btrfs	ssd,noatime,compress=zstd,subvol=@root		0 0
+/dev/mapper/cryptroot	/var/cache		btrfs	ssd,noatime,compress=zstd,subvol=@cache		0 0
+/dev/mapper/cryptroot	/var/tmp		btrfs	ssd,noatime,compress=zstd,subvol=@tmp		0 0
+/dev/mapper/cryptroot	/var/log		btrfs	ssd,noatime,compress=zstd,subvol=@log		0 0
+/dev/mapper/cryptroot	/var/lib/flatpak	btrfs	ssd,noatime,compress=zstd,subvol=@flatpak	0 0
+/dev/mapper/cryptroot	/data			btrfs	ssd,noatime,compress=zstd,subvol=@data		0 0
+
+UUID={espuuid}		/boot			vfat	defaults					0 2
+
+UUID={ntfsuuid}	/storage		ntfs	gid=wheel,umask=0002				0 2
+
