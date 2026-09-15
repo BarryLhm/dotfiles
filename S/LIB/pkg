@@ -65,14 +65,15 @@ require cmd:apt-mark cmd:apt-cache
 
 arch_rate_mirrors()
 {
+require cmd:rate-mirrors
 	local i target=${1-/etc/pacman.d/mirror.d}
 	elevate mkdir -p "$target"
-	for i in arch archlinuxcn cachyos
+	for i in arch archlinuxcn cachyos chaotic-aur 
 	do rate-mirrors "$i" | elevate tee "$target/$i"
 	done
 
 	for i in v3 #_v4
-	do sed -e "s/\$arch/x86_64_$i/g" "$target/cachyos" > elevate tee "$target/cachyos_$i" > /dev/null
+	do sed -e "s/\$arch/x86_64_$i/g" "$target/cachyos" | elevate tee "$target/cachyos_$i" > /dev/null
 	done
 }
 
