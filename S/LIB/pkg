@@ -68,7 +68,7 @@ arch_rate_mirrors()
 require cmd:rate-mirrors
 	local i target=${1-/etc/pacman.d/mirror.d}
 	elevate mkdir -p "$target"
-	for i in arch archlinuxcn cachyos chaotic-aur 
+	for i in arch archlinuxcn cachyos #chaotic-aur
 	do rate-mirrors "$i" | elevate tee "$target/$i"
 	done
 
