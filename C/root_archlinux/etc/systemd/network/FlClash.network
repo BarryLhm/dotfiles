@@ -1,0 +1,5 @@
+[Match]
+Name=FlClash
+
+[Network]
+DNSOverTLS=no
