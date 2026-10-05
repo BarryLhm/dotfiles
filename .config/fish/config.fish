@@ -7,3 +7,8 @@ if status is-interactive
 end
 set -x RUSTUP_UPDATE_ROOT https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
 set -x RUSTUP_DIST_SERVER https://mirrors.tuna.tsinghua.edu.cn/rustup
+
+set -gx PATH "$PATH:$PREFIX/opt/android-ndk"
+set -gx ANDROID_NDK $PREFIX/opt/android-ndk
+set -gx ANDROID_NDK_HOME $PREFIX/opt/android-ndk
+set -gx ANDROID_NDK_ROOT $ANDROID_NDK_HOME
