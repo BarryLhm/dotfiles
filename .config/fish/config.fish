@@ -5,6 +5,12 @@ if status is-interactive
     end
     set PATH "$HOME/.local/bin:$HOME/.cargo/bin:$PATH:/usr/share/steam/compatibilitytools.d/proton-cachyos-native/protonfixes/files/bin:/usr/share/steam/compatibilitytools.d/proton-cachyos-native/files/bin"
 end
+
+abbr pqe pacman -Qe
+abbr psyu pacman -Syu
+abbr pruns pacman -Runs
+abbr pss pacman -Ss
+
 set -x RUSTUP_UPDATE_ROOT https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
 set -x RUSTUP_DIST_SERVER https://mirrors.tuna.tsinghua.edu.cn/rustup
 

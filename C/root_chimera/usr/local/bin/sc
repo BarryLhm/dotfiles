@@ -1,3 +1,0 @@
-#!/bin/sh
-if [ "x$(id -u)" != "x0" ];then echo '### Authenticate to proceed ###';fi
-exec doas dinitctl "$@"
