@@ -1,7 +1,6 @@
 .cargo/config.toml
 .config/autostart/dev-sidecar.desktop
 .config/baloofilerc
-.config/dinit.d/
 .config/fcitx5/conf/rime.conf
 .config/fcitx5/config
 .config/fcitx5/profile
