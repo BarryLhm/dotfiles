@@ -14,6 +14,8 @@
 	editor = nano
 	filemode = true
 	symlinks = true
+[safe]
+	directory = *
 [diff "moss"]
 	textconv = moss inspect
 	binary = true
