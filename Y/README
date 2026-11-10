@@ -1,4 +1,4 @@
-Y/: yadm helper scripts
+Y/: yadm-like dotfiles manager scripts
 This is a set of yadm helper scripts.
 
 brief documents (may not accurate, please refer to actual scripts):
@@ -12,24 +12,19 @@ SCRIPTS
             ep/edit-path
             ee/edit-exclude
     Y/save <config> [commit_message]: save files (yadm add and commit)
-    Y/sort <config>: sort and uniq path and exclude lists
 FILES
-    Y/template: executable, copy one to create a new script
+    Y/.template: executable, copy one to create a new script
     Y/COMMON: common parts of the scripts, non-executable
     Y/CONFIG/<config>/: config directory
         CONTENT
             PATH: path(include) list
             EXCLUDE: exclude(ignore) list
-            yadm/: yadm config dir, refer to yadm(1):FILES
-    Y/DATA/<config>/: yadm data dir, refer to yadm(1):FILES
-        CONTENT
-            repo.git/: yadm git repo
-            ...
+            repo.git/: git dir
 
 AS THE `LICENSE` SYMLINK, THEY'RE DISTRIBUTED
-UNDER THE SAME LICENSE (GPL-3.0-or-later) OF THE WHOLE REPO
+UNDER THE SAME LICENSE (AGPL-3.0-or-later) OF THE WHOLE REPO
 
-Copyright (C) 2025 BarryLhm
+Copyright (C) 2025-2026 BarryLhm
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
