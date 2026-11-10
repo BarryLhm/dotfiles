@@ -5,7 +5,7 @@ if status is-interactive
     end
 end
 
-set -gx "PATH "$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+set -gx PATH "$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 
 abbr pqe pacman -Qe
 abbr psyu pacman -Syu
