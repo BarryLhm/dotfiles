@@ -41,5 +41,5 @@ greet()
 	todo
 	cat "$s_dir/PS"
 	[ ! -f ~/PS_EXT ] || cat ~/PS_EXT
-	[ "$in_fbcon" = 1 ] || hitokoto "$s_dir/TMP/hitokoto" 30 30 &
+	[ "$in_fbcon" = 1 ] || { mkdir -p "$s_dir/TMP"; hitokoto "$s_dir/TMP/hitokoto" 30 30 & }
 }
