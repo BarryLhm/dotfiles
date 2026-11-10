@@ -3,8 +3,9 @@ if status is-interactive
     if [ "$TERM" = linux ]
         set -gx LANG C
     end
-    set PATH "$HOME/.local/bin:$HOME/.cargo/bin:$PATH:/usr/share/steam/compatibilitytools.d/proton-cachyos-native/protonfixes/files/bin:/usr/share/steam/compatibilitytools.d/proton-cachyos-native/files/bin"
 end
+
+set -gx "PATH "$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 
 abbr pqe pacman -Qe
 abbr psyu pacman -Syu
