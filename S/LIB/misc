@@ -1,9 +1,6 @@
 #!/bin/bash
 ## not executable, just for syntax highlighting
 
-### head_except <-c|-v> <n> <file>
-head_except(){ head "$1" "$(("$(wc -l < "$3")" - "$2"))" "$3";}
-
 debugsh()
 {
 	local tty=/dev/tty shell=${1-bash}; [ "$#" = 0 ] || shift 1
@@ -22,7 +19,7 @@ justdo()
 
 countdown() ### ( time/s: 5, [msg], [finmsg] )
 {
-	local i=$1 msg=${2-} finmsg=${3-}
+	local i=${1-5} msg=${2-} finmsg=${3-}
 	while [ "$i" -gt 0 ]
 	do	echo "$msg$i"
 		sleep 1

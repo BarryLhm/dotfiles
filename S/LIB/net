@@ -7,12 +7,10 @@ require cmd:rsync
 	rsync -a --no-motd -r --list-only "$1" | calculate_sum 2
 }
 
-hitokoto() ## (out_file:stdout conn_timeout:0.6 maxtime: 0.6)
+hitokoto() ## (out_file: /dev/stdout, conn_timeout: 0.6, maxtime: 0.6)
 {
 require cmd:curl
 	local outfile=${1-/dev/stdout} timeout=${2-0.6} maxtime=${3-0.6}
-	local outdir=${outfile%/*}
-	[ -d "$outdir" ] || mkdir -p "$outdir"
 	curl -s -o "$outfile" --connect-timeout "$timeout" --max-time "$maxtime" \
 	  https://v1.hitokoto.cn?encode=text || return 1
 }

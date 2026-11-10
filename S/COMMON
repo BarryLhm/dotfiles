@@ -24,7 +24,7 @@ libfunc_register()
 
 ## dynloaded functions
 
-libfunc_register misc debugsh justdo countdown head_except
+libfunc_register misc debugsh justdo countdown
 libfunc_register greet banner todo greet
 libfunc_register pkg apksize apk_world_dedup pacman_minimize_explicit apt_parse_rdepends apt_minimize_manual arch_rate_mirrors pacsize
 libfunc_register net hitokoto dynv6_update
